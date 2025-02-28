@@ -2,6 +2,7 @@ package pt.ulisboa.tecnico.tuplespaces.server;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
+import io.grpc.BindableService;
 import java.io.IOException;
 
 public class ServerMain {
@@ -31,7 +32,9 @@ public class ServerMain {
             return;
         }
 
+        //final BindableService impl = new TSImpl();
         // Criar e iniciar o servidor
+        //Server server = ServerBuilder.forPort(port).addService(impl).build();
         Server server = ServerBuilder.forPort(port).build();
         server.start();
         System.out.printf("Server started on port: %d%n", port);

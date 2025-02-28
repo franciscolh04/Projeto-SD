@@ -30,12 +30,20 @@ public class ServerState {
   }
 
   public String take(String pattern) {
-    // TODO
-    return null;
+
+    // Procura o primeiro tuplo que corresponde ao padrão
+    for (String tuple : this.tuples) {
+      if (tuple.matches(pattern)) {
+        this.tuples.remove(tuple);
+        return tuple;
+      }
+    }
+
+    return null; // Se nenhum tuplo corresponder
   }
 
   public List<String> getTupleSpacesState() {
-    // TODO
-    return null;
+    // Retorna uma cópia da lista para evitar modificações externas
+    return this.tuples;
   }
 }
