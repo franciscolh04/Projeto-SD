@@ -4,7 +4,6 @@ Distributed Systems Project 2025
  
 **Group A19**
 
-*(choose one of the following levels and erase the other one)*  
 **Difficulty level: I am Death incarnate!**
 
 
