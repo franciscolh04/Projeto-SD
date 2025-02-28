@@ -1,8 +1,7 @@
 # TupleSpaces
 
 Distributed Systems Project 2025
-
-*(fill the line below with the group identifier, for example A25 or T25, and then delete this line)*  
+ 
 **Group A19**
 
 *(choose one of the following levels and erase the other one)*  
@@ -16,8 +15,6 @@ identifier consists of either A or T followed by the group number - always two d
 code dependency management, to ensure your code runs using the correct components and not someone else's.
 
 ### Team Members
-
-*(fill the table below with the team members, and then delete this line)*
 
 | Number | Name               | User                                   | Email                                          |
 |--------|--------------------|----------------------------------------|------------------------------------------------|
