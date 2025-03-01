@@ -2,8 +2,13 @@ package pt.ulisboa.tecnico.tuplespaces.server;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import io.grpc.BindableService;
+
 import java.io.IOException;
+import java.util.Objects;
+
+import io.grpc.BindableService;
+import io.grpc.Server;
+import io.grpc.ServerBuilder;
 
 public class ServerMain {
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -32,13 +37,21 @@ public class ServerMain {
             return;
         }
 
-        //final BindableService impl = new TSImpl();
+        final BindableService impl = new TSServerImpl();
+
         // Criar e iniciar o servidor
-        //Server server = ServerBuilder.forPort(port).addService(impl).build();
-        Server server = ServerBuilder.forPort(port).build();
-        server.start();
+        Server server = ServerBuilder.forPort(port).addService(impl).build();
+
+        try {server.start();
+        }
+        catch (IOException e) {
+        }
+
         System.out.printf("Server started on port: %d%n", port);
 
-        server.awaitTermination();
+        try {server.awaitTermination();
+        }
+        catch (InterruptedException e){
+        }
     }
 }
