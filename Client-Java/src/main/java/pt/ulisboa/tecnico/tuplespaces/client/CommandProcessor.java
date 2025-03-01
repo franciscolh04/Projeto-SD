@@ -141,11 +141,11 @@ public class CommandProcessor {
 
     private void printUsage() {
         System.out.println("Usage:\n" +
-                "- put <element>\n" +
-                "- read <element>\n" +
-                "- take <element>\n" +
+                "- put <element[,more_elements]>\n" +
+                "- read <element[,more_elements]>\n" +
+                "- take <element[,more_elements]>\n" +
                 "- getTupleSpacesState\n" +
-                "- sleep <seconds>\n" +
+                "- sleep <integer>\n" +
                 "- exit\n");
     }
 

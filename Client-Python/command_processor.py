@@ -1,3 +1,4 @@
+import time
 from typing import List
 
 class CommandProcessor:
@@ -7,6 +8,7 @@ class CommandProcessor:
     PUT = "put"
     READ = "read"
     TAKE = "take"
+    SLEEP = "sleep"
     EXIT = "exit"
     GET_TUPLE_SPACES_STATE = "getTupleSpacesState"
 
@@ -29,6 +31,8 @@ class CommandProcessor:
                     self.take(split)
                 elif command == self.GET_TUPLE_SPACES_STATE:
                     self.get_tuple_spaces_state()
+                elif command == self.SLEEP:
+                    self.sleep(split)
                 elif command == self.EXIT:
                     exit_flag = True
                 else:
@@ -37,37 +41,48 @@ class CommandProcessor:
                 break
 
     def put(self, split: List[str]):
-        # check if the input is valid
         if not self.input_is_valid(split):
             self.print_usage()
             return
-
-        # get the tuple
         tuple_data = split[1]
-        print("TODO: implement put command")
+        response = self.client_service.put(tuple_data)
+        print("OK")
+        print(response)
 
     def read(self, split: List[str]):
-        # check if the input is valid
         if not self.input_is_valid(split):
             self.print_usage()
             return
-
-        # get the tuple
         tuple_data = split[1]
-        print("TODO: implement read command")
+        response = self.client_service.read(tuple_data)
+        print("OK")
+        print(response)
 
     def take(self, split: List[str]):
-        # check if the input is valid
         if not self.input_is_valid(split):
             self.print_usage()
             return
-
-        # get the tuple
         tuple_data = split[1]
-        print("TODO: implement take command")
+        response = self.client_service.take(tuple_data)
+        print("OK")
+        print(response)
 
     def get_tuple_spaces_state(self):
-        print("TODO: implement getTupleSpacesState command")
+        response = self.client_service.get_tuple_spaces_state()
+        print("OK")
+        print(response)
+
+    def sleep(self, split: List[str]):
+        if len(split) != 2:
+            self.print_usage()
+            return
+        try:
+            time_value = int(split[1])
+            time.sleep(time_value)
+        except ValueError:
+            print("Invalid time format. Use an integer value.")
+        except KeyboardInterrupt:
+            print("Sleep interrupted.")
 
     def print_usage(self):
         print("Usage:\n"

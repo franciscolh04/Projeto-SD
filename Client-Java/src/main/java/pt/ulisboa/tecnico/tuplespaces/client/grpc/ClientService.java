@@ -75,13 +75,13 @@ public class ClientService {
     public getTupleSpacesStateResponse getTupleSpacesState() {
         getTupleSpacesStateRequest request = getTupleSpacesStateRequest.newBuilder().build();
         getTupleSpacesStateResponse response = stub.getTupleSpacesState(request);
-        debug("TupleSpaces State: " + response.getTupleList());
+        debug("TupleSpaces Current State: " + response.getTupleList());
         return response;
     }
 
     // Fechar o canal gRPC corretamente
     public void shutdown() {
         channel.shutdown();
-        debug("Canal gRPC fechado.");
+        debug("Closed gRPC channel.");
     }
 }
