@@ -10,19 +10,19 @@ import static io.grpc.Status.INVALID_ARGUMENT;
 
 
 
-public class TSServerImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
+public class TupleSpacesServerImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
 
-    private ServerState ss;
+    private ServerState state;
 
-    public TSServerImpl() {
-        ss = new ServerState();
+    public TupleSpacesServerImpl() {
+        state = new ServerState();
     }
 
     @Override
     public void put(TupleSpacesOuterClass.PutRequest request, StreamObserver<TupleSpacesOuterClass.PutResponse> responseObserver) {
         String tuple = request.getNewTuple();
 
-        ss.put(tuple);
+        state.put(tuple);
         TupleSpacesOuterClass.PutResponse response = TupleSpacesOuterClass.PutResponse.newBuilder().build();
 
         responseObserver.onNext(response);
@@ -33,7 +33,7 @@ public class TSServerImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
     public void read(TupleSpacesOuterClass.ReadRequest request, StreamObserver<TupleSpacesOuterClass.ReadResponse> responseObserver) {
         String pattern = request.getSearchPattern();
 
-        String tuple = ss.read(pattern);
+        String tuple = state.read(pattern);
 
         if (tuple == null) {
             responseObserver.onError(INVALID_ARGUMENT.withDescription("Invalid Input").asRuntimeException());
@@ -49,7 +49,7 @@ public class TSServerImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
     public void take(TupleSpacesOuterClass.TakeRequest request, StreamObserver<TupleSpacesOuterClass.TakeResponse> responseObserver) {
         String pattern = request.getSearchPattern();
 
-        String tuple = ss.take(pattern);
+        String tuple = state.take(pattern);
 
         //if (tuple == null) {
             //responseObserver.onError(INVALID_ARGUMENT.withDescription("Invalid Input").asRuntimeException());
@@ -64,7 +64,7 @@ public class TSServerImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
     @Override
     public void getTupleSpacesState(TupleSpacesOuterClass.getTupleSpacesStateRequest request, StreamObserver<TupleSpacesOuterClass.getTupleSpacesStateResponse> responseObserver) {
 
-        TupleSpacesOuterClass.getTupleSpacesStateResponse response = TupleSpacesOuterClass.getTupleSpacesStateResponse.newBuilder().addAllTuple(ss.getTupleSpacesState()).build();
+        TupleSpacesOuterClass.getTupleSpacesStateResponse response = TupleSpacesOuterClass.getTupleSpacesStateResponse.newBuilder().addAllTuple(state.getTupleSpacesState()).build();
 
         responseObserver.onNext(response);
         responseObserver.onCompleted();

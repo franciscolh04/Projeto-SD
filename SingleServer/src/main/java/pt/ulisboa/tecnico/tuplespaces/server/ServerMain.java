@@ -37,7 +37,7 @@ public class ServerMain {
             return;
         }
 
-        final BindableService impl = new TSServerImpl();
+        final BindableService impl = new TupleSpacesServerImpl();
 
         // Criar e iniciar o servidor
         Server server = ServerBuilder.forPort(port).addService(impl).build();

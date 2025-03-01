@@ -1,6 +1,8 @@
 package pt.ulisboa.tecnico.tuplespaces.client;
 
 import pt.ulisboa.tecnico.tuplespaces.client.grpc.ClientService;
+import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesGrpc;
+import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesOuterClass.*;
 
 import java.util.Scanner;
 
@@ -23,7 +25,6 @@ public class CommandProcessor {
     }
 
     void parseInput() {
-
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
 
@@ -31,7 +32,8 @@ public class CommandProcessor {
             System.out.print("> ");
             String line = scanner.nextLine().trim();
             String[] split = line.split(SPACE);
-             switch (split[0]) {
+
+            switch (split[0]) {
                 case PUT:
                     this.put(split);
                     break;
@@ -59,108 +61,95 @@ public class CommandProcessor {
                 default:
                     this.printUsage();
                     break;
-             }
+            }
         }
         scanner.close();
     }
 
-    private void put(String[] split){
-
+    private void put(String[] split) {
         // check if input is valid
         if (!this.inputIsValid(split)) {
             this.printUsage();
             return;
         }
-        
+
         // get the tuple
         String tuple = split[1];
 
-        // put the tuple
-        System.out.println("TODO: implement put command");
-
+        // put the tuple and get the response
+        PutResponse response = clientService.put(tuple);
+        System.out.println("OK");
+        System.out.println(response.toString());
     }
 
-    private void read(String[] split){
+    private void read(String[] split) {
         // check if input is valid
         if (!this.inputIsValid(split)) {
             this.printUsage();
             return;
         }
-        
+
         // get the tuple
         String tuple = split[1];
 
-        // read the tuple
-        System.out.println("TODO: implement read command");
+        // read the tuple and get the response
+        ReadResponse response = clientService.read(tuple);
+        System.out.println("OK");
+        System.out.println(response.toString());
     }
 
-
-    private void take(String[] split){
-         // check if input is valid
+    private void take(String[] split) {
+        // check if input is valid
         if (!this.inputIsValid(split)) {
             this.printUsage();
             return;
         }
-        
+
         // get the tuple
         String tuple = split[1];
 
-        // take the tuple
-        System.out.println("TODO: implement take command");
+        // take the tuple and get the response
+        TakeResponse response = clientService.take(tuple);
+        System.out.println("OK");
+        System.out.println(response.toString());
     }
 
-    private void getTupleSpacesState(){
-
+    private void getTupleSpacesState() {
         // get the tuple spaces state
-        System.out.println("TODO: implement getTupleSpacesState command");
-
+        getTupleSpacesStateResponse response = clientService.getTupleSpacesState();
+        System.out.println("OK");
+        System.out.println(response.toString());
     }
 
     private void sleep(String[] split) {
-      if (split.length != 2){
-        this.printUsage();
-        return;
-      }
-      Integer time;
+        if (split.length != 2) {
+            this.printUsage();
+            return;
+        }
 
-      // checks if input String can be parsed as an Integer
-      try {
-         time = Integer.parseInt(split[1]);
-      } catch (NumberFormatException e) {
-        this.printUsage();
-        return;
-      }
-
-      try {
-        Thread.sleep(time*1000);
-      } catch (InterruptedException e) {
-        throw new RuntimeException(e);
-      }
+        // checks if input String can be parsed as an Integer
+        try {
+            int time = Integer.parseInt(split[1]);
+            Thread.sleep(time * 1000L);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid time format. Use an integer value.");
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.out.println("Sleep interrupted.");
+        }
     }
 
     private void printUsage() {
         System.out.println("Usage:\n" +
-                "- put <element[,more_elements]>\n" +
-                "- read <element[,more_elements]>\n" +
-                "- take <element[,more_elements]>\n" +
-                "- getTupleSpacesState <server>\n" +
-                "- sleep <integer>\n" +
+                "- put <element>\n" +
+                "- read <element>\n" +
+                "- take <element>\n" +
+                "- getTupleSpacesState\n" +
+                "- sleep <seconds>\n" +
                 "- exit\n");
     }
 
-    private boolean inputIsValid(String[] input){
-        if (input.length < 2 
-            ||
-            !input[1].substring(0,1).equals(BGN_TUPLE) 
-            || 
-            !input[1].endsWith(END_TUPLE)
-            || 
-            input.length > 2
-            ) {
-            return false;
-        }
-        else {
-            return true;
-        }
+    private boolean inputIsValid(String[] input) {
+        return input.length == 2 && input[1].startsWith(BGN_TUPLE) && input[1].endsWith(END_TUPLE);
     }
 }
