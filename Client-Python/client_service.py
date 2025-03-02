@@ -50,7 +50,7 @@ class ClientService:
     def get_tuple_spaces_state(self):
         request = TupleSpaces_pb2.getTupleSpacesStateRequest()
         response = self.stub.getTupleSpacesState(request)
-        print(f"TupleSpaces Current State: {response.tupleList}")
+        print(f"TupleSpaces Current State: {response.tuple}")
         return response
 
     # Fechar o canal gRPC corretamente

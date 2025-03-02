@@ -25,3 +25,4 @@ replay_pid*
 
 #.venv python
 Client-Python/.venv/
+Client-Python/__pycache__/
