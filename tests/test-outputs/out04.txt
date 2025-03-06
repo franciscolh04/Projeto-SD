@@ -1,0 +1,654 @@
+ClientMain
+Received 2 arguments
+arg[0] = localhost:3001
+arg[1] = 1
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+tuple: "<vaga,sd,turno1>"
+tuple: "<vaga,sd,turno2>"
+tuple: "<vaga,sd,turno3>"
+tuple: "<vaga,sd,turno4>"
+tuple: "<vaga,sd,turno5>"
+tuple: "<vaga,sd,turno6>"
+tuple: "<vaga,sd,turno7>"
+tuple: "<vaga,sd,turno8>"
+tuple: "<vaga,sd,turno9>"
+tuple: "<vaga,sd,turno10>"
+tuple: "<vaga,sd,turno11>"
+tuple: "<vaga,sd,turno12>"
+tuple: "<vaga,sd,turno13>"
+tuple: "<vaga,sd,turno14>"
+tuple: "<vaga,sd,turno15>"
+tuple: "<vaga,sd,turno16>"
+tuple: "<vaga,sd,turno17>"
+tuple: "<vaga,sd,turno18>"
+tuple: "<vaga,sd,turno19>"
+tuple: "<vaga,sd,turno20>"
+tuple: "<vaga,sd,turno21>"
+tuple: "<vaga,sd,turno22>"
+tuple: "<vaga,sd,turno23>"
+tuple: "<vaga,sd,turno24>"
+tuple: "<vaga,sd,turno25>"
+tuple: "<vaga,sd,turno26>"
+tuple: "<vaga,sd,turno27>"
+tuple: "<vaga,sd,turno28>"
+tuple: "<vaga,sd,turno29>"
+tuple: "<vaga,sd,turno30>"
+tuple: "<vaga,sd,turno31>"
+tuple: "<vaga,sd,turno32>"
+tuple: "<vaga,sd,turno33>"
+tuple: "<vaga,sd,turno34>"
+tuple: "<vaga,sd,turno35>"
+tuple: "<vaga,sd,turno36>"
+tuple: "<vaga,sd,turno37>"
+tuple: "<vaga,sd,turno38>"
+tuple: "<vaga,sd,turno39>"
+tuple: "<vaga,sd,turno40>"
+tuple: "<vaga,sd,turno41>"
+tuple: "<vaga,sd,turno42>"
+tuple: "<vaga,sd,turno43>"
+tuple: "<vaga,sd,turno44>"
+tuple: "<vaga,sd,turno45>"
+tuple: "<vaga,sd,turno46>"
+tuple: "<vaga,sd,turno47>"
+tuple: "<vaga,sd,turno48>"
+tuple: "<vaga,sd,turno49>"
+tuple: "<vaga,sd,turno50>"
+tuple: "<vaga,sd,turno51>"
+tuple: "<vaga,sd,turno52>"
+tuple: "<vaga,sd,turno53>"
+tuple: "<vaga,sd,turno54>"
+tuple: "<vaga,sd,turno55>"
+tuple: "<vaga,sd,turno56>"
+tuple: "<vaga,sd,turno57>"
+tuple: "<vaga,sd,turno58>"
+tuple: "<vaga,sd,turno59>"
+tuple: "<vaga,sd,turno60>"
+tuple: "<vaga,sd,turno61>"
+tuple: "<vaga,sd,turno62>"
+tuple: "<vaga,sd,turno63>"
+tuple: "<vaga,sd,turno64>"
+tuple: "<vaga,sd,turno65>"
+tuple: "<vaga,sd,turno66>"
+tuple: "<vaga,sd,turno67>"
+tuple: "<vaga,sd,turno68>"
+tuple: "<vaga,sd,turno69>"
+tuple: "<vaga,sd,turno70>"
+tuple: "<vaga,sd,turno71>"
+tuple: "<vaga,sd,turno72>"
+tuple: "<vaga,sd,turno73>"
+tuple: "<vaga,sd,turno74>"
+tuple: "<vaga,sd,turno75>"
+tuple: "<vaga,sd,turno76>"
+tuple: "<vaga,sd,turno77>"
+tuple: "<vaga,sd,turno78>"
+tuple: "<vaga,sd,turno79>"
+tuple: "<vaga,sd,turno80>"
+tuple: "<vaga,sd,turno81>"
+tuple: "<vaga,sd,turno82>"
+tuple: "<vaga,sd,turno83>"
+tuple: "<vaga,sd,turno84>"
+tuple: "<vaga,sd,turno85>"
+tuple: "<vaga,sd,turno86>"
+tuple: "<vaga,sd,turno87>"
+tuple: "<vaga,sd,turno88>"
+tuple: "<vaga,sd,turno89>"
+tuple: "<vaga,sd,turno90>"
+tuple: "<vaga,sd,turno91>"
+tuple: "<vaga,sd,turno92>"
+tuple: "<vaga,sd,turno93>"
+tuple: "<vaga,sd,turno94>"
+tuple: "<vaga,sd,turno95>"
+tuple: "<vaga,sd,turno96>"
+tuple: "<vaga,sd,turno97>"
+tuple: "<vaga,sd,turno98>"
+tuple: "<vaga,sd,turno99>"
+
+> OK
+result: "<vaga,sd,turno1>"
+
+> OK
+result: "<vaga,sd,turno3>"
+
+> OK
+result: "<vaga,sd,turno5>"
+
+> OK
+result: "<vaga,sd,turno7>"
+
+> OK
+result: "<vaga,sd,turno9>"
+
+> OK
+result: "<vaga,sd,turno11>"
+
+> OK
+result: "<vaga,sd,turno13>"
+
+> OK
+result: "<vaga,sd,turno15>"
+
+> OK
+result: "<vaga,sd,turno17>"
+
+> OK
+result: "<vaga,sd,turno19>"
+
+> OK
+result: "<vaga,sd,turno21>"
+
+> OK
+result: "<vaga,sd,turno23>"
+
+> OK
+result: "<vaga,sd,turno25>"
+
+> OK
+result: "<vaga,sd,turno27>"
+
+> OK
+result: "<vaga,sd,turno29>"
+
+> OK
+result: "<vaga,sd,turno31>"
+
+> OK
+result: "<vaga,sd,turno33>"
+
+> OK
+result: "<vaga,sd,turno35>"
+
+> OK
+result: "<vaga,sd,turno37>"
+
+> OK
+result: "<vaga,sd,turno39>"
+
+> OK
+result: "<vaga,sd,turno41>"
+
+> OK
+result: "<vaga,sd,turno43>"
+
+> OK
+result: "<vaga,sd,turno45>"
+
+> OK
+result: "<vaga,sd,turno47>"
+
+> OK
+result: "<vaga,sd,turno49>"
+
+> OK
+result: "<vaga,sd,turno51>"
+
+> OK
+result: "<vaga,sd,turno53>"
+
+> OK
+result: "<vaga,sd,turno55>"
+
+> OK
+result: "<vaga,sd,turno57>"
+
+> OK
+result: "<vaga,sd,turno59>"
+
+> OK
+result: "<vaga,sd,turno61>"
+
+> OK
+result: "<vaga,sd,turno63>"
+
+> OK
+result: "<vaga,sd,turno65>"
+
+> OK
+result: "<vaga,sd,turno67>"
+
+> OK
+result: "<vaga,sd,turno69>"
+
+> OK
+result: "<vaga,sd,turno71>"
+
+> OK
+result: "<vaga,sd,turno73>"
+
+> OK
+result: "<vaga,sd,turno75>"
+
+> OK
+result: "<vaga,sd,turno77>"
+
+> OK
+result: "<vaga,sd,turno79>"
+
+> OK
+result: "<vaga,sd,turno81>"
+
+> OK
+result: "<vaga,sd,turno83>"
+
+> OK
+result: "<vaga,sd,turno85>"
+
+> OK
+result: "<vaga,sd,turno87>"
+
+> OK
+result: "<vaga,sd,turno89>"
+
+> OK
+result: "<vaga,sd,turno91>"
+
+> OK
+result: "<vaga,sd,turno93>"
+
+> OK
+result: "<vaga,sd,turno95>"
+
+> OK
+result: "<vaga,sd,turno97>"
+
+> OK
+result: "<vaga,sd,turno99>"
+
+> OK
+tuple: "<vaga,sd,turno2>"
+tuple: "<vaga,sd,turno4>"
+tuple: "<vaga,sd,turno6>"
+tuple: "<vaga,sd,turno8>"
+tuple: "<vaga,sd,turno10>"
+tuple: "<vaga,sd,turno12>"
+tuple: "<vaga,sd,turno14>"
+tuple: "<vaga,sd,turno16>"
+tuple: "<vaga,sd,turno18>"
+tuple: "<vaga,sd,turno20>"
+tuple: "<vaga,sd,turno22>"
+tuple: "<vaga,sd,turno24>"
+tuple: "<vaga,sd,turno26>"
+tuple: "<vaga,sd,turno28>"
+tuple: "<vaga,sd,turno30>"
+tuple: "<vaga,sd,turno32>"
+tuple: "<vaga,sd,turno34>"
+tuple: "<vaga,sd,turno36>"
+tuple: "<vaga,sd,turno38>"
+tuple: "<vaga,sd,turno40>"
+tuple: "<vaga,sd,turno42>"
+tuple: "<vaga,sd,turno44>"
+tuple: "<vaga,sd,turno46>"
+tuple: "<vaga,sd,turno48>"
+tuple: "<vaga,sd,turno50>"
+tuple: "<vaga,sd,turno52>"
+tuple: "<vaga,sd,turno54>"
+tuple: "<vaga,sd,turno56>"
+tuple: "<vaga,sd,turno58>"
+tuple: "<vaga,sd,turno60>"
+tuple: "<vaga,sd,turno62>"
+tuple: "<vaga,sd,turno64>"
+tuple: "<vaga,sd,turno66>"
+tuple: "<vaga,sd,turno68>"
+tuple: "<vaga,sd,turno70>"
+tuple: "<vaga,sd,turno72>"
+tuple: "<vaga,sd,turno74>"
+tuple: "<vaga,sd,turno76>"
+tuple: "<vaga,sd,turno78>"
+tuple: "<vaga,sd,turno80>"
+tuple: "<vaga,sd,turno82>"
+tuple: "<vaga,sd,turno84>"
+tuple: "<vaga,sd,turno86>"
+tuple: "<vaga,sd,turno88>"
+tuple: "<vaga,sd,turno90>"
+tuple: "<vaga,sd,turno92>"
+tuple: "<vaga,sd,turno94>"
+tuple: "<vaga,sd,turno96>"
+tuple: "<vaga,sd,turno98>"
+
+> OK
+result: "<vaga,sd,turno2>"
+
+> OK
+result: "<vaga,sd,turno4>"
+
+> OK
+result: "<vaga,sd,turno6>"
+
+> OK
+result: "<vaga,sd,turno8>"
+
+> OK
+result: "<vaga,sd,turno10>"
+
+> OK
+result: "<vaga,sd,turno12>"
+
+> OK
+result: "<vaga,sd,turno14>"
+
+> OK
+result: "<vaga,sd,turno16>"
+
+> OK
+result: "<vaga,sd,turno18>"
+
+> OK
+result: "<vaga,sd,turno20>"
+
+> OK
+result: "<vaga,sd,turno22>"
+
+> OK
+result: "<vaga,sd,turno24>"
+
+> OK
+result: "<vaga,sd,turno26>"
+
+> OK
+result: "<vaga,sd,turno28>"
+
+> OK
+result: "<vaga,sd,turno30>"
+
+> OK
+result: "<vaga,sd,turno32>"
+
+> OK
+result: "<vaga,sd,turno34>"
+
+> OK
+result: "<vaga,sd,turno36>"
+
+> OK
+result: "<vaga,sd,turno38>"
+
+> OK
+result: "<vaga,sd,turno40>"
+
+> OK
+result: "<vaga,sd,turno42>"
+
+> OK
+result: "<vaga,sd,turno44>"
+
+> OK
+result: "<vaga,sd,turno46>"
+
+> OK
+result: "<vaga,sd,turno48>"
+
+> OK
+result: "<vaga,sd,turno50>"
+
+> OK
+result: "<vaga,sd,turno52>"
+
+> OK
+result: "<vaga,sd,turno54>"
+
+> OK
+result: "<vaga,sd,turno56>"
+
+> OK
+result: "<vaga,sd,turno58>"
+
+> OK
+result: "<vaga,sd,turno60>"
+
+> OK
+result: "<vaga,sd,turno62>"
+
+> OK
+result: "<vaga,sd,turno64>"
+
+> OK
+result: "<vaga,sd,turno66>"
+
+> OK
+result: "<vaga,sd,turno68>"
+
+> OK
+result: "<vaga,sd,turno70>"
+
+> OK
+result: "<vaga,sd,turno72>"
+
+> OK
+result: "<vaga,sd,turno74>"
+
+> OK
+result: "<vaga,sd,turno76>"
+
+> OK
+result: "<vaga,sd,turno78>"
+
+> OK
+result: "<vaga,sd,turno80>"
+
+> OK
+result: "<vaga,sd,turno82>"
+
+> OK
+result: "<vaga,sd,turno84>"
+
+> OK
+result: "<vaga,sd,turno86>"
+
+> OK
+result: "<vaga,sd,turno88>"
+
+> OK
+result: "<vaga,sd,turno90>"
+
+> OK
+result: "<vaga,sd,turno92>"
+
+> OK
+result: "<vaga,sd,turno94>"
+
+> OK
+result: "<vaga,sd,turno96>"
+
+> OK
+result: "<vaga,sd,turno98>"
+
+> OK
+
+> 

@@ -1,0 +1,6504 @@
+ClientMain
+Received 2 arguments
+arg[0] = localhost:3001
+arg[1] = 1
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+
+> OK
+tuple: "<vaga,sd,turno1>"
+tuple: "<vaga,sd,turno2>"
+tuple: "<vaga,sd,turno3>"
+tuple: "<vaga,sd,turno4>"
+tuple: "<vaga,sd,turno5>"
+tuple: "<vaga,sd,turno6>"
+tuple: "<vaga,sd,turno7>"
+tuple: "<vaga,sd,turno8>"
+tuple: "<vaga,sd,turno9>"
+tuple: "<vaga,sd,turno10>"
+tuple: "<vaga,sd,turno11>"
+tuple: "<vaga,sd,turno12>"
+tuple: "<vaga,sd,turno13>"
+tuple: "<vaga,sd,turno14>"
+tuple: "<vaga,sd,turno15>"
+tuple: "<vaga,sd,turno16>"
+tuple: "<vaga,sd,turno17>"
+tuple: "<vaga,sd,turno18>"
+tuple: "<vaga,sd,turno19>"
+tuple: "<vaga,sd,turno20>"
+tuple: "<vaga,sd,turno21>"
+tuple: "<vaga,sd,turno22>"
+tuple: "<vaga,sd,turno23>"
+tuple: "<vaga,sd,turno24>"
+tuple: "<vaga,sd,turno25>"
+tuple: "<vaga,sd,turno26>"
+tuple: "<vaga,sd,turno27>"
+tuple: "<vaga,sd,turno28>"
+tuple: "<vaga,sd,turno29>"
+tuple: "<vaga,sd,turno30>"
+tuple: "<vaga,sd,turno31>"
+tuple: "<vaga,sd,turno32>"
+tuple: "<vaga,sd,turno33>"
+tuple: "<vaga,sd,turno34>"
+tuple: "<vaga,sd,turno35>"
+tuple: "<vaga,sd,turno36>"
+tuple: "<vaga,sd,turno37>"
+tuple: "<vaga,sd,turno38>"
+tuple: "<vaga,sd,turno39>"
+tuple: "<vaga,sd,turno40>"
+tuple: "<vaga,sd,turno41>"
+tuple: "<vaga,sd,turno42>"
+tuple: "<vaga,sd,turno43>"
+tuple: "<vaga,sd,turno44>"
+tuple: "<vaga,sd,turno45>"
+tuple: "<vaga,sd,turno46>"
+tuple: "<vaga,sd,turno47>"
+tuple: "<vaga,sd,turno48>"
+tuple: "<vaga,sd,turno49>"
+tuple: "<vaga,sd,turno50>"
+tuple: "<vaga,sd,turno51>"
+tuple: "<vaga,sd,turno52>"
+tuple: "<vaga,sd,turno53>"
+tuple: "<vaga,sd,turno54>"
+tuple: "<vaga,sd,turno55>"
+tuple: "<vaga,sd,turno56>"
+tuple: "<vaga,sd,turno57>"
+tuple: "<vaga,sd,turno58>"
+tuple: "<vaga,sd,turno59>"
+tuple: "<vaga,sd,turno60>"
+tuple: "<vaga,sd,turno61>"
+tuple: "<vaga,sd,turno62>"
+tuple: "<vaga,sd,turno63>"
+tuple: "<vaga,sd,turno64>"
+tuple: "<vaga,sd,turno65>"
+tuple: "<vaga,sd,turno66>"
+tuple: "<vaga,sd,turno67>"
+tuple: "<vaga,sd,turno68>"
+tuple: "<vaga,sd,turno69>"
+tuple: "<vaga,sd,turno70>"
+tuple: "<vaga,sd,turno71>"
+tuple: "<vaga,sd,turno72>"
+tuple: "<vaga,sd,turno73>"
+tuple: "<vaga,sd,turno74>"
+tuple: "<vaga,sd,turno75>"
+tuple: "<vaga,sd,turno76>"
+tuple: "<vaga,sd,turno77>"
+tuple: "<vaga,sd,turno78>"
+tuple: "<vaga,sd,turno79>"
+tuple: "<vaga,sd,turno80>"
+tuple: "<vaga,sd,turno81>"
+tuple: "<vaga,sd,turno82>"
+tuple: "<vaga,sd,turno83>"
+tuple: "<vaga,sd,turno84>"
+tuple: "<vaga,sd,turno85>"
+tuple: "<vaga,sd,turno86>"
+tuple: "<vaga,sd,turno87>"
+tuple: "<vaga,sd,turno88>"
+tuple: "<vaga,sd,turno89>"
+tuple: "<vaga,sd,turno90>"
+tuple: "<vaga,sd,turno91>"
+tuple: "<vaga,sd,turno92>"
+tuple: "<vaga,sd,turno93>"
+tuple: "<vaga,sd,turno94>"
+tuple: "<vaga,sd,turno95>"
+tuple: "<vaga,sd,turno96>"
+tuple: "<vaga,sd,turno97>"
+tuple: "<vaga,sd,turno98>"
+tuple: "<vaga,sd,turno99>"
+tuple: "<vaga,sd,turno100>"
+tuple: "<vaga,sd,turno101>"
+tuple: "<vaga,sd,turno102>"
+tuple: "<vaga,sd,turno103>"
+tuple: "<vaga,sd,turno104>"
+tuple: "<vaga,sd,turno105>"
+tuple: "<vaga,sd,turno106>"
+tuple: "<vaga,sd,turno107>"
+tuple: "<vaga,sd,turno108>"
+tuple: "<vaga,sd,turno109>"
+tuple: "<vaga,sd,turno110>"
+tuple: "<vaga,sd,turno111>"
+tuple: "<vaga,sd,turno112>"
+tuple: "<vaga,sd,turno113>"
+tuple: "<vaga,sd,turno114>"
+tuple: "<vaga,sd,turno115>"
+tuple: "<vaga,sd,turno116>"
+tuple: "<vaga,sd,turno117>"
+tuple: "<vaga,sd,turno118>"
+tuple: "<vaga,sd,turno119>"
+tuple: "<vaga,sd,turno120>"
+tuple: "<vaga,sd,turno121>"
+tuple: "<vaga,sd,turno122>"
+tuple: "<vaga,sd,turno123>"
+tuple: "<vaga,sd,turno124>"
+tuple: "<vaga,sd,turno125>"
+tuple: "<vaga,sd,turno126>"
+tuple: "<vaga,sd,turno127>"
+tuple: "<vaga,sd,turno128>"
+tuple: "<vaga,sd,turno129>"
+tuple: "<vaga,sd,turno130>"
+tuple: "<vaga,sd,turno131>"
+tuple: "<vaga,sd,turno132>"
+tuple: "<vaga,sd,turno133>"
+tuple: "<vaga,sd,turno134>"
+tuple: "<vaga,sd,turno135>"
+tuple: "<vaga,sd,turno136>"
+tuple: "<vaga,sd,turno137>"
+tuple: "<vaga,sd,turno138>"
+tuple: "<vaga,sd,turno139>"
+tuple: "<vaga,sd,turno140>"
+tuple: "<vaga,sd,turno141>"
+tuple: "<vaga,sd,turno142>"
+tuple: "<vaga,sd,turno143>"
+tuple: "<vaga,sd,turno144>"
+tuple: "<vaga,sd,turno145>"
+tuple: "<vaga,sd,turno146>"
+tuple: "<vaga,sd,turno147>"
+tuple: "<vaga,sd,turno148>"
+tuple: "<vaga,sd,turno149>"
+tuple: "<vaga,sd,turno150>"
+tuple: "<vaga,sd,turno151>"
+tuple: "<vaga,sd,turno152>"
+tuple: "<vaga,sd,turno153>"
+tuple: "<vaga,sd,turno154>"
+tuple: "<vaga,sd,turno155>"
+tuple: "<vaga,sd,turno156>"
+tuple: "<vaga,sd,turno157>"
+tuple: "<vaga,sd,turno158>"
+tuple: "<vaga,sd,turno159>"
+tuple: "<vaga,sd,turno160>"
+tuple: "<vaga,sd,turno161>"
+tuple: "<vaga,sd,turno162>"
+tuple: "<vaga,sd,turno163>"
+tuple: "<vaga,sd,turno164>"
+tuple: "<vaga,sd,turno165>"
+tuple: "<vaga,sd,turno166>"
+tuple: "<vaga,sd,turno167>"
+tuple: "<vaga,sd,turno168>"
+tuple: "<vaga,sd,turno169>"
+tuple: "<vaga,sd,turno170>"
+tuple: "<vaga,sd,turno171>"
+tuple: "<vaga,sd,turno172>"
+tuple: "<vaga,sd,turno173>"
+tuple: "<vaga,sd,turno174>"
+tuple: "<vaga,sd,turno175>"
+tuple: "<vaga,sd,turno176>"
+tuple: "<vaga,sd,turno177>"
+tuple: "<vaga,sd,turno178>"
+tuple: "<vaga,sd,turno179>"
+tuple: "<vaga,sd,turno180>"
+tuple: "<vaga,sd,turno181>"
+tuple: "<vaga,sd,turno182>"
+tuple: "<vaga,sd,turno183>"
+tuple: "<vaga,sd,turno184>"
+tuple: "<vaga,sd,turno185>"
+tuple: "<vaga,sd,turno186>"
+tuple: "<vaga,sd,turno187>"
+tuple: "<vaga,sd,turno188>"
+tuple: "<vaga,sd,turno189>"
+tuple: "<vaga,sd,turno190>"
+tuple: "<vaga,sd,turno191>"
+tuple: "<vaga,sd,turno192>"
+tuple: "<vaga,sd,turno193>"
+tuple: "<vaga,sd,turno194>"
+tuple: "<vaga,sd,turno195>"
+tuple: "<vaga,sd,turno196>"
+tuple: "<vaga,sd,turno197>"
+tuple: "<vaga,sd,turno198>"
+tuple: "<vaga,sd,turno199>"
+tuple: "<vaga,sd,turno200>"
+tuple: "<vaga,sd,turno201>"
+tuple: "<vaga,sd,turno202>"
+tuple: "<vaga,sd,turno203>"
+tuple: "<vaga,sd,turno204>"
+tuple: "<vaga,sd,turno205>"
+tuple: "<vaga,sd,turno206>"
+tuple: "<vaga,sd,turno207>"
+tuple: "<vaga,sd,turno208>"
+tuple: "<vaga,sd,turno209>"
+tuple: "<vaga,sd,turno210>"
+tuple: "<vaga,sd,turno211>"
+tuple: "<vaga,sd,turno212>"
+tuple: "<vaga,sd,turno213>"
+tuple: "<vaga,sd,turno214>"
+tuple: "<vaga,sd,turno215>"
+tuple: "<vaga,sd,turno216>"
+tuple: "<vaga,sd,turno217>"
+tuple: "<vaga,sd,turno218>"
+tuple: "<vaga,sd,turno219>"
+tuple: "<vaga,sd,turno220>"
+tuple: "<vaga,sd,turno221>"
+tuple: "<vaga,sd,turno222>"
+tuple: "<vaga,sd,turno223>"
+tuple: "<vaga,sd,turno224>"
+tuple: "<vaga,sd,turno225>"
+tuple: "<vaga,sd,turno226>"
+tuple: "<vaga,sd,turno227>"
+tuple: "<vaga,sd,turno228>"
+tuple: "<vaga,sd,turno229>"
+tuple: "<vaga,sd,turno230>"
+tuple: "<vaga,sd,turno231>"
+tuple: "<vaga,sd,turno232>"
+tuple: "<vaga,sd,turno233>"
+tuple: "<vaga,sd,turno234>"
+tuple: "<vaga,sd,turno235>"
+tuple: "<vaga,sd,turno236>"
+tuple: "<vaga,sd,turno237>"
+tuple: "<vaga,sd,turno238>"
+tuple: "<vaga,sd,turno239>"
+tuple: "<vaga,sd,turno240>"
+tuple: "<vaga,sd,turno241>"
+tuple: "<vaga,sd,turno242>"
+tuple: "<vaga,sd,turno243>"
+tuple: "<vaga,sd,turno244>"
+tuple: "<vaga,sd,turno245>"
+tuple: "<vaga,sd,turno246>"
+tuple: "<vaga,sd,turno247>"
+tuple: "<vaga,sd,turno248>"
+tuple: "<vaga,sd,turno249>"
+tuple: "<vaga,sd,turno250>"
+tuple: "<vaga,sd,turno251>"
+tuple: "<vaga,sd,turno252>"
+tuple: "<vaga,sd,turno253>"
+tuple: "<vaga,sd,turno254>"
+tuple: "<vaga,sd,turno255>"
+tuple: "<vaga,sd,turno256>"
+tuple: "<vaga,sd,turno257>"
+tuple: "<vaga,sd,turno258>"
+tuple: "<vaga,sd,turno259>"
+tuple: "<vaga,sd,turno260>"
+tuple: "<vaga,sd,turno261>"
+tuple: "<vaga,sd,turno262>"
+tuple: "<vaga,sd,turno263>"
+tuple: "<vaga,sd,turno264>"
+tuple: "<vaga,sd,turno265>"
+tuple: "<vaga,sd,turno266>"
+tuple: "<vaga,sd,turno267>"
+tuple: "<vaga,sd,turno268>"
+tuple: "<vaga,sd,turno269>"
+tuple: "<vaga,sd,turno270>"
+tuple: "<vaga,sd,turno271>"
+tuple: "<vaga,sd,turno272>"
+tuple: "<vaga,sd,turno273>"
+tuple: "<vaga,sd,turno274>"
+tuple: "<vaga,sd,turno275>"
+tuple: "<vaga,sd,turno276>"
+tuple: "<vaga,sd,turno277>"
+tuple: "<vaga,sd,turno278>"
+tuple: "<vaga,sd,turno279>"
+tuple: "<vaga,sd,turno280>"
+tuple: "<vaga,sd,turno281>"
+tuple: "<vaga,sd,turno282>"
+tuple: "<vaga,sd,turno283>"
+tuple: "<vaga,sd,turno284>"
+tuple: "<vaga,sd,turno285>"
+tuple: "<vaga,sd,turno286>"
+tuple: "<vaga,sd,turno287>"
+tuple: "<vaga,sd,turno288>"
+tuple: "<vaga,sd,turno289>"
+tuple: "<vaga,sd,turno290>"
+tuple: "<vaga,sd,turno291>"
+tuple: "<vaga,sd,turno292>"
+tuple: "<vaga,sd,turno293>"
+tuple: "<vaga,sd,turno294>"
+tuple: "<vaga,sd,turno295>"
+tuple: "<vaga,sd,turno296>"
+tuple: "<vaga,sd,turno297>"
+tuple: "<vaga,sd,turno298>"
+tuple: "<vaga,sd,turno299>"
+tuple: "<vaga,sd,turno300>"
+tuple: "<vaga,sd,turno301>"
+tuple: "<vaga,sd,turno302>"
+tuple: "<vaga,sd,turno303>"
+tuple: "<vaga,sd,turno304>"
+tuple: "<vaga,sd,turno305>"
+tuple: "<vaga,sd,turno306>"
+tuple: "<vaga,sd,turno307>"
+tuple: "<vaga,sd,turno308>"
+tuple: "<vaga,sd,turno309>"
+tuple: "<vaga,sd,turno310>"
+tuple: "<vaga,sd,turno311>"
+tuple: "<vaga,sd,turno312>"
+tuple: "<vaga,sd,turno313>"
+tuple: "<vaga,sd,turno314>"
+tuple: "<vaga,sd,turno315>"
+tuple: "<vaga,sd,turno316>"
+tuple: "<vaga,sd,turno317>"
+tuple: "<vaga,sd,turno318>"
+tuple: "<vaga,sd,turno319>"
+tuple: "<vaga,sd,turno320>"
+tuple: "<vaga,sd,turno321>"
+tuple: "<vaga,sd,turno322>"
+tuple: "<vaga,sd,turno323>"
+tuple: "<vaga,sd,turno324>"
+tuple: "<vaga,sd,turno325>"
+tuple: "<vaga,sd,turno326>"
+tuple: "<vaga,sd,turno327>"
+tuple: "<vaga,sd,turno328>"
+tuple: "<vaga,sd,turno329>"
+tuple: "<vaga,sd,turno330>"
+tuple: "<vaga,sd,turno331>"
+tuple: "<vaga,sd,turno332>"
+tuple: "<vaga,sd,turno333>"
+tuple: "<vaga,sd,turno334>"
+tuple: "<vaga,sd,turno335>"
+tuple: "<vaga,sd,turno336>"
+tuple: "<vaga,sd,turno337>"
+tuple: "<vaga,sd,turno338>"
+tuple: "<vaga,sd,turno339>"
+tuple: "<vaga,sd,turno340>"
+tuple: "<vaga,sd,turno341>"
+tuple: "<vaga,sd,turno342>"
+tuple: "<vaga,sd,turno343>"
+tuple: "<vaga,sd,turno344>"
+tuple: "<vaga,sd,turno345>"
+tuple: "<vaga,sd,turno346>"
+tuple: "<vaga,sd,turno347>"
+tuple: "<vaga,sd,turno348>"
+tuple: "<vaga,sd,turno349>"
+tuple: "<vaga,sd,turno350>"
+tuple: "<vaga,sd,turno351>"
+tuple: "<vaga,sd,turno352>"
+tuple: "<vaga,sd,turno353>"
+tuple: "<vaga,sd,turno354>"
+tuple: "<vaga,sd,turno355>"
+tuple: "<vaga,sd,turno356>"
+tuple: "<vaga,sd,turno357>"
+tuple: "<vaga,sd,turno358>"
+tuple: "<vaga,sd,turno359>"
+tuple: "<vaga,sd,turno360>"
+tuple: "<vaga,sd,turno361>"
+tuple: "<vaga,sd,turno362>"
+tuple: "<vaga,sd,turno363>"
+tuple: "<vaga,sd,turno364>"
+tuple: "<vaga,sd,turno365>"
+tuple: "<vaga,sd,turno366>"
+tuple: "<vaga,sd,turno367>"
+tuple: "<vaga,sd,turno368>"
+tuple: "<vaga,sd,turno369>"
+tuple: "<vaga,sd,turno370>"
+tuple: "<vaga,sd,turno371>"
+tuple: "<vaga,sd,turno372>"
+tuple: "<vaga,sd,turno373>"
+tuple: "<vaga,sd,turno374>"
+tuple: "<vaga,sd,turno375>"
+tuple: "<vaga,sd,turno376>"
+tuple: "<vaga,sd,turno377>"
+tuple: "<vaga,sd,turno378>"
+tuple: "<vaga,sd,turno379>"
+tuple: "<vaga,sd,turno380>"
+tuple: "<vaga,sd,turno381>"
+tuple: "<vaga,sd,turno382>"
+tuple: "<vaga,sd,turno383>"
+tuple: "<vaga,sd,turno384>"
+tuple: "<vaga,sd,turno385>"
+tuple: "<vaga,sd,turno386>"
+tuple: "<vaga,sd,turno387>"
+tuple: "<vaga,sd,turno388>"
+tuple: "<vaga,sd,turno389>"
+tuple: "<vaga,sd,turno390>"
+tuple: "<vaga,sd,turno391>"
+tuple: "<vaga,sd,turno392>"
+tuple: "<vaga,sd,turno393>"
+tuple: "<vaga,sd,turno394>"
+tuple: "<vaga,sd,turno395>"
+tuple: "<vaga,sd,turno396>"
+tuple: "<vaga,sd,turno397>"
+tuple: "<vaga,sd,turno398>"
+tuple: "<vaga,sd,turno399>"
+tuple: "<vaga,sd,turno400>"
+tuple: "<vaga,sd,turno401>"
+tuple: "<vaga,sd,turno402>"
+tuple: "<vaga,sd,turno403>"
+tuple: "<vaga,sd,turno404>"
+tuple: "<vaga,sd,turno405>"
+tuple: "<vaga,sd,turno406>"
+tuple: "<vaga,sd,turno407>"
+tuple: "<vaga,sd,turno408>"
+tuple: "<vaga,sd,turno409>"
+tuple: "<vaga,sd,turno410>"
+tuple: "<vaga,sd,turno411>"
+tuple: "<vaga,sd,turno412>"
+tuple: "<vaga,sd,turno413>"
+tuple: "<vaga,sd,turno414>"
+tuple: "<vaga,sd,turno415>"
+tuple: "<vaga,sd,turno416>"
+tuple: "<vaga,sd,turno417>"
+tuple: "<vaga,sd,turno418>"
+tuple: "<vaga,sd,turno419>"
+tuple: "<vaga,sd,turno420>"
+tuple: "<vaga,sd,turno421>"
+tuple: "<vaga,sd,turno422>"
+tuple: "<vaga,sd,turno423>"
+tuple: "<vaga,sd,turno424>"
+tuple: "<vaga,sd,turno425>"
+tuple: "<vaga,sd,turno426>"
+tuple: "<vaga,sd,turno427>"
+tuple: "<vaga,sd,turno428>"
+tuple: "<vaga,sd,turno429>"
+tuple: "<vaga,sd,turno430>"
+tuple: "<vaga,sd,turno431>"
+tuple: "<vaga,sd,turno432>"
+tuple: "<vaga,sd,turno433>"
+tuple: "<vaga,sd,turno434>"
+tuple: "<vaga,sd,turno435>"
+tuple: "<vaga,sd,turno436>"
+tuple: "<vaga,sd,turno437>"
+tuple: "<vaga,sd,turno438>"
+tuple: "<vaga,sd,turno439>"
+tuple: "<vaga,sd,turno440>"
+tuple: "<vaga,sd,turno441>"
+tuple: "<vaga,sd,turno442>"
+tuple: "<vaga,sd,turno443>"
+tuple: "<vaga,sd,turno444>"
+tuple: "<vaga,sd,turno445>"
+tuple: "<vaga,sd,turno446>"
+tuple: "<vaga,sd,turno447>"
+tuple: "<vaga,sd,turno448>"
+tuple: "<vaga,sd,turno449>"
+tuple: "<vaga,sd,turno450>"
+tuple: "<vaga,sd,turno451>"
+tuple: "<vaga,sd,turno452>"
+tuple: "<vaga,sd,turno453>"
+tuple: "<vaga,sd,turno454>"
+tuple: "<vaga,sd,turno455>"
+tuple: "<vaga,sd,turno456>"
+tuple: "<vaga,sd,turno457>"
+tuple: "<vaga,sd,turno458>"
+tuple: "<vaga,sd,turno459>"
+tuple: "<vaga,sd,turno460>"
+tuple: "<vaga,sd,turno461>"
+tuple: "<vaga,sd,turno462>"
+tuple: "<vaga,sd,turno463>"
+tuple: "<vaga,sd,turno464>"
+tuple: "<vaga,sd,turno465>"
+tuple: "<vaga,sd,turno466>"
+tuple: "<vaga,sd,turno467>"
+tuple: "<vaga,sd,turno468>"
+tuple: "<vaga,sd,turno469>"
+tuple: "<vaga,sd,turno470>"
+tuple: "<vaga,sd,turno471>"
+tuple: "<vaga,sd,turno472>"
+tuple: "<vaga,sd,turno473>"
+tuple: "<vaga,sd,turno474>"
+tuple: "<vaga,sd,turno475>"
+tuple: "<vaga,sd,turno476>"
+tuple: "<vaga,sd,turno477>"
+tuple: "<vaga,sd,turno478>"
+tuple: "<vaga,sd,turno479>"
+tuple: "<vaga,sd,turno480>"
+tuple: "<vaga,sd,turno481>"
+tuple: "<vaga,sd,turno482>"
+tuple: "<vaga,sd,turno483>"
+tuple: "<vaga,sd,turno484>"
+tuple: "<vaga,sd,turno485>"
+tuple: "<vaga,sd,turno486>"
+tuple: "<vaga,sd,turno487>"
+tuple: "<vaga,sd,turno488>"
+tuple: "<vaga,sd,turno489>"
+tuple: "<vaga,sd,turno490>"
+tuple: "<vaga,sd,turno491>"
+tuple: "<vaga,sd,turno492>"
+tuple: "<vaga,sd,turno493>"
+tuple: "<vaga,sd,turno494>"
+tuple: "<vaga,sd,turno495>"
+tuple: "<vaga,sd,turno496>"
+tuple: "<vaga,sd,turno497>"
+tuple: "<vaga,sd,turno498>"
+tuple: "<vaga,sd,turno499>"
+tuple: "<vaga,sd,turno500>"
+tuple: "<vaga,sd,turno501>"
+tuple: "<vaga,sd,turno502>"
+tuple: "<vaga,sd,turno503>"
+tuple: "<vaga,sd,turno504>"
+tuple: "<vaga,sd,turno505>"
+tuple: "<vaga,sd,turno506>"
+tuple: "<vaga,sd,turno507>"
+tuple: "<vaga,sd,turno508>"
+tuple: "<vaga,sd,turno509>"
+tuple: "<vaga,sd,turno510>"
+tuple: "<vaga,sd,turno511>"
+tuple: "<vaga,sd,turno512>"
+tuple: "<vaga,sd,turno513>"
+tuple: "<vaga,sd,turno514>"
+tuple: "<vaga,sd,turno515>"
+tuple: "<vaga,sd,turno516>"
+tuple: "<vaga,sd,turno517>"
+tuple: "<vaga,sd,turno518>"
+tuple: "<vaga,sd,turno519>"
+tuple: "<vaga,sd,turno520>"
+tuple: "<vaga,sd,turno521>"
+tuple: "<vaga,sd,turno522>"
+tuple: "<vaga,sd,turno523>"
+tuple: "<vaga,sd,turno524>"
+tuple: "<vaga,sd,turno525>"
+tuple: "<vaga,sd,turno526>"
+tuple: "<vaga,sd,turno527>"
+tuple: "<vaga,sd,turno528>"
+tuple: "<vaga,sd,turno529>"
+tuple: "<vaga,sd,turno530>"
+tuple: "<vaga,sd,turno531>"
+tuple: "<vaga,sd,turno532>"
+tuple: "<vaga,sd,turno533>"
+tuple: "<vaga,sd,turno534>"
+tuple: "<vaga,sd,turno535>"
+tuple: "<vaga,sd,turno536>"
+tuple: "<vaga,sd,turno537>"
+tuple: "<vaga,sd,turno538>"
+tuple: "<vaga,sd,turno539>"
+tuple: "<vaga,sd,turno540>"
+tuple: "<vaga,sd,turno541>"
+tuple: "<vaga,sd,turno542>"
+tuple: "<vaga,sd,turno543>"
+tuple: "<vaga,sd,turno544>"
+tuple: "<vaga,sd,turno545>"
+tuple: "<vaga,sd,turno546>"
+tuple: "<vaga,sd,turno547>"
+tuple: "<vaga,sd,turno548>"
+tuple: "<vaga,sd,turno549>"
+tuple: "<vaga,sd,turno550>"
+tuple: "<vaga,sd,turno551>"
+tuple: "<vaga,sd,turno552>"
+tuple: "<vaga,sd,turno553>"
+tuple: "<vaga,sd,turno554>"
+tuple: "<vaga,sd,turno555>"
+tuple: "<vaga,sd,turno556>"
+tuple: "<vaga,sd,turno557>"
+tuple: "<vaga,sd,turno558>"
+tuple: "<vaga,sd,turno559>"
+tuple: "<vaga,sd,turno560>"
+tuple: "<vaga,sd,turno561>"
+tuple: "<vaga,sd,turno562>"
+tuple: "<vaga,sd,turno563>"
+tuple: "<vaga,sd,turno564>"
+tuple: "<vaga,sd,turno565>"
+tuple: "<vaga,sd,turno566>"
+tuple: "<vaga,sd,turno567>"
+tuple: "<vaga,sd,turno568>"
+tuple: "<vaga,sd,turno569>"
+tuple: "<vaga,sd,turno570>"
+tuple: "<vaga,sd,turno571>"
+tuple: "<vaga,sd,turno572>"
+tuple: "<vaga,sd,turno573>"
+tuple: "<vaga,sd,turno574>"
+tuple: "<vaga,sd,turno575>"
+tuple: "<vaga,sd,turno576>"
+tuple: "<vaga,sd,turno577>"
+tuple: "<vaga,sd,turno578>"
+tuple: "<vaga,sd,turno579>"
+tuple: "<vaga,sd,turno580>"
+tuple: "<vaga,sd,turno581>"
+tuple: "<vaga,sd,turno582>"
+tuple: "<vaga,sd,turno583>"
+tuple: "<vaga,sd,turno584>"
+tuple: "<vaga,sd,turno585>"
+tuple: "<vaga,sd,turno586>"
+tuple: "<vaga,sd,turno587>"
+tuple: "<vaga,sd,turno588>"
+tuple: "<vaga,sd,turno589>"
+tuple: "<vaga,sd,turno590>"
+tuple: "<vaga,sd,turno591>"
+tuple: "<vaga,sd,turno592>"
+tuple: "<vaga,sd,turno593>"
+tuple: "<vaga,sd,turno594>"
+tuple: "<vaga,sd,turno595>"
+tuple: "<vaga,sd,turno596>"
+tuple: "<vaga,sd,turno597>"
+tuple: "<vaga,sd,turno598>"
+tuple: "<vaga,sd,turno599>"
+tuple: "<vaga,sd,turno600>"
+tuple: "<vaga,sd,turno601>"
+tuple: "<vaga,sd,turno602>"
+tuple: "<vaga,sd,turno603>"
+tuple: "<vaga,sd,turno604>"
+tuple: "<vaga,sd,turno605>"
+tuple: "<vaga,sd,turno606>"
+tuple: "<vaga,sd,turno607>"
+tuple: "<vaga,sd,turno608>"
+tuple: "<vaga,sd,turno609>"
+tuple: "<vaga,sd,turno610>"
+tuple: "<vaga,sd,turno611>"
+tuple: "<vaga,sd,turno612>"
+tuple: "<vaga,sd,turno613>"
+tuple: "<vaga,sd,turno614>"
+tuple: "<vaga,sd,turno615>"
+tuple: "<vaga,sd,turno616>"
+tuple: "<vaga,sd,turno617>"
+tuple: "<vaga,sd,turno618>"
+tuple: "<vaga,sd,turno619>"
+tuple: "<vaga,sd,turno620>"
+tuple: "<vaga,sd,turno621>"
+tuple: "<vaga,sd,turno622>"
+tuple: "<vaga,sd,turno623>"
+tuple: "<vaga,sd,turno624>"
+tuple: "<vaga,sd,turno625>"
+tuple: "<vaga,sd,turno626>"
+tuple: "<vaga,sd,turno627>"
+tuple: "<vaga,sd,turno628>"
+tuple: "<vaga,sd,turno629>"
+tuple: "<vaga,sd,turno630>"
+tuple: "<vaga,sd,turno631>"
+tuple: "<vaga,sd,turno632>"
+tuple: "<vaga,sd,turno633>"
+tuple: "<vaga,sd,turno634>"
+tuple: "<vaga,sd,turno635>"
+tuple: "<vaga,sd,turno636>"
+tuple: "<vaga,sd,turno637>"
+tuple: "<vaga,sd,turno638>"
+tuple: "<vaga,sd,turno639>"
+tuple: "<vaga,sd,turno640>"
+tuple: "<vaga,sd,turno641>"
+tuple: "<vaga,sd,turno642>"
+tuple: "<vaga,sd,turno643>"
+tuple: "<vaga,sd,turno644>"
+tuple: "<vaga,sd,turno645>"
+tuple: "<vaga,sd,turno646>"
+tuple: "<vaga,sd,turno647>"
+tuple: "<vaga,sd,turno648>"
+tuple: "<vaga,sd,turno649>"
+tuple: "<vaga,sd,turno650>"
+tuple: "<vaga,sd,turno651>"
+tuple: "<vaga,sd,turno652>"
+tuple: "<vaga,sd,turno653>"
+tuple: "<vaga,sd,turno654>"
+tuple: "<vaga,sd,turno655>"
+tuple: "<vaga,sd,turno656>"
+tuple: "<vaga,sd,turno657>"
+tuple: "<vaga,sd,turno658>"
+tuple: "<vaga,sd,turno659>"
+tuple: "<vaga,sd,turno660>"
+tuple: "<vaga,sd,turno661>"
+tuple: "<vaga,sd,turno662>"
+tuple: "<vaga,sd,turno663>"
+tuple: "<vaga,sd,turno664>"
+tuple: "<vaga,sd,turno665>"
+tuple: "<vaga,sd,turno666>"
+tuple: "<vaga,sd,turno667>"
+tuple: "<vaga,sd,turno668>"
+tuple: "<vaga,sd,turno669>"
+tuple: "<vaga,sd,turno670>"
+tuple: "<vaga,sd,turno671>"
+tuple: "<vaga,sd,turno672>"
+tuple: "<vaga,sd,turno673>"
+tuple: "<vaga,sd,turno674>"
+tuple: "<vaga,sd,turno675>"
+tuple: "<vaga,sd,turno676>"
+tuple: "<vaga,sd,turno677>"
+tuple: "<vaga,sd,turno678>"
+tuple: "<vaga,sd,turno679>"
+tuple: "<vaga,sd,turno680>"
+tuple: "<vaga,sd,turno681>"
+tuple: "<vaga,sd,turno682>"
+tuple: "<vaga,sd,turno683>"
+tuple: "<vaga,sd,turno684>"
+tuple: "<vaga,sd,turno685>"
+tuple: "<vaga,sd,turno686>"
+tuple: "<vaga,sd,turno687>"
+tuple: "<vaga,sd,turno688>"
+tuple: "<vaga,sd,turno689>"
+tuple: "<vaga,sd,turno690>"
+tuple: "<vaga,sd,turno691>"
+tuple: "<vaga,sd,turno692>"
+tuple: "<vaga,sd,turno693>"
+tuple: "<vaga,sd,turno694>"
+tuple: "<vaga,sd,turno695>"
+tuple: "<vaga,sd,turno696>"
+tuple: "<vaga,sd,turno697>"
+tuple: "<vaga,sd,turno698>"
+tuple: "<vaga,sd,turno699>"
+tuple: "<vaga,sd,turno700>"
+tuple: "<vaga,sd,turno701>"
+tuple: "<vaga,sd,turno702>"
+tuple: "<vaga,sd,turno703>"
+tuple: "<vaga,sd,turno704>"
+tuple: "<vaga,sd,turno705>"
+tuple: "<vaga,sd,turno706>"
+tuple: "<vaga,sd,turno707>"
+tuple: "<vaga,sd,turno708>"
+tuple: "<vaga,sd,turno709>"
+tuple: "<vaga,sd,turno710>"
+tuple: "<vaga,sd,turno711>"
+tuple: "<vaga,sd,turno712>"
+tuple: "<vaga,sd,turno713>"
+tuple: "<vaga,sd,turno714>"
+tuple: "<vaga,sd,turno715>"
+tuple: "<vaga,sd,turno716>"
+tuple: "<vaga,sd,turno717>"
+tuple: "<vaga,sd,turno718>"
+tuple: "<vaga,sd,turno719>"
+tuple: "<vaga,sd,turno720>"
+tuple: "<vaga,sd,turno721>"
+tuple: "<vaga,sd,turno722>"
+tuple: "<vaga,sd,turno723>"
+tuple: "<vaga,sd,turno724>"
+tuple: "<vaga,sd,turno725>"
+tuple: "<vaga,sd,turno726>"
+tuple: "<vaga,sd,turno727>"
+tuple: "<vaga,sd,turno728>"
+tuple: "<vaga,sd,turno729>"
+tuple: "<vaga,sd,turno730>"
+tuple: "<vaga,sd,turno731>"
+tuple: "<vaga,sd,turno732>"
+tuple: "<vaga,sd,turno733>"
+tuple: "<vaga,sd,turno734>"
+tuple: "<vaga,sd,turno735>"
+tuple: "<vaga,sd,turno736>"
+tuple: "<vaga,sd,turno737>"
+tuple: "<vaga,sd,turno738>"
+tuple: "<vaga,sd,turno739>"
+tuple: "<vaga,sd,turno740>"
+tuple: "<vaga,sd,turno741>"
+tuple: "<vaga,sd,turno742>"
+tuple: "<vaga,sd,turno743>"
+tuple: "<vaga,sd,turno744>"
+tuple: "<vaga,sd,turno745>"
+tuple: "<vaga,sd,turno746>"
+tuple: "<vaga,sd,turno747>"
+tuple: "<vaga,sd,turno748>"
+tuple: "<vaga,sd,turno749>"
+tuple: "<vaga,sd,turno750>"
+tuple: "<vaga,sd,turno751>"
+tuple: "<vaga,sd,turno752>"
+tuple: "<vaga,sd,turno753>"
+tuple: "<vaga,sd,turno754>"
+tuple: "<vaga,sd,turno755>"
+tuple: "<vaga,sd,turno756>"
+tuple: "<vaga,sd,turno757>"
+tuple: "<vaga,sd,turno758>"
+tuple: "<vaga,sd,turno759>"
+tuple: "<vaga,sd,turno760>"
+tuple: "<vaga,sd,turno761>"
+tuple: "<vaga,sd,turno762>"
+tuple: "<vaga,sd,turno763>"
+tuple: "<vaga,sd,turno764>"
+tuple: "<vaga,sd,turno765>"
+tuple: "<vaga,sd,turno766>"
+tuple: "<vaga,sd,turno767>"
+tuple: "<vaga,sd,turno768>"
+tuple: "<vaga,sd,turno769>"
+tuple: "<vaga,sd,turno770>"
+tuple: "<vaga,sd,turno771>"
+tuple: "<vaga,sd,turno772>"
+tuple: "<vaga,sd,turno773>"
+tuple: "<vaga,sd,turno774>"
+tuple: "<vaga,sd,turno775>"
+tuple: "<vaga,sd,turno776>"
+tuple: "<vaga,sd,turno777>"
+tuple: "<vaga,sd,turno778>"
+tuple: "<vaga,sd,turno779>"
+tuple: "<vaga,sd,turno780>"
+tuple: "<vaga,sd,turno781>"
+tuple: "<vaga,sd,turno782>"
+tuple: "<vaga,sd,turno783>"
+tuple: "<vaga,sd,turno784>"
+tuple: "<vaga,sd,turno785>"
+tuple: "<vaga,sd,turno786>"
+tuple: "<vaga,sd,turno787>"
+tuple: "<vaga,sd,turno788>"
+tuple: "<vaga,sd,turno789>"
+tuple: "<vaga,sd,turno790>"
+tuple: "<vaga,sd,turno791>"
+tuple: "<vaga,sd,turno792>"
+tuple: "<vaga,sd,turno793>"
+tuple: "<vaga,sd,turno794>"
+tuple: "<vaga,sd,turno795>"
+tuple: "<vaga,sd,turno796>"
+tuple: "<vaga,sd,turno797>"
+tuple: "<vaga,sd,turno798>"
+tuple: "<vaga,sd,turno799>"
+tuple: "<vaga,sd,turno800>"
+tuple: "<vaga,sd,turno801>"
+tuple: "<vaga,sd,turno802>"
+tuple: "<vaga,sd,turno803>"
+tuple: "<vaga,sd,turno804>"
+tuple: "<vaga,sd,turno805>"
+tuple: "<vaga,sd,turno806>"
+tuple: "<vaga,sd,turno807>"
+tuple: "<vaga,sd,turno808>"
+tuple: "<vaga,sd,turno809>"
+tuple: "<vaga,sd,turno810>"
+tuple: "<vaga,sd,turno811>"
+tuple: "<vaga,sd,turno812>"
+tuple: "<vaga,sd,turno813>"
+tuple: "<vaga,sd,turno814>"
+tuple: "<vaga,sd,turno815>"
+tuple: "<vaga,sd,turno816>"
+tuple: "<vaga,sd,turno817>"
+tuple: "<vaga,sd,turno818>"
+tuple: "<vaga,sd,turno819>"
+tuple: "<vaga,sd,turno820>"
+tuple: "<vaga,sd,turno821>"
+tuple: "<vaga,sd,turno822>"
+tuple: "<vaga,sd,turno823>"
+tuple: "<vaga,sd,turno824>"
+tuple: "<vaga,sd,turno825>"
+tuple: "<vaga,sd,turno826>"
+tuple: "<vaga,sd,turno827>"
+tuple: "<vaga,sd,turno828>"
+tuple: "<vaga,sd,turno829>"
+tuple: "<vaga,sd,turno830>"
+tuple: "<vaga,sd,turno831>"
+tuple: "<vaga,sd,turno832>"
+tuple: "<vaga,sd,turno833>"
+tuple: "<vaga,sd,turno834>"
+tuple: "<vaga,sd,turno835>"
+tuple: "<vaga,sd,turno836>"
+tuple: "<vaga,sd,turno837>"
+tuple: "<vaga,sd,turno838>"
+tuple: "<vaga,sd,turno839>"
+tuple: "<vaga,sd,turno840>"
+tuple: "<vaga,sd,turno841>"
+tuple: "<vaga,sd,turno842>"
+tuple: "<vaga,sd,turno843>"
+tuple: "<vaga,sd,turno844>"
+tuple: "<vaga,sd,turno845>"
+tuple: "<vaga,sd,turno846>"
+tuple: "<vaga,sd,turno847>"
+tuple: "<vaga,sd,turno848>"
+tuple: "<vaga,sd,turno849>"
+tuple: "<vaga,sd,turno850>"
+tuple: "<vaga,sd,turno851>"
+tuple: "<vaga,sd,turno852>"
+tuple: "<vaga,sd,turno853>"
+tuple: "<vaga,sd,turno854>"
+tuple: "<vaga,sd,turno855>"
+tuple: "<vaga,sd,turno856>"
+tuple: "<vaga,sd,turno857>"
+tuple: "<vaga,sd,turno858>"
+tuple: "<vaga,sd,turno859>"
+tuple: "<vaga,sd,turno860>"
+tuple: "<vaga,sd,turno861>"
+tuple: "<vaga,sd,turno862>"
+tuple: "<vaga,sd,turno863>"
+tuple: "<vaga,sd,turno864>"
+tuple: "<vaga,sd,turno865>"
+tuple: "<vaga,sd,turno866>"
+tuple: "<vaga,sd,turno867>"
+tuple: "<vaga,sd,turno868>"
+tuple: "<vaga,sd,turno869>"
+tuple: "<vaga,sd,turno870>"
+tuple: "<vaga,sd,turno871>"
+tuple: "<vaga,sd,turno872>"
+tuple: "<vaga,sd,turno873>"
+tuple: "<vaga,sd,turno874>"
+tuple: "<vaga,sd,turno875>"
+tuple: "<vaga,sd,turno876>"
+tuple: "<vaga,sd,turno877>"
+tuple: "<vaga,sd,turno878>"
+tuple: "<vaga,sd,turno879>"
+tuple: "<vaga,sd,turno880>"
+tuple: "<vaga,sd,turno881>"
+tuple: "<vaga,sd,turno882>"
+tuple: "<vaga,sd,turno883>"
+tuple: "<vaga,sd,turno884>"
+tuple: "<vaga,sd,turno885>"
+tuple: "<vaga,sd,turno886>"
+tuple: "<vaga,sd,turno887>"
+tuple: "<vaga,sd,turno888>"
+tuple: "<vaga,sd,turno889>"
+tuple: "<vaga,sd,turno890>"
+tuple: "<vaga,sd,turno891>"
+tuple: "<vaga,sd,turno892>"
+tuple: "<vaga,sd,turno893>"
+tuple: "<vaga,sd,turno894>"
+tuple: "<vaga,sd,turno895>"
+tuple: "<vaga,sd,turno896>"
+tuple: "<vaga,sd,turno897>"
+tuple: "<vaga,sd,turno898>"
+tuple: "<vaga,sd,turno899>"
+tuple: "<vaga,sd,turno900>"
+tuple: "<vaga,sd,turno901>"
+tuple: "<vaga,sd,turno902>"
+tuple: "<vaga,sd,turno903>"
+tuple: "<vaga,sd,turno904>"
+tuple: "<vaga,sd,turno905>"
+tuple: "<vaga,sd,turno906>"
+tuple: "<vaga,sd,turno907>"
+tuple: "<vaga,sd,turno908>"
+tuple: "<vaga,sd,turno909>"
+tuple: "<vaga,sd,turno910>"
+tuple: "<vaga,sd,turno911>"
+tuple: "<vaga,sd,turno912>"
+tuple: "<vaga,sd,turno913>"
+tuple: "<vaga,sd,turno914>"
+tuple: "<vaga,sd,turno915>"
+tuple: "<vaga,sd,turno916>"
+tuple: "<vaga,sd,turno917>"
+tuple: "<vaga,sd,turno918>"
+tuple: "<vaga,sd,turno919>"
+tuple: "<vaga,sd,turno920>"
+tuple: "<vaga,sd,turno921>"
+tuple: "<vaga,sd,turno922>"
+tuple: "<vaga,sd,turno923>"
+tuple: "<vaga,sd,turno924>"
+tuple: "<vaga,sd,turno925>"
+tuple: "<vaga,sd,turno926>"
+tuple: "<vaga,sd,turno927>"
+tuple: "<vaga,sd,turno928>"
+tuple: "<vaga,sd,turno929>"
+tuple: "<vaga,sd,turno930>"
+tuple: "<vaga,sd,turno931>"
+tuple: "<vaga,sd,turno932>"
+tuple: "<vaga,sd,turno933>"
+tuple: "<vaga,sd,turno934>"
+tuple: "<vaga,sd,turno935>"
+tuple: "<vaga,sd,turno936>"
+tuple: "<vaga,sd,turno937>"
+tuple: "<vaga,sd,turno938>"
+tuple: "<vaga,sd,turno939>"
+tuple: "<vaga,sd,turno940>"
+tuple: "<vaga,sd,turno941>"
+tuple: "<vaga,sd,turno942>"
+tuple: "<vaga,sd,turno943>"
+tuple: "<vaga,sd,turno944>"
+tuple: "<vaga,sd,turno945>"
+tuple: "<vaga,sd,turno946>"
+tuple: "<vaga,sd,turno947>"
+tuple: "<vaga,sd,turno948>"
+tuple: "<vaga,sd,turno949>"
+tuple: "<vaga,sd,turno950>"
+tuple: "<vaga,sd,turno951>"
+tuple: "<vaga,sd,turno952>"
+tuple: "<vaga,sd,turno953>"
+tuple: "<vaga,sd,turno954>"
+tuple: "<vaga,sd,turno955>"
+tuple: "<vaga,sd,turno956>"
+tuple: "<vaga,sd,turno957>"
+tuple: "<vaga,sd,turno958>"
+tuple: "<vaga,sd,turno959>"
+tuple: "<vaga,sd,turno960>"
+tuple: "<vaga,sd,turno961>"
+tuple: "<vaga,sd,turno962>"
+tuple: "<vaga,sd,turno963>"
+tuple: "<vaga,sd,turno964>"
+tuple: "<vaga,sd,turno965>"
+tuple: "<vaga,sd,turno966>"
+tuple: "<vaga,sd,turno967>"
+tuple: "<vaga,sd,turno968>"
+tuple: "<vaga,sd,turno969>"
+tuple: "<vaga,sd,turno970>"
+tuple: "<vaga,sd,turno971>"
+tuple: "<vaga,sd,turno972>"
+tuple: "<vaga,sd,turno973>"
+tuple: "<vaga,sd,turno974>"
+tuple: "<vaga,sd,turno975>"
+tuple: "<vaga,sd,turno976>"
+tuple: "<vaga,sd,turno977>"
+tuple: "<vaga,sd,turno978>"
+tuple: "<vaga,sd,turno979>"
+tuple: "<vaga,sd,turno980>"
+tuple: "<vaga,sd,turno981>"
+tuple: "<vaga,sd,turno982>"
+tuple: "<vaga,sd,turno983>"
+tuple: "<vaga,sd,turno984>"
+tuple: "<vaga,sd,turno985>"
+tuple: "<vaga,sd,turno986>"
+tuple: "<vaga,sd,turno987>"
+tuple: "<vaga,sd,turno988>"
+tuple: "<vaga,sd,turno989>"
+tuple: "<vaga,sd,turno990>"
+tuple: "<vaga,sd,turno991>"
+tuple: "<vaga,sd,turno992>"
+tuple: "<vaga,sd,turno993>"
+tuple: "<vaga,sd,turno994>"
+tuple: "<vaga,sd,turno995>"
+tuple: "<vaga,sd,turno996>"
+tuple: "<vaga,sd,turno997>"
+tuple: "<vaga,sd,turno998>"
+tuple: "<vaga,sd,turno999>"
+
+> OK
+result: "<vaga,sd,turno1>"
+
+> OK
+result: "<vaga,sd,turno3>"
+
+> OK
+result: "<vaga,sd,turno5>"
+
+> OK
+result: "<vaga,sd,turno7>"
+
+> OK
+result: "<vaga,sd,turno9>"
+
+> OK
+result: "<vaga,sd,turno11>"
+
+> OK
+result: "<vaga,sd,turno13>"
+
+> OK
+result: "<vaga,sd,turno15>"
+
+> OK
+result: "<vaga,sd,turno17>"
+
+> OK
+result: "<vaga,sd,turno19>"
+
+> OK
+result: "<vaga,sd,turno21>"
+
+> OK
+result: "<vaga,sd,turno23>"
+
+> OK
+result: "<vaga,sd,turno25>"
+
+> OK
+result: "<vaga,sd,turno27>"
+
+> OK
+result: "<vaga,sd,turno29>"
+
+> OK
+result: "<vaga,sd,turno31>"
+
+> OK
+result: "<vaga,sd,turno33>"
+
+> OK
+result: "<vaga,sd,turno35>"
+
+> OK
+result: "<vaga,sd,turno37>"
+
+> OK
+result: "<vaga,sd,turno39>"
+
+> OK
+result: "<vaga,sd,turno41>"
+
+> OK
+result: "<vaga,sd,turno43>"
+
+> OK
+result: "<vaga,sd,turno45>"
+
+> OK
+result: "<vaga,sd,turno47>"
+
+> OK
+result: "<vaga,sd,turno49>"
+
+> OK
+result: "<vaga,sd,turno51>"
+
+> OK
+result: "<vaga,sd,turno53>"
+
+> OK
+result: "<vaga,sd,turno55>"
+
+> OK
+result: "<vaga,sd,turno57>"
+
+> OK
+result: "<vaga,sd,turno59>"
+
+> OK
+result: "<vaga,sd,turno61>"
+
+> OK
+result: "<vaga,sd,turno63>"
+
+> OK
+result: "<vaga,sd,turno65>"
+
+> OK
+result: "<vaga,sd,turno67>"
+
+> OK
+result: "<vaga,sd,turno69>"
+
+> OK
+result: "<vaga,sd,turno71>"
+
+> OK
+result: "<vaga,sd,turno73>"
+
+> OK
+result: "<vaga,sd,turno75>"
+
+> OK
+result: "<vaga,sd,turno77>"
+
+> OK
+result: "<vaga,sd,turno79>"
+
+> OK
+result: "<vaga,sd,turno81>"
+
+> OK
+result: "<vaga,sd,turno83>"
+
+> OK
+result: "<vaga,sd,turno85>"
+
+> OK
+result: "<vaga,sd,turno87>"
+
+> OK
+result: "<vaga,sd,turno89>"
+
+> OK
+result: "<vaga,sd,turno91>"
+
+> OK
+result: "<vaga,sd,turno93>"
+
+> OK
+result: "<vaga,sd,turno95>"
+
+> OK
+result: "<vaga,sd,turno97>"
+
+> OK
+result: "<vaga,sd,turno99>"
+
+> OK
+result: "<vaga,sd,turno101>"
+
+> OK
+result: "<vaga,sd,turno103>"
+
+> OK
+result: "<vaga,sd,turno105>"
+
+> OK
+result: "<vaga,sd,turno107>"
+
+> OK
+result: "<vaga,sd,turno109>"
+
+> OK
+result: "<vaga,sd,turno111>"
+
+> OK
+result: "<vaga,sd,turno113>"
+
+> OK
+result: "<vaga,sd,turno115>"
+
+> OK
+result: "<vaga,sd,turno117>"
+
+> OK
+result: "<vaga,sd,turno119>"
+
+> OK
+result: "<vaga,sd,turno121>"
+
+> OK
+result: "<vaga,sd,turno123>"
+
+> OK
+result: "<vaga,sd,turno125>"
+
+> OK
+result: "<vaga,sd,turno127>"
+
+> OK
+result: "<vaga,sd,turno129>"
+
+> OK
+result: "<vaga,sd,turno131>"
+
+> OK
+result: "<vaga,sd,turno133>"
+
+> OK
+result: "<vaga,sd,turno135>"
+
+> OK
+result: "<vaga,sd,turno137>"
+
+> OK
+result: "<vaga,sd,turno139>"
+
+> OK
+result: "<vaga,sd,turno141>"
+
+> OK
+result: "<vaga,sd,turno143>"
+
+> OK
+result: "<vaga,sd,turno145>"
+
+> OK
+result: "<vaga,sd,turno147>"
+
+> OK
+result: "<vaga,sd,turno149>"
+
+> OK
+result: "<vaga,sd,turno151>"
+
+> OK
+result: "<vaga,sd,turno153>"
+
+> OK
+result: "<vaga,sd,turno155>"
+
+> OK
+result: "<vaga,sd,turno157>"
+
+> OK
+result: "<vaga,sd,turno159>"
+
+> OK
+result: "<vaga,sd,turno161>"
+
+> OK
+result: "<vaga,sd,turno163>"
+
+> OK
+result: "<vaga,sd,turno165>"
+
+> OK
+result: "<vaga,sd,turno167>"
+
+> OK
+result: "<vaga,sd,turno169>"
+
+> OK
+result: "<vaga,sd,turno171>"
+
+> OK
+result: "<vaga,sd,turno173>"
+
+> OK
+result: "<vaga,sd,turno175>"
+
+> OK
+result: "<vaga,sd,turno177>"
+
+> OK
+result: "<vaga,sd,turno179>"
+
+> OK
+result: "<vaga,sd,turno181>"
+
+> OK
+result: "<vaga,sd,turno183>"
+
+> OK
+result: "<vaga,sd,turno185>"
+
+> OK
+result: "<vaga,sd,turno187>"
+
+> OK
+result: "<vaga,sd,turno189>"
+
+> OK
+result: "<vaga,sd,turno191>"
+
+> OK
+result: "<vaga,sd,turno193>"
+
+> OK
+result: "<vaga,sd,turno195>"
+
+> OK
+result: "<vaga,sd,turno197>"
+
+> OK
+result: "<vaga,sd,turno199>"
+
+> OK
+result: "<vaga,sd,turno201>"
+
+> OK
+result: "<vaga,sd,turno203>"
+
+> OK
+result: "<vaga,sd,turno205>"
+
+> OK
+result: "<vaga,sd,turno207>"
+
+> OK
+result: "<vaga,sd,turno209>"
+
+> OK
+result: "<vaga,sd,turno211>"
+
+> OK
+result: "<vaga,sd,turno213>"
+
+> OK
+result: "<vaga,sd,turno215>"
+
+> OK
+result: "<vaga,sd,turno217>"
+
+> OK
+result: "<vaga,sd,turno219>"
+
+> OK
+result: "<vaga,sd,turno221>"
+
+> OK
+result: "<vaga,sd,turno223>"
+
+> OK
+result: "<vaga,sd,turno225>"
+
+> OK
+result: "<vaga,sd,turno227>"
+
+> OK
+result: "<vaga,sd,turno229>"
+
+> OK
+result: "<vaga,sd,turno231>"
+
+> OK
+result: "<vaga,sd,turno233>"
+
+> OK
+result: "<vaga,sd,turno235>"
+
+> OK
+result: "<vaga,sd,turno237>"
+
+> OK
+result: "<vaga,sd,turno239>"
+
+> OK
+result: "<vaga,sd,turno241>"
+
+> OK
+result: "<vaga,sd,turno243>"
+
+> OK
+result: "<vaga,sd,turno245>"
+
+> OK
+result: "<vaga,sd,turno247>"
+
+> OK
+result: "<vaga,sd,turno249>"
+
+> OK
+result: "<vaga,sd,turno251>"
+
+> OK
+result: "<vaga,sd,turno253>"
+
+> OK
+result: "<vaga,sd,turno255>"
+
+> OK
+result: "<vaga,sd,turno257>"
+
+> OK
+result: "<vaga,sd,turno259>"
+
+> OK
+result: "<vaga,sd,turno261>"
+
+> OK
+result: "<vaga,sd,turno263>"
+
+> OK
+result: "<vaga,sd,turno265>"
+
+> OK
+result: "<vaga,sd,turno267>"
+
+> OK
+result: "<vaga,sd,turno269>"
+
+> OK
+result: "<vaga,sd,turno271>"
+
+> OK
+result: "<vaga,sd,turno273>"
+
+> OK
+result: "<vaga,sd,turno275>"
+
+> OK
+result: "<vaga,sd,turno277>"
+
+> OK
+result: "<vaga,sd,turno279>"
+
+> OK
+result: "<vaga,sd,turno281>"
+
+> OK
+result: "<vaga,sd,turno283>"
+
+> OK
+result: "<vaga,sd,turno285>"
+
+> OK
+result: "<vaga,sd,turno287>"
+
+> OK
+result: "<vaga,sd,turno289>"
+
+> OK
+result: "<vaga,sd,turno291>"
+
+> OK
+result: "<vaga,sd,turno293>"
+
+> OK
+result: "<vaga,sd,turno295>"
+
+> OK
+result: "<vaga,sd,turno297>"
+
+> OK
+result: "<vaga,sd,turno299>"
+
+> OK
+result: "<vaga,sd,turno301>"
+
+> OK
+result: "<vaga,sd,turno303>"
+
+> OK
+result: "<vaga,sd,turno305>"
+
+> OK
+result: "<vaga,sd,turno307>"
+
+> OK
+result: "<vaga,sd,turno309>"
+
+> OK
+result: "<vaga,sd,turno311>"
+
+> OK
+result: "<vaga,sd,turno313>"
+
+> OK
+result: "<vaga,sd,turno315>"
+
+> OK
+result: "<vaga,sd,turno317>"
+
+> OK
+result: "<vaga,sd,turno319>"
+
+> OK
+result: "<vaga,sd,turno321>"
+
+> OK
+result: "<vaga,sd,turno323>"
+
+> OK
+result: "<vaga,sd,turno325>"
+
+> OK
+result: "<vaga,sd,turno327>"
+
+> OK
+result: "<vaga,sd,turno329>"
+
+> OK
+result: "<vaga,sd,turno331>"
+
+> OK
+result: "<vaga,sd,turno333>"
+
+> OK
+result: "<vaga,sd,turno335>"
+
+> OK
+result: "<vaga,sd,turno337>"
+
+> OK
+result: "<vaga,sd,turno339>"
+
+> OK
+result: "<vaga,sd,turno341>"
+
+> OK
+result: "<vaga,sd,turno343>"
+
+> OK
+result: "<vaga,sd,turno345>"
+
+> OK
+result: "<vaga,sd,turno347>"
+
+> OK
+result: "<vaga,sd,turno349>"
+
+> OK
+result: "<vaga,sd,turno351>"
+
+> OK
+result: "<vaga,sd,turno353>"
+
+> OK
+result: "<vaga,sd,turno355>"
+
+> OK
+result: "<vaga,sd,turno357>"
+
+> OK
+result: "<vaga,sd,turno359>"
+
+> OK
+result: "<vaga,sd,turno361>"
+
+> OK
+result: "<vaga,sd,turno363>"
+
+> OK
+result: "<vaga,sd,turno365>"
+
+> OK
+result: "<vaga,sd,turno367>"
+
+> OK
+result: "<vaga,sd,turno369>"
+
+> OK
+result: "<vaga,sd,turno371>"
+
+> OK
+result: "<vaga,sd,turno373>"
+
+> OK
+result: "<vaga,sd,turno375>"
+
+> OK
+result: "<vaga,sd,turno377>"
+
+> OK
+result: "<vaga,sd,turno379>"
+
+> OK
+result: "<vaga,sd,turno381>"
+
+> OK
+result: "<vaga,sd,turno383>"
+
+> OK
+result: "<vaga,sd,turno385>"
+
+> OK
+result: "<vaga,sd,turno387>"
+
+> OK
+result: "<vaga,sd,turno389>"
+
+> OK
+result: "<vaga,sd,turno391>"
+
+> OK
+result: "<vaga,sd,turno393>"
+
+> OK
+result: "<vaga,sd,turno395>"
+
+> OK
+result: "<vaga,sd,turno397>"
+
+> OK
+result: "<vaga,sd,turno399>"
+
+> OK
+result: "<vaga,sd,turno401>"
+
+> OK
+result: "<vaga,sd,turno403>"
+
+> OK
+result: "<vaga,sd,turno405>"
+
+> OK
+result: "<vaga,sd,turno407>"
+
+> OK
+result: "<vaga,sd,turno409>"
+
+> OK
+result: "<vaga,sd,turno411>"
+
+> OK
+result: "<vaga,sd,turno413>"
+
+> OK
+result: "<vaga,sd,turno415>"
+
+> OK
+result: "<vaga,sd,turno417>"
+
+> OK
+result: "<vaga,sd,turno419>"
+
+> OK
+result: "<vaga,sd,turno421>"
+
+> OK
+result: "<vaga,sd,turno423>"
+
+> OK
+result: "<vaga,sd,turno425>"
+
+> OK
+result: "<vaga,sd,turno427>"
+
+> OK
+result: "<vaga,sd,turno429>"
+
+> OK
+result: "<vaga,sd,turno431>"
+
+> OK
+result: "<vaga,sd,turno433>"
+
+> OK
+result: "<vaga,sd,turno435>"
+
+> OK
+result: "<vaga,sd,turno437>"
+
+> OK
+result: "<vaga,sd,turno439>"
+
+> OK
+result: "<vaga,sd,turno441>"
+
+> OK
+result: "<vaga,sd,turno443>"
+
+> OK
+result: "<vaga,sd,turno445>"
+
+> OK
+result: "<vaga,sd,turno447>"
+
+> OK
+result: "<vaga,sd,turno449>"
+
+> OK
+result: "<vaga,sd,turno451>"
+
+> OK
+result: "<vaga,sd,turno453>"
+
+> OK
+result: "<vaga,sd,turno455>"
+
+> OK
+result: "<vaga,sd,turno457>"
+
+> OK
+result: "<vaga,sd,turno459>"
+
+> OK
+result: "<vaga,sd,turno461>"
+
+> OK
+result: "<vaga,sd,turno463>"
+
+> OK
+result: "<vaga,sd,turno465>"
+
+> OK
+result: "<vaga,sd,turno467>"
+
+> OK
+result: "<vaga,sd,turno469>"
+
+> OK
+result: "<vaga,sd,turno471>"
+
+> OK
+result: "<vaga,sd,turno473>"
+
+> OK
+result: "<vaga,sd,turno475>"
+
+> OK
+result: "<vaga,sd,turno477>"
+
+> OK
+result: "<vaga,sd,turno479>"
+
+> OK
+result: "<vaga,sd,turno481>"
+
+> OK
+result: "<vaga,sd,turno483>"
+
+> OK
+result: "<vaga,sd,turno485>"
+
+> OK
+result: "<vaga,sd,turno487>"
+
+> OK
+result: "<vaga,sd,turno489>"
+
+> OK
+result: "<vaga,sd,turno491>"
+
+> OK
+result: "<vaga,sd,turno493>"
+
+> OK
+result: "<vaga,sd,turno495>"
+
+> OK
+result: "<vaga,sd,turno497>"
+
+> OK
+result: "<vaga,sd,turno499>"
+
+> OK
+result: "<vaga,sd,turno501>"
+
+> OK
+result: "<vaga,sd,turno503>"
+
+> OK
+result: "<vaga,sd,turno505>"
+
+> OK
+result: "<vaga,sd,turno507>"
+
+> OK
+result: "<vaga,sd,turno509>"
+
+> OK
+result: "<vaga,sd,turno511>"
+
+> OK
+result: "<vaga,sd,turno513>"
+
+> OK
+result: "<vaga,sd,turno515>"
+
+> OK
+result: "<vaga,sd,turno517>"
+
+> OK
+result: "<vaga,sd,turno519>"
+
+> OK
+result: "<vaga,sd,turno521>"
+
+> OK
+result: "<vaga,sd,turno523>"
+
+> OK
+result: "<vaga,sd,turno525>"
+
+> OK
+result: "<vaga,sd,turno527>"
+
+> OK
+result: "<vaga,sd,turno529>"
+
+> OK
+result: "<vaga,sd,turno531>"
+
+> OK
+result: "<vaga,sd,turno533>"
+
+> OK
+result: "<vaga,sd,turno535>"
+
+> OK
+result: "<vaga,sd,turno537>"
+
+> OK
+result: "<vaga,sd,turno539>"
+
+> OK
+result: "<vaga,sd,turno541>"
+
+> OK
+result: "<vaga,sd,turno543>"
+
+> OK
+result: "<vaga,sd,turno545>"
+
+> OK
+result: "<vaga,sd,turno547>"
+
+> OK
+result: "<vaga,sd,turno549>"
+
+> OK
+result: "<vaga,sd,turno551>"
+
+> OK
+result: "<vaga,sd,turno553>"
+
+> OK
+result: "<vaga,sd,turno555>"
+
+> OK
+result: "<vaga,sd,turno557>"
+
+> OK
+result: "<vaga,sd,turno559>"
+
+> OK
+result: "<vaga,sd,turno561>"
+
+> OK
+result: "<vaga,sd,turno563>"
+
+> OK
+result: "<vaga,sd,turno565>"
+
+> OK
+result: "<vaga,sd,turno567>"
+
+> OK
+result: "<vaga,sd,turno569>"
+
+> OK
+result: "<vaga,sd,turno571>"
+
+> OK
+result: "<vaga,sd,turno573>"
+
+> OK
+result: "<vaga,sd,turno575>"
+
+> OK
+result: "<vaga,sd,turno577>"
+
+> OK
+result: "<vaga,sd,turno579>"
+
+> OK
+result: "<vaga,sd,turno581>"
+
+> OK
+result: "<vaga,sd,turno583>"
+
+> OK
+result: "<vaga,sd,turno585>"
+
+> OK
+result: "<vaga,sd,turno587>"
+
+> OK
+result: "<vaga,sd,turno589>"
+
+> OK
+result: "<vaga,sd,turno591>"
+
+> OK
+result: "<vaga,sd,turno593>"
+
+> OK
+result: "<vaga,sd,turno595>"
+
+> OK
+result: "<vaga,sd,turno597>"
+
+> OK
+result: "<vaga,sd,turno599>"
+
+> OK
+result: "<vaga,sd,turno601>"
+
+> OK
+result: "<vaga,sd,turno603>"
+
+> OK
+result: "<vaga,sd,turno605>"
+
+> OK
+result: "<vaga,sd,turno607>"
+
+> OK
+result: "<vaga,sd,turno609>"
+
+> OK
+result: "<vaga,sd,turno611>"
+
+> OK
+result: "<vaga,sd,turno613>"
+
+> OK
+result: "<vaga,sd,turno615>"
+
+> OK
+result: "<vaga,sd,turno617>"
+
+> OK
+result: "<vaga,sd,turno619>"
+
+> OK
+result: "<vaga,sd,turno621>"
+
+> OK
+result: "<vaga,sd,turno623>"
+
+> OK
+result: "<vaga,sd,turno625>"
+
+> OK
+result: "<vaga,sd,turno627>"
+
+> OK
+result: "<vaga,sd,turno629>"
+
+> OK
+result: "<vaga,sd,turno631>"
+
+> OK
+result: "<vaga,sd,turno633>"
+
+> OK
+result: "<vaga,sd,turno635>"
+
+> OK
+result: "<vaga,sd,turno637>"
+
+> OK
+result: "<vaga,sd,turno639>"
+
+> OK
+result: "<vaga,sd,turno641>"
+
+> OK
+result: "<vaga,sd,turno643>"
+
+> OK
+result: "<vaga,sd,turno645>"
+
+> OK
+result: "<vaga,sd,turno647>"
+
+> OK
+result: "<vaga,sd,turno649>"
+
+> OK
+result: "<vaga,sd,turno651>"
+
+> OK
+result: "<vaga,sd,turno653>"
+
+> OK
+result: "<vaga,sd,turno655>"
+
+> OK
+result: "<vaga,sd,turno657>"
+
+> OK
+result: "<vaga,sd,turno659>"
+
+> OK
+result: "<vaga,sd,turno661>"
+
+> OK
+result: "<vaga,sd,turno663>"
+
+> OK
+result: "<vaga,sd,turno665>"
+
+> OK
+result: "<vaga,sd,turno667>"
+
+> OK
+result: "<vaga,sd,turno669>"
+
+> OK
+result: "<vaga,sd,turno671>"
+
+> OK
+result: "<vaga,sd,turno673>"
+
+> OK
+result: "<vaga,sd,turno675>"
+
+> OK
+result: "<vaga,sd,turno677>"
+
+> OK
+result: "<vaga,sd,turno679>"
+
+> OK
+result: "<vaga,sd,turno681>"
+
+> OK
+result: "<vaga,sd,turno683>"
+
+> OK
+result: "<vaga,sd,turno685>"
+
+> OK
+result: "<vaga,sd,turno687>"
+
+> OK
+result: "<vaga,sd,turno689>"
+
+> OK
+result: "<vaga,sd,turno691>"
+
+> OK
+result: "<vaga,sd,turno693>"
+
+> OK
+result: "<vaga,sd,turno695>"
+
+> OK
+result: "<vaga,sd,turno697>"
+
+> OK
+result: "<vaga,sd,turno699>"
+
+> OK
+result: "<vaga,sd,turno701>"
+
+> OK
+result: "<vaga,sd,turno703>"
+
+> OK
+result: "<vaga,sd,turno705>"
+
+> OK
+result: "<vaga,sd,turno707>"
+
+> OK
+result: "<vaga,sd,turno709>"
+
+> OK
+result: "<vaga,sd,turno711>"
+
+> OK
+result: "<vaga,sd,turno713>"
+
+> OK
+result: "<vaga,sd,turno715>"
+
+> OK
+result: "<vaga,sd,turno717>"
+
+> OK
+result: "<vaga,sd,turno719>"
+
+> OK
+result: "<vaga,sd,turno721>"
+
+> OK
+result: "<vaga,sd,turno723>"
+
+> OK
+result: "<vaga,sd,turno725>"
+
+> OK
+result: "<vaga,sd,turno727>"
+
+> OK
+result: "<vaga,sd,turno729>"
+
+> OK
+result: "<vaga,sd,turno731>"
+
+> OK
+result: "<vaga,sd,turno733>"
+
+> OK
+result: "<vaga,sd,turno735>"
+
+> OK
+result: "<vaga,sd,turno737>"
+
+> OK
+result: "<vaga,sd,turno739>"
+
+> OK
+result: "<vaga,sd,turno741>"
+
+> OK
+result: "<vaga,sd,turno743>"
+
+> OK
+result: "<vaga,sd,turno745>"
+
+> OK
+result: "<vaga,sd,turno747>"
+
+> OK
+result: "<vaga,sd,turno749>"
+
+> OK
+result: "<vaga,sd,turno751>"
+
+> OK
+result: "<vaga,sd,turno753>"
+
+> OK
+result: "<vaga,sd,turno755>"
+
+> OK
+result: "<vaga,sd,turno757>"
+
+> OK
+result: "<vaga,sd,turno759>"
+
+> OK
+result: "<vaga,sd,turno761>"
+
+> OK
+result: "<vaga,sd,turno763>"
+
+> OK
+result: "<vaga,sd,turno765>"
+
+> OK
+result: "<vaga,sd,turno767>"
+
+> OK
+result: "<vaga,sd,turno769>"
+
+> OK
+result: "<vaga,sd,turno771>"
+
+> OK
+result: "<vaga,sd,turno773>"
+
+> OK
+result: "<vaga,sd,turno775>"
+
+> OK
+result: "<vaga,sd,turno777>"
+
+> OK
+result: "<vaga,sd,turno779>"
+
+> OK
+result: "<vaga,sd,turno781>"
+
+> OK
+result: "<vaga,sd,turno783>"
+
+> OK
+result: "<vaga,sd,turno785>"
+
+> OK
+result: "<vaga,sd,turno787>"
+
+> OK
+result: "<vaga,sd,turno789>"
+
+> OK
+result: "<vaga,sd,turno791>"
+
+> OK
+result: "<vaga,sd,turno793>"
+
+> OK
+result: "<vaga,sd,turno795>"
+
+> OK
+result: "<vaga,sd,turno797>"
+
+> OK
+result: "<vaga,sd,turno799>"
+
+> OK
+result: "<vaga,sd,turno801>"
+
+> OK
+result: "<vaga,sd,turno803>"
+
+> OK
+result: "<vaga,sd,turno805>"
+
+> OK
+result: "<vaga,sd,turno807>"
+
+> OK
+result: "<vaga,sd,turno809>"
+
+> OK
+result: "<vaga,sd,turno811>"
+
+> OK
+result: "<vaga,sd,turno813>"
+
+> OK
+result: "<vaga,sd,turno815>"
+
+> OK
+result: "<vaga,sd,turno817>"
+
+> OK
+result: "<vaga,sd,turno819>"
+
+> OK
+result: "<vaga,sd,turno821>"
+
+> OK
+result: "<vaga,sd,turno823>"
+
+> OK
+result: "<vaga,sd,turno825>"
+
+> OK
+result: "<vaga,sd,turno827>"
+
+> OK
+result: "<vaga,sd,turno829>"
+
+> OK
+result: "<vaga,sd,turno831>"
+
+> OK
+result: "<vaga,sd,turno833>"
+
+> OK
+result: "<vaga,sd,turno835>"
+
+> OK
+result: "<vaga,sd,turno837>"
+
+> OK
+result: "<vaga,sd,turno839>"
+
+> OK
+result: "<vaga,sd,turno841>"
+
+> OK
+result: "<vaga,sd,turno843>"
+
+> OK
+result: "<vaga,sd,turno845>"
+
+> OK
+result: "<vaga,sd,turno847>"
+
+> OK
+result: "<vaga,sd,turno849>"
+
+> OK
+result: "<vaga,sd,turno851>"
+
+> OK
+result: "<vaga,sd,turno853>"
+
+> OK
+result: "<vaga,sd,turno855>"
+
+> OK
+result: "<vaga,sd,turno857>"
+
+> OK
+result: "<vaga,sd,turno859>"
+
+> OK
+result: "<vaga,sd,turno861>"
+
+> OK
+result: "<vaga,sd,turno863>"
+
+> OK
+result: "<vaga,sd,turno865>"
+
+> OK
+result: "<vaga,sd,turno867>"
+
+> OK
+result: "<vaga,sd,turno869>"
+
+> OK
+result: "<vaga,sd,turno871>"
+
+> OK
+result: "<vaga,sd,turno873>"
+
+> OK
+result: "<vaga,sd,turno875>"
+
+> OK
+result: "<vaga,sd,turno877>"
+
+> OK
+result: "<vaga,sd,turno879>"
+
+> OK
+result: "<vaga,sd,turno881>"
+
+> OK
+result: "<vaga,sd,turno883>"
+
+> OK
+result: "<vaga,sd,turno885>"
+
+> OK
+result: "<vaga,sd,turno887>"
+
+> OK
+result: "<vaga,sd,turno889>"
+
+> OK
+result: "<vaga,sd,turno891>"
+
+> OK
+result: "<vaga,sd,turno893>"
+
+> OK
+result: "<vaga,sd,turno895>"
+
+> OK
+result: "<vaga,sd,turno897>"
+
+> OK
+result: "<vaga,sd,turno899>"
+
+> OK
+result: "<vaga,sd,turno901>"
+
+> OK
+result: "<vaga,sd,turno903>"
+
+> OK
+result: "<vaga,sd,turno905>"
+
+> OK
+result: "<vaga,sd,turno907>"
+
+> OK
+result: "<vaga,sd,turno909>"
+
+> OK
+result: "<vaga,sd,turno911>"
+
+> OK
+result: "<vaga,sd,turno913>"
+
+> OK
+result: "<vaga,sd,turno915>"
+
+> OK
+result: "<vaga,sd,turno917>"
+
+> OK
+result: "<vaga,sd,turno919>"
+
+> OK
+result: "<vaga,sd,turno921>"
+
+> OK
+result: "<vaga,sd,turno923>"
+
+> OK
+result: "<vaga,sd,turno925>"
+
+> OK
+result: "<vaga,sd,turno927>"
+
+> OK
+result: "<vaga,sd,turno929>"
+
+> OK
+result: "<vaga,sd,turno931>"
+
+> OK
+result: "<vaga,sd,turno933>"
+
+> OK
+result: "<vaga,sd,turno935>"
+
+> OK
+result: "<vaga,sd,turno937>"
+
+> OK
+result: "<vaga,sd,turno939>"
+
+> OK
+result: "<vaga,sd,turno941>"
+
+> OK
+result: "<vaga,sd,turno943>"
+
+> OK
+result: "<vaga,sd,turno945>"
+
+> OK
+result: "<vaga,sd,turno947>"
+
+> OK
+result: "<vaga,sd,turno949>"
+
+> OK
+result: "<vaga,sd,turno951>"
+
+> OK
+result: "<vaga,sd,turno953>"
+
+> OK
+result: "<vaga,sd,turno955>"
+
+> OK
+result: "<vaga,sd,turno957>"
+
+> OK
+result: "<vaga,sd,turno959>"
+
+> OK
+result: "<vaga,sd,turno961>"
+
+> OK
+result: "<vaga,sd,turno963>"
+
+> OK
+result: "<vaga,sd,turno965>"
+
+> OK
+result: "<vaga,sd,turno967>"
+
+> OK
+result: "<vaga,sd,turno969>"
+
+> OK
+result: "<vaga,sd,turno971>"
+
+> OK
+result: "<vaga,sd,turno973>"
+
+> OK
+result: "<vaga,sd,turno975>"
+
+> OK
+result: "<vaga,sd,turno977>"
+
+> OK
+result: "<vaga,sd,turno979>"
+
+> OK
+result: "<vaga,sd,turno981>"
+
+> OK
+result: "<vaga,sd,turno983>"
+
+> OK
+result: "<vaga,sd,turno985>"
+
+> OK
+result: "<vaga,sd,turno987>"
+
+> OK
+result: "<vaga,sd,turno989>"
+
+> OK
+result: "<vaga,sd,turno991>"
+
+> OK
+result: "<vaga,sd,turno993>"
+
+> OK
+result: "<vaga,sd,turno995>"
+
+> OK
+result: "<vaga,sd,turno997>"
+
+> OK
+result: "<vaga,sd,turno999>"
+
+> OK
+tuple: "<vaga,sd,turno2>"
+tuple: "<vaga,sd,turno4>"
+tuple: "<vaga,sd,turno6>"
+tuple: "<vaga,sd,turno8>"
+tuple: "<vaga,sd,turno10>"
+tuple: "<vaga,sd,turno12>"
+tuple: "<vaga,sd,turno14>"
+tuple: "<vaga,sd,turno16>"
+tuple: "<vaga,sd,turno18>"
+tuple: "<vaga,sd,turno20>"
+tuple: "<vaga,sd,turno22>"
+tuple: "<vaga,sd,turno24>"
+tuple: "<vaga,sd,turno26>"
+tuple: "<vaga,sd,turno28>"
+tuple: "<vaga,sd,turno30>"
+tuple: "<vaga,sd,turno32>"
+tuple: "<vaga,sd,turno34>"
+tuple: "<vaga,sd,turno36>"
+tuple: "<vaga,sd,turno38>"
+tuple: "<vaga,sd,turno40>"
+tuple: "<vaga,sd,turno42>"
+tuple: "<vaga,sd,turno44>"
+tuple: "<vaga,sd,turno46>"
+tuple: "<vaga,sd,turno48>"
+tuple: "<vaga,sd,turno50>"
+tuple: "<vaga,sd,turno52>"
+tuple: "<vaga,sd,turno54>"
+tuple: "<vaga,sd,turno56>"
+tuple: "<vaga,sd,turno58>"
+tuple: "<vaga,sd,turno60>"
+tuple: "<vaga,sd,turno62>"
+tuple: "<vaga,sd,turno64>"
+tuple: "<vaga,sd,turno66>"
+tuple: "<vaga,sd,turno68>"
+tuple: "<vaga,sd,turno70>"
+tuple: "<vaga,sd,turno72>"
+tuple: "<vaga,sd,turno74>"
+tuple: "<vaga,sd,turno76>"
+tuple: "<vaga,sd,turno78>"
+tuple: "<vaga,sd,turno80>"
+tuple: "<vaga,sd,turno82>"
+tuple: "<vaga,sd,turno84>"
+tuple: "<vaga,sd,turno86>"
+tuple: "<vaga,sd,turno88>"
+tuple: "<vaga,sd,turno90>"
+tuple: "<vaga,sd,turno92>"
+tuple: "<vaga,sd,turno94>"
+tuple: "<vaga,sd,turno96>"
+tuple: "<vaga,sd,turno98>"
+tuple: "<vaga,sd,turno100>"
+tuple: "<vaga,sd,turno102>"
+tuple: "<vaga,sd,turno104>"
+tuple: "<vaga,sd,turno106>"
+tuple: "<vaga,sd,turno108>"
+tuple: "<vaga,sd,turno110>"
+tuple: "<vaga,sd,turno112>"
+tuple: "<vaga,sd,turno114>"
+tuple: "<vaga,sd,turno116>"
+tuple: "<vaga,sd,turno118>"
+tuple: "<vaga,sd,turno120>"
+tuple: "<vaga,sd,turno122>"
+tuple: "<vaga,sd,turno124>"
+tuple: "<vaga,sd,turno126>"
+tuple: "<vaga,sd,turno128>"
+tuple: "<vaga,sd,turno130>"
+tuple: "<vaga,sd,turno132>"
+tuple: "<vaga,sd,turno134>"
+tuple: "<vaga,sd,turno136>"
+tuple: "<vaga,sd,turno138>"
+tuple: "<vaga,sd,turno140>"
+tuple: "<vaga,sd,turno142>"
+tuple: "<vaga,sd,turno144>"
+tuple: "<vaga,sd,turno146>"
+tuple: "<vaga,sd,turno148>"
+tuple: "<vaga,sd,turno150>"
+tuple: "<vaga,sd,turno152>"
+tuple: "<vaga,sd,turno154>"
+tuple: "<vaga,sd,turno156>"
+tuple: "<vaga,sd,turno158>"
+tuple: "<vaga,sd,turno160>"
+tuple: "<vaga,sd,turno162>"
+tuple: "<vaga,sd,turno164>"
+tuple: "<vaga,sd,turno166>"
+tuple: "<vaga,sd,turno168>"
+tuple: "<vaga,sd,turno170>"
+tuple: "<vaga,sd,turno172>"
+tuple: "<vaga,sd,turno174>"
+tuple: "<vaga,sd,turno176>"
+tuple: "<vaga,sd,turno178>"
+tuple: "<vaga,sd,turno180>"
+tuple: "<vaga,sd,turno182>"
+tuple: "<vaga,sd,turno184>"
+tuple: "<vaga,sd,turno186>"
+tuple: "<vaga,sd,turno188>"
+tuple: "<vaga,sd,turno190>"
+tuple: "<vaga,sd,turno192>"
+tuple: "<vaga,sd,turno194>"
+tuple: "<vaga,sd,turno196>"
+tuple: "<vaga,sd,turno198>"
+tuple: "<vaga,sd,turno200>"
+tuple: "<vaga,sd,turno202>"
+tuple: "<vaga,sd,turno204>"
+tuple: "<vaga,sd,turno206>"
+tuple: "<vaga,sd,turno208>"
+tuple: "<vaga,sd,turno210>"
+tuple: "<vaga,sd,turno212>"
+tuple: "<vaga,sd,turno214>"
+tuple: "<vaga,sd,turno216>"
+tuple: "<vaga,sd,turno218>"
+tuple: "<vaga,sd,turno220>"
+tuple: "<vaga,sd,turno222>"
+tuple: "<vaga,sd,turno224>"
+tuple: "<vaga,sd,turno226>"
+tuple: "<vaga,sd,turno228>"
+tuple: "<vaga,sd,turno230>"
+tuple: "<vaga,sd,turno232>"
+tuple: "<vaga,sd,turno234>"
+tuple: "<vaga,sd,turno236>"
+tuple: "<vaga,sd,turno238>"
+tuple: "<vaga,sd,turno240>"
+tuple: "<vaga,sd,turno242>"
+tuple: "<vaga,sd,turno244>"
+tuple: "<vaga,sd,turno246>"
+tuple: "<vaga,sd,turno248>"
+tuple: "<vaga,sd,turno250>"
+tuple: "<vaga,sd,turno252>"
+tuple: "<vaga,sd,turno254>"
+tuple: "<vaga,sd,turno256>"
+tuple: "<vaga,sd,turno258>"
+tuple: "<vaga,sd,turno260>"
+tuple: "<vaga,sd,turno262>"
+tuple: "<vaga,sd,turno264>"
+tuple: "<vaga,sd,turno266>"
+tuple: "<vaga,sd,turno268>"
+tuple: "<vaga,sd,turno270>"
+tuple: "<vaga,sd,turno272>"
+tuple: "<vaga,sd,turno274>"
+tuple: "<vaga,sd,turno276>"
+tuple: "<vaga,sd,turno278>"
+tuple: "<vaga,sd,turno280>"
+tuple: "<vaga,sd,turno282>"
+tuple: "<vaga,sd,turno284>"
+tuple: "<vaga,sd,turno286>"
+tuple: "<vaga,sd,turno288>"
+tuple: "<vaga,sd,turno290>"
+tuple: "<vaga,sd,turno292>"
+tuple: "<vaga,sd,turno294>"
+tuple: "<vaga,sd,turno296>"
+tuple: "<vaga,sd,turno298>"
+tuple: "<vaga,sd,turno300>"
+tuple: "<vaga,sd,turno302>"
+tuple: "<vaga,sd,turno304>"
+tuple: "<vaga,sd,turno306>"
+tuple: "<vaga,sd,turno308>"
+tuple: "<vaga,sd,turno310>"
+tuple: "<vaga,sd,turno312>"
+tuple: "<vaga,sd,turno314>"
+tuple: "<vaga,sd,turno316>"
+tuple: "<vaga,sd,turno318>"
+tuple: "<vaga,sd,turno320>"
+tuple: "<vaga,sd,turno322>"
+tuple: "<vaga,sd,turno324>"
+tuple: "<vaga,sd,turno326>"
+tuple: "<vaga,sd,turno328>"
+tuple: "<vaga,sd,turno330>"
+tuple: "<vaga,sd,turno332>"
+tuple: "<vaga,sd,turno334>"
+tuple: "<vaga,sd,turno336>"
+tuple: "<vaga,sd,turno338>"
+tuple: "<vaga,sd,turno340>"
+tuple: "<vaga,sd,turno342>"
+tuple: "<vaga,sd,turno344>"
+tuple: "<vaga,sd,turno346>"
+tuple: "<vaga,sd,turno348>"
+tuple: "<vaga,sd,turno350>"
+tuple: "<vaga,sd,turno352>"
+tuple: "<vaga,sd,turno354>"
+tuple: "<vaga,sd,turno356>"
+tuple: "<vaga,sd,turno358>"
+tuple: "<vaga,sd,turno360>"
+tuple: "<vaga,sd,turno362>"
+tuple: "<vaga,sd,turno364>"
+tuple: "<vaga,sd,turno366>"
+tuple: "<vaga,sd,turno368>"
+tuple: "<vaga,sd,turno370>"
+tuple: "<vaga,sd,turno372>"
+tuple: "<vaga,sd,turno374>"
+tuple: "<vaga,sd,turno376>"
+tuple: "<vaga,sd,turno378>"
+tuple: "<vaga,sd,turno380>"
+tuple: "<vaga,sd,turno382>"
+tuple: "<vaga,sd,turno384>"
+tuple: "<vaga,sd,turno386>"
+tuple: "<vaga,sd,turno388>"
+tuple: "<vaga,sd,turno390>"
+tuple: "<vaga,sd,turno392>"
+tuple: "<vaga,sd,turno394>"
+tuple: "<vaga,sd,turno396>"
+tuple: "<vaga,sd,turno398>"
+tuple: "<vaga,sd,turno400>"
+tuple: "<vaga,sd,turno402>"
+tuple: "<vaga,sd,turno404>"
+tuple: "<vaga,sd,turno406>"
+tuple: "<vaga,sd,turno408>"
+tuple: "<vaga,sd,turno410>"
+tuple: "<vaga,sd,turno412>"
+tuple: "<vaga,sd,turno414>"
+tuple: "<vaga,sd,turno416>"
+tuple: "<vaga,sd,turno418>"
+tuple: "<vaga,sd,turno420>"
+tuple: "<vaga,sd,turno422>"
+tuple: "<vaga,sd,turno424>"
+tuple: "<vaga,sd,turno426>"
+tuple: "<vaga,sd,turno428>"
+tuple: "<vaga,sd,turno430>"
+tuple: "<vaga,sd,turno432>"
+tuple: "<vaga,sd,turno434>"
+tuple: "<vaga,sd,turno436>"
+tuple: "<vaga,sd,turno438>"
+tuple: "<vaga,sd,turno440>"
+tuple: "<vaga,sd,turno442>"
+tuple: "<vaga,sd,turno444>"
+tuple: "<vaga,sd,turno446>"
+tuple: "<vaga,sd,turno448>"
+tuple: "<vaga,sd,turno450>"
+tuple: "<vaga,sd,turno452>"
+tuple: "<vaga,sd,turno454>"
+tuple: "<vaga,sd,turno456>"
+tuple: "<vaga,sd,turno458>"
+tuple: "<vaga,sd,turno460>"
+tuple: "<vaga,sd,turno462>"
+tuple: "<vaga,sd,turno464>"
+tuple: "<vaga,sd,turno466>"
+tuple: "<vaga,sd,turno468>"
+tuple: "<vaga,sd,turno470>"
+tuple: "<vaga,sd,turno472>"
+tuple: "<vaga,sd,turno474>"
+tuple: "<vaga,sd,turno476>"
+tuple: "<vaga,sd,turno478>"
+tuple: "<vaga,sd,turno480>"
+tuple: "<vaga,sd,turno482>"
+tuple: "<vaga,sd,turno484>"
+tuple: "<vaga,sd,turno486>"
+tuple: "<vaga,sd,turno488>"
+tuple: "<vaga,sd,turno490>"
+tuple: "<vaga,sd,turno492>"
+tuple: "<vaga,sd,turno494>"
+tuple: "<vaga,sd,turno496>"
+tuple: "<vaga,sd,turno498>"
+tuple: "<vaga,sd,turno500>"
+tuple: "<vaga,sd,turno502>"
+tuple: "<vaga,sd,turno504>"
+tuple: "<vaga,sd,turno506>"
+tuple: "<vaga,sd,turno508>"
+tuple: "<vaga,sd,turno510>"
+tuple: "<vaga,sd,turno512>"
+tuple: "<vaga,sd,turno514>"
+tuple: "<vaga,sd,turno516>"
+tuple: "<vaga,sd,turno518>"
+tuple: "<vaga,sd,turno520>"
+tuple: "<vaga,sd,turno522>"
+tuple: "<vaga,sd,turno524>"
+tuple: "<vaga,sd,turno526>"
+tuple: "<vaga,sd,turno528>"
+tuple: "<vaga,sd,turno530>"
+tuple: "<vaga,sd,turno532>"
+tuple: "<vaga,sd,turno534>"
+tuple: "<vaga,sd,turno536>"
+tuple: "<vaga,sd,turno538>"
+tuple: "<vaga,sd,turno540>"
+tuple: "<vaga,sd,turno542>"
+tuple: "<vaga,sd,turno544>"
+tuple: "<vaga,sd,turno546>"
+tuple: "<vaga,sd,turno548>"
+tuple: "<vaga,sd,turno550>"
+tuple: "<vaga,sd,turno552>"
+tuple: "<vaga,sd,turno554>"
+tuple: "<vaga,sd,turno556>"
+tuple: "<vaga,sd,turno558>"
+tuple: "<vaga,sd,turno560>"
+tuple: "<vaga,sd,turno562>"
+tuple: "<vaga,sd,turno564>"
+tuple: "<vaga,sd,turno566>"
+tuple: "<vaga,sd,turno568>"
+tuple: "<vaga,sd,turno570>"
+tuple: "<vaga,sd,turno572>"
+tuple: "<vaga,sd,turno574>"
+tuple: "<vaga,sd,turno576>"
+tuple: "<vaga,sd,turno578>"
+tuple: "<vaga,sd,turno580>"
+tuple: "<vaga,sd,turno582>"
+tuple: "<vaga,sd,turno584>"
+tuple: "<vaga,sd,turno586>"
+tuple: "<vaga,sd,turno588>"
+tuple: "<vaga,sd,turno590>"
+tuple: "<vaga,sd,turno592>"
+tuple: "<vaga,sd,turno594>"
+tuple: "<vaga,sd,turno596>"
+tuple: "<vaga,sd,turno598>"
+tuple: "<vaga,sd,turno600>"
+tuple: "<vaga,sd,turno602>"
+tuple: "<vaga,sd,turno604>"
+tuple: "<vaga,sd,turno606>"
+tuple: "<vaga,sd,turno608>"
+tuple: "<vaga,sd,turno610>"
+tuple: "<vaga,sd,turno612>"
+tuple: "<vaga,sd,turno614>"
+tuple: "<vaga,sd,turno616>"
+tuple: "<vaga,sd,turno618>"
+tuple: "<vaga,sd,turno620>"
+tuple: "<vaga,sd,turno622>"
+tuple: "<vaga,sd,turno624>"
+tuple: "<vaga,sd,turno626>"
+tuple: "<vaga,sd,turno628>"
+tuple: "<vaga,sd,turno630>"
+tuple: "<vaga,sd,turno632>"
+tuple: "<vaga,sd,turno634>"
+tuple: "<vaga,sd,turno636>"
+tuple: "<vaga,sd,turno638>"
+tuple: "<vaga,sd,turno640>"
+tuple: "<vaga,sd,turno642>"
+tuple: "<vaga,sd,turno644>"
+tuple: "<vaga,sd,turno646>"
+tuple: "<vaga,sd,turno648>"
+tuple: "<vaga,sd,turno650>"
+tuple: "<vaga,sd,turno652>"
+tuple: "<vaga,sd,turno654>"
+tuple: "<vaga,sd,turno656>"
+tuple: "<vaga,sd,turno658>"
+tuple: "<vaga,sd,turno660>"
+tuple: "<vaga,sd,turno662>"
+tuple: "<vaga,sd,turno664>"
+tuple: "<vaga,sd,turno666>"
+tuple: "<vaga,sd,turno668>"
+tuple: "<vaga,sd,turno670>"
+tuple: "<vaga,sd,turno672>"
+tuple: "<vaga,sd,turno674>"
+tuple: "<vaga,sd,turno676>"
+tuple: "<vaga,sd,turno678>"
+tuple: "<vaga,sd,turno680>"
+tuple: "<vaga,sd,turno682>"
+tuple: "<vaga,sd,turno684>"
+tuple: "<vaga,sd,turno686>"
+tuple: "<vaga,sd,turno688>"
+tuple: "<vaga,sd,turno690>"
+tuple: "<vaga,sd,turno692>"
+tuple: "<vaga,sd,turno694>"
+tuple: "<vaga,sd,turno696>"
+tuple: "<vaga,sd,turno698>"
+tuple: "<vaga,sd,turno700>"
+tuple: "<vaga,sd,turno702>"
+tuple: "<vaga,sd,turno704>"
+tuple: "<vaga,sd,turno706>"
+tuple: "<vaga,sd,turno708>"
+tuple: "<vaga,sd,turno710>"
+tuple: "<vaga,sd,turno712>"
+tuple: "<vaga,sd,turno714>"
+tuple: "<vaga,sd,turno716>"
+tuple: "<vaga,sd,turno718>"
+tuple: "<vaga,sd,turno720>"
+tuple: "<vaga,sd,turno722>"
+tuple: "<vaga,sd,turno724>"
+tuple: "<vaga,sd,turno726>"
+tuple: "<vaga,sd,turno728>"
+tuple: "<vaga,sd,turno730>"
+tuple: "<vaga,sd,turno732>"
+tuple: "<vaga,sd,turno734>"
+tuple: "<vaga,sd,turno736>"
+tuple: "<vaga,sd,turno738>"
+tuple: "<vaga,sd,turno740>"
+tuple: "<vaga,sd,turno742>"
+tuple: "<vaga,sd,turno744>"
+tuple: "<vaga,sd,turno746>"
+tuple: "<vaga,sd,turno748>"
+tuple: "<vaga,sd,turno750>"
+tuple: "<vaga,sd,turno752>"
+tuple: "<vaga,sd,turno754>"
+tuple: "<vaga,sd,turno756>"
+tuple: "<vaga,sd,turno758>"
+tuple: "<vaga,sd,turno760>"
+tuple: "<vaga,sd,turno762>"
+tuple: "<vaga,sd,turno764>"
+tuple: "<vaga,sd,turno766>"
+tuple: "<vaga,sd,turno768>"
+tuple: "<vaga,sd,turno770>"
+tuple: "<vaga,sd,turno772>"
+tuple: "<vaga,sd,turno774>"
+tuple: "<vaga,sd,turno776>"
+tuple: "<vaga,sd,turno778>"
+tuple: "<vaga,sd,turno780>"
+tuple: "<vaga,sd,turno782>"
+tuple: "<vaga,sd,turno784>"
+tuple: "<vaga,sd,turno786>"
+tuple: "<vaga,sd,turno788>"
+tuple: "<vaga,sd,turno790>"
+tuple: "<vaga,sd,turno792>"
+tuple: "<vaga,sd,turno794>"
+tuple: "<vaga,sd,turno796>"
+tuple: "<vaga,sd,turno798>"
+tuple: "<vaga,sd,turno800>"
+tuple: "<vaga,sd,turno802>"
+tuple: "<vaga,sd,turno804>"
+tuple: "<vaga,sd,turno806>"
+tuple: "<vaga,sd,turno808>"
+tuple: "<vaga,sd,turno810>"
+tuple: "<vaga,sd,turno812>"
+tuple: "<vaga,sd,turno814>"
+tuple: "<vaga,sd,turno816>"
+tuple: "<vaga,sd,turno818>"
+tuple: "<vaga,sd,turno820>"
+tuple: "<vaga,sd,turno822>"
+tuple: "<vaga,sd,turno824>"
+tuple: "<vaga,sd,turno826>"
+tuple: "<vaga,sd,turno828>"
+tuple: "<vaga,sd,turno830>"
+tuple: "<vaga,sd,turno832>"
+tuple: "<vaga,sd,turno834>"
+tuple: "<vaga,sd,turno836>"
+tuple: "<vaga,sd,turno838>"
+tuple: "<vaga,sd,turno840>"
+tuple: "<vaga,sd,turno842>"
+tuple: "<vaga,sd,turno844>"
+tuple: "<vaga,sd,turno846>"
+tuple: "<vaga,sd,turno848>"
+tuple: "<vaga,sd,turno850>"
+tuple: "<vaga,sd,turno852>"
+tuple: "<vaga,sd,turno854>"
+tuple: "<vaga,sd,turno856>"
+tuple: "<vaga,sd,turno858>"
+tuple: "<vaga,sd,turno860>"
+tuple: "<vaga,sd,turno862>"
+tuple: "<vaga,sd,turno864>"
+tuple: "<vaga,sd,turno866>"
+tuple: "<vaga,sd,turno868>"
+tuple: "<vaga,sd,turno870>"
+tuple: "<vaga,sd,turno872>"
+tuple: "<vaga,sd,turno874>"
+tuple: "<vaga,sd,turno876>"
+tuple: "<vaga,sd,turno878>"
+tuple: "<vaga,sd,turno880>"
+tuple: "<vaga,sd,turno882>"
+tuple: "<vaga,sd,turno884>"
+tuple: "<vaga,sd,turno886>"
+tuple: "<vaga,sd,turno888>"
+tuple: "<vaga,sd,turno890>"
+tuple: "<vaga,sd,turno892>"
+tuple: "<vaga,sd,turno894>"
+tuple: "<vaga,sd,turno896>"
+tuple: "<vaga,sd,turno898>"
+tuple: "<vaga,sd,turno900>"
+tuple: "<vaga,sd,turno902>"
+tuple: "<vaga,sd,turno904>"
+tuple: "<vaga,sd,turno906>"
+tuple: "<vaga,sd,turno908>"
+tuple: "<vaga,sd,turno910>"
+tuple: "<vaga,sd,turno912>"
+tuple: "<vaga,sd,turno914>"
+tuple: "<vaga,sd,turno916>"
+tuple: "<vaga,sd,turno918>"
+tuple: "<vaga,sd,turno920>"
+tuple: "<vaga,sd,turno922>"
+tuple: "<vaga,sd,turno924>"
+tuple: "<vaga,sd,turno926>"
+tuple: "<vaga,sd,turno928>"
+tuple: "<vaga,sd,turno930>"
+tuple: "<vaga,sd,turno932>"
+tuple: "<vaga,sd,turno934>"
+tuple: "<vaga,sd,turno936>"
+tuple: "<vaga,sd,turno938>"
+tuple: "<vaga,sd,turno940>"
+tuple: "<vaga,sd,turno942>"
+tuple: "<vaga,sd,turno944>"
+tuple: "<vaga,sd,turno946>"
+tuple: "<vaga,sd,turno948>"
+tuple: "<vaga,sd,turno950>"
+tuple: "<vaga,sd,turno952>"
+tuple: "<vaga,sd,turno954>"
+tuple: "<vaga,sd,turno956>"
+tuple: "<vaga,sd,turno958>"
+tuple: "<vaga,sd,turno960>"
+tuple: "<vaga,sd,turno962>"
+tuple: "<vaga,sd,turno964>"
+tuple: "<vaga,sd,turno966>"
+tuple: "<vaga,sd,turno968>"
+tuple: "<vaga,sd,turno970>"
+tuple: "<vaga,sd,turno972>"
+tuple: "<vaga,sd,turno974>"
+tuple: "<vaga,sd,turno976>"
+tuple: "<vaga,sd,turno978>"
+tuple: "<vaga,sd,turno980>"
+tuple: "<vaga,sd,turno982>"
+tuple: "<vaga,sd,turno984>"
+tuple: "<vaga,sd,turno986>"
+tuple: "<vaga,sd,turno988>"
+tuple: "<vaga,sd,turno990>"
+tuple: "<vaga,sd,turno992>"
+tuple: "<vaga,sd,turno994>"
+tuple: "<vaga,sd,turno996>"
+tuple: "<vaga,sd,turno998>"
+
+> OK
+result: "<vaga,sd,turno2>"
+
+> OK
+result: "<vaga,sd,turno4>"
+
+> OK
+result: "<vaga,sd,turno6>"
+
+> OK
+result: "<vaga,sd,turno8>"
+
+> OK
+result: "<vaga,sd,turno10>"
+
+> OK
+result: "<vaga,sd,turno12>"
+
+> OK
+result: "<vaga,sd,turno14>"
+
+> OK
+result: "<vaga,sd,turno16>"
+
+> OK
+result: "<vaga,sd,turno18>"
+
+> OK
+result: "<vaga,sd,turno20>"
+
+> OK
+result: "<vaga,sd,turno22>"
+
+> OK
+result: "<vaga,sd,turno24>"
+
+> OK
+result: "<vaga,sd,turno26>"
+
+> OK
+result: "<vaga,sd,turno28>"
+
+> OK
+result: "<vaga,sd,turno30>"
+
+> OK
+result: "<vaga,sd,turno32>"
+
+> OK
+result: "<vaga,sd,turno34>"
+
+> OK
+result: "<vaga,sd,turno36>"
+
+> OK
+result: "<vaga,sd,turno38>"
+
+> OK
+result: "<vaga,sd,turno40>"
+
+> OK
+result: "<vaga,sd,turno42>"
+
+> OK
+result: "<vaga,sd,turno44>"
+
+> OK
+result: "<vaga,sd,turno46>"
+
+> OK
+result: "<vaga,sd,turno48>"
+
+> OK
+result: "<vaga,sd,turno50>"
+
+> OK
+result: "<vaga,sd,turno52>"
+
+> OK
+result: "<vaga,sd,turno54>"
+
+> OK
+result: "<vaga,sd,turno56>"
+
+> OK
+result: "<vaga,sd,turno58>"
+
+> OK
+result: "<vaga,sd,turno60>"
+
+> OK
+result: "<vaga,sd,turno62>"
+
+> OK
+result: "<vaga,sd,turno64>"
+
+> OK
+result: "<vaga,sd,turno66>"
+
+> OK
+result: "<vaga,sd,turno68>"
+
+> OK
+result: "<vaga,sd,turno70>"
+
+> OK
+result: "<vaga,sd,turno72>"
+
+> OK
+result: "<vaga,sd,turno74>"
+
+> OK
+result: "<vaga,sd,turno76>"
+
+> OK
+result: "<vaga,sd,turno78>"
+
+> OK
+result: "<vaga,sd,turno80>"
+
+> OK
+result: "<vaga,sd,turno82>"
+
+> OK
+result: "<vaga,sd,turno84>"
+
+> OK
+result: "<vaga,sd,turno86>"
+
+> OK
+result: "<vaga,sd,turno88>"
+
+> OK
+result: "<vaga,sd,turno90>"
+
+> OK
+result: "<vaga,sd,turno92>"
+
+> OK
+result: "<vaga,sd,turno94>"
+
+> OK
+result: "<vaga,sd,turno96>"
+
+> OK
+result: "<vaga,sd,turno98>"
+
+> OK
+result: "<vaga,sd,turno100>"
+
+> OK
+result: "<vaga,sd,turno102>"
+
+> OK
+result: "<vaga,sd,turno104>"
+
+> OK
+result: "<vaga,sd,turno106>"
+
+> OK
+result: "<vaga,sd,turno108>"
+
+> OK
+result: "<vaga,sd,turno110>"
+
+> OK
+result: "<vaga,sd,turno112>"
+
+> OK
+result: "<vaga,sd,turno114>"
+
+> OK
+result: "<vaga,sd,turno116>"
+
+> OK
+result: "<vaga,sd,turno118>"
+
+> OK
+result: "<vaga,sd,turno120>"
+
+> OK
+result: "<vaga,sd,turno122>"
+
+> OK
+result: "<vaga,sd,turno124>"
+
+> OK
+result: "<vaga,sd,turno126>"
+
+> OK
+result: "<vaga,sd,turno128>"
+
+> OK
+result: "<vaga,sd,turno130>"
+
+> OK
+result: "<vaga,sd,turno132>"
+
+> OK
+result: "<vaga,sd,turno134>"
+
+> OK
+result: "<vaga,sd,turno136>"
+
+> OK
+result: "<vaga,sd,turno138>"
+
+> OK
+result: "<vaga,sd,turno140>"
+
+> OK
+result: "<vaga,sd,turno142>"
+
+> OK
+result: "<vaga,sd,turno144>"
+
+> OK
+result: "<vaga,sd,turno146>"
+
+> OK
+result: "<vaga,sd,turno148>"
+
+> OK
+result: "<vaga,sd,turno150>"
+
+> OK
+result: "<vaga,sd,turno152>"
+
+> OK
+result: "<vaga,sd,turno154>"
+
+> OK
+result: "<vaga,sd,turno156>"
+
+> OK
+result: "<vaga,sd,turno158>"
+
+> OK
+result: "<vaga,sd,turno160>"
+
+> OK
+result: "<vaga,sd,turno162>"
+
+> OK
+result: "<vaga,sd,turno164>"
+
+> OK
+result: "<vaga,sd,turno166>"
+
+> OK
+result: "<vaga,sd,turno168>"
+
+> OK
+result: "<vaga,sd,turno170>"
+
+> OK
+result: "<vaga,sd,turno172>"
+
+> OK
+result: "<vaga,sd,turno174>"
+
+> OK
+result: "<vaga,sd,turno176>"
+
+> OK
+result: "<vaga,sd,turno178>"
+
+> OK
+result: "<vaga,sd,turno180>"
+
+> OK
+result: "<vaga,sd,turno182>"
+
+> OK
+result: "<vaga,sd,turno184>"
+
+> OK
+result: "<vaga,sd,turno186>"
+
+> OK
+result: "<vaga,sd,turno188>"
+
+> OK
+result: "<vaga,sd,turno190>"
+
+> OK
+result: "<vaga,sd,turno192>"
+
+> OK
+result: "<vaga,sd,turno194>"
+
+> OK
+result: "<vaga,sd,turno196>"
+
+> OK
+result: "<vaga,sd,turno198>"
+
+> OK
+result: "<vaga,sd,turno200>"
+
+> OK
+result: "<vaga,sd,turno202>"
+
+> OK
+result: "<vaga,sd,turno204>"
+
+> OK
+result: "<vaga,sd,turno206>"
+
+> OK
+result: "<vaga,sd,turno208>"
+
+> OK
+result: "<vaga,sd,turno210>"
+
+> OK
+result: "<vaga,sd,turno212>"
+
+> OK
+result: "<vaga,sd,turno214>"
+
+> OK
+result: "<vaga,sd,turno216>"
+
+> OK
+result: "<vaga,sd,turno218>"
+
+> OK
+result: "<vaga,sd,turno220>"
+
+> OK
+result: "<vaga,sd,turno222>"
+
+> OK
+result: "<vaga,sd,turno224>"
+
+> OK
+result: "<vaga,sd,turno226>"
+
+> OK
+result: "<vaga,sd,turno228>"
+
+> OK
+result: "<vaga,sd,turno230>"
+
+> OK
+result: "<vaga,sd,turno232>"
+
+> OK
+result: "<vaga,sd,turno234>"
+
+> OK
+result: "<vaga,sd,turno236>"
+
+> OK
+result: "<vaga,sd,turno238>"
+
+> OK
+result: "<vaga,sd,turno240>"
+
+> OK
+result: "<vaga,sd,turno242>"
+
+> OK
+result: "<vaga,sd,turno244>"
+
+> OK
+result: "<vaga,sd,turno246>"
+
+> OK
+result: "<vaga,sd,turno248>"
+
+> OK
+result: "<vaga,sd,turno250>"
+
+> OK
+result: "<vaga,sd,turno252>"
+
+> OK
+result: "<vaga,sd,turno254>"
+
+> OK
+result: "<vaga,sd,turno256>"
+
+> OK
+result: "<vaga,sd,turno258>"
+
+> OK
+result: "<vaga,sd,turno260>"
+
+> OK
+result: "<vaga,sd,turno262>"
+
+> OK
+result: "<vaga,sd,turno264>"
+
+> OK
+result: "<vaga,sd,turno266>"
+
+> OK
+result: "<vaga,sd,turno268>"
+
+> OK
+result: "<vaga,sd,turno270>"
+
+> OK
+result: "<vaga,sd,turno272>"
+
+> OK
+result: "<vaga,sd,turno274>"
+
+> OK
+result: "<vaga,sd,turno276>"
+
+> OK
+result: "<vaga,sd,turno278>"
+
+> OK
+result: "<vaga,sd,turno280>"
+
+> OK
+result: "<vaga,sd,turno282>"
+
+> OK
+result: "<vaga,sd,turno284>"
+
+> OK
+result: "<vaga,sd,turno286>"
+
+> OK
+result: "<vaga,sd,turno288>"
+
+> OK
+result: "<vaga,sd,turno290>"
+
+> OK
+result: "<vaga,sd,turno292>"
+
+> OK
+result: "<vaga,sd,turno294>"
+
+> OK
+result: "<vaga,sd,turno296>"
+
+> OK
+result: "<vaga,sd,turno298>"
+
+> OK
+result: "<vaga,sd,turno300>"
+
+> OK
+result: "<vaga,sd,turno302>"
+
+> OK
+result: "<vaga,sd,turno304>"
+
+> OK
+result: "<vaga,sd,turno306>"
+
+> OK
+result: "<vaga,sd,turno308>"
+
+> OK
+result: "<vaga,sd,turno310>"
+
+> OK
+result: "<vaga,sd,turno312>"
+
+> OK
+result: "<vaga,sd,turno314>"
+
+> OK
+result: "<vaga,sd,turno316>"
+
+> OK
+result: "<vaga,sd,turno318>"
+
+> OK
+result: "<vaga,sd,turno320>"
+
+> OK
+result: "<vaga,sd,turno322>"
+
+> OK
+result: "<vaga,sd,turno324>"
+
+> OK
+result: "<vaga,sd,turno326>"
+
+> OK
+result: "<vaga,sd,turno328>"
+
+> OK
+result: "<vaga,sd,turno330>"
+
+> OK
+result: "<vaga,sd,turno332>"
+
+> OK
+result: "<vaga,sd,turno334>"
+
+> OK
+result: "<vaga,sd,turno336>"
+
+> OK
+result: "<vaga,sd,turno338>"
+
+> OK
+result: "<vaga,sd,turno340>"
+
+> OK
+result: "<vaga,sd,turno342>"
+
+> OK
+result: "<vaga,sd,turno344>"
+
+> OK
+result: "<vaga,sd,turno346>"
+
+> OK
+result: "<vaga,sd,turno348>"
+
+> OK
+result: "<vaga,sd,turno350>"
+
+> OK
+result: "<vaga,sd,turno352>"
+
+> OK
+result: "<vaga,sd,turno354>"
+
+> OK
+result: "<vaga,sd,turno356>"
+
+> OK
+result: "<vaga,sd,turno358>"
+
+> OK
+result: "<vaga,sd,turno360>"
+
+> OK
+result: "<vaga,sd,turno362>"
+
+> OK
+result: "<vaga,sd,turno364>"
+
+> OK
+result: "<vaga,sd,turno366>"
+
+> OK
+result: "<vaga,sd,turno368>"
+
+> OK
+result: "<vaga,sd,turno370>"
+
+> OK
+result: "<vaga,sd,turno372>"
+
+> OK
+result: "<vaga,sd,turno374>"
+
+> OK
+result: "<vaga,sd,turno376>"
+
+> OK
+result: "<vaga,sd,turno378>"
+
+> OK
+result: "<vaga,sd,turno380>"
+
+> OK
+result: "<vaga,sd,turno382>"
+
+> OK
+result: "<vaga,sd,turno384>"
+
+> OK
+result: "<vaga,sd,turno386>"
+
+> OK
+result: "<vaga,sd,turno388>"
+
+> OK
+result: "<vaga,sd,turno390>"
+
+> OK
+result: "<vaga,sd,turno392>"
+
+> OK
+result: "<vaga,sd,turno394>"
+
+> OK
+result: "<vaga,sd,turno396>"
+
+> OK
+result: "<vaga,sd,turno398>"
+
+> OK
+result: "<vaga,sd,turno400>"
+
+> OK
+result: "<vaga,sd,turno402>"
+
+> OK
+result: "<vaga,sd,turno404>"
+
+> OK
+result: "<vaga,sd,turno406>"
+
+> OK
+result: "<vaga,sd,turno408>"
+
+> OK
+result: "<vaga,sd,turno410>"
+
+> OK
+result: "<vaga,sd,turno412>"
+
+> OK
+result: "<vaga,sd,turno414>"
+
+> OK
+result: "<vaga,sd,turno416>"
+
+> OK
+result: "<vaga,sd,turno418>"
+
+> OK
+result: "<vaga,sd,turno420>"
+
+> OK
+result: "<vaga,sd,turno422>"
+
+> OK
+result: "<vaga,sd,turno424>"
+
+> OK
+result: "<vaga,sd,turno426>"
+
+> OK
+result: "<vaga,sd,turno428>"
+
+> OK
+result: "<vaga,sd,turno430>"
+
+> OK
+result: "<vaga,sd,turno432>"
+
+> OK
+result: "<vaga,sd,turno434>"
+
+> OK
+result: "<vaga,sd,turno436>"
+
+> OK
+result: "<vaga,sd,turno438>"
+
+> OK
+result: "<vaga,sd,turno440>"
+
+> OK
+result: "<vaga,sd,turno442>"
+
+> OK
+result: "<vaga,sd,turno444>"
+
+> OK
+result: "<vaga,sd,turno446>"
+
+> OK
+result: "<vaga,sd,turno448>"
+
+> OK
+result: "<vaga,sd,turno450>"
+
+> OK
+result: "<vaga,sd,turno452>"
+
+> OK
+result: "<vaga,sd,turno454>"
+
+> OK
+result: "<vaga,sd,turno456>"
+
+> OK
+result: "<vaga,sd,turno458>"
+
+> OK
+result: "<vaga,sd,turno460>"
+
+> OK
+result: "<vaga,sd,turno462>"
+
+> OK
+result: "<vaga,sd,turno464>"
+
+> OK
+result: "<vaga,sd,turno466>"
+
+> OK
+result: "<vaga,sd,turno468>"
+
+> OK
+result: "<vaga,sd,turno470>"
+
+> OK
+result: "<vaga,sd,turno472>"
+
+> OK
+result: "<vaga,sd,turno474>"
+
+> OK
+result: "<vaga,sd,turno476>"
+
+> OK
+result: "<vaga,sd,turno478>"
+
+> OK
+result: "<vaga,sd,turno480>"
+
+> OK
+result: "<vaga,sd,turno482>"
+
+> OK
+result: "<vaga,sd,turno484>"
+
+> OK
+result: "<vaga,sd,turno486>"
+
+> OK
+result: "<vaga,sd,turno488>"
+
+> OK
+result: "<vaga,sd,turno490>"
+
+> OK
+result: "<vaga,sd,turno492>"
+
+> OK
+result: "<vaga,sd,turno494>"
+
+> OK
+result: "<vaga,sd,turno496>"
+
+> OK
+result: "<vaga,sd,turno498>"
+
+> OK
+result: "<vaga,sd,turno500>"
+
+> OK
+result: "<vaga,sd,turno502>"
+
+> OK
+result: "<vaga,sd,turno504>"
+
+> OK
+result: "<vaga,sd,turno506>"
+
+> OK
+result: "<vaga,sd,turno508>"
+
+> OK
+result: "<vaga,sd,turno510>"
+
+> OK
+result: "<vaga,sd,turno512>"
+
+> OK
+result: "<vaga,sd,turno514>"
+
+> OK
+result: "<vaga,sd,turno516>"
+
+> OK
+result: "<vaga,sd,turno518>"
+
+> OK
+result: "<vaga,sd,turno520>"
+
+> OK
+result: "<vaga,sd,turno522>"
+
+> OK
+result: "<vaga,sd,turno524>"
+
+> OK
+result: "<vaga,sd,turno526>"
+
+> OK
+result: "<vaga,sd,turno528>"
+
+> OK
+result: "<vaga,sd,turno530>"
+
+> OK
+result: "<vaga,sd,turno532>"
+
+> OK
+result: "<vaga,sd,turno534>"
+
+> OK
+result: "<vaga,sd,turno536>"
+
+> OK
+result: "<vaga,sd,turno538>"
+
+> OK
+result: "<vaga,sd,turno540>"
+
+> OK
+result: "<vaga,sd,turno542>"
+
+> OK
+result: "<vaga,sd,turno544>"
+
+> OK
+result: "<vaga,sd,turno546>"
+
+> OK
+result: "<vaga,sd,turno548>"
+
+> OK
+result: "<vaga,sd,turno550>"
+
+> OK
+result: "<vaga,sd,turno552>"
+
+> OK
+result: "<vaga,sd,turno554>"
+
+> OK
+result: "<vaga,sd,turno556>"
+
+> OK
+result: "<vaga,sd,turno558>"
+
+> OK
+result: "<vaga,sd,turno560>"
+
+> OK
+result: "<vaga,sd,turno562>"
+
+> OK
+result: "<vaga,sd,turno564>"
+
+> OK
+result: "<vaga,sd,turno566>"
+
+> OK
+result: "<vaga,sd,turno568>"
+
+> OK
+result: "<vaga,sd,turno570>"
+
+> OK
+result: "<vaga,sd,turno572>"
+
+> OK
+result: "<vaga,sd,turno574>"
+
+> OK
+result: "<vaga,sd,turno576>"
+
+> OK
+result: "<vaga,sd,turno578>"
+
+> OK
+result: "<vaga,sd,turno580>"
+
+> OK
+result: "<vaga,sd,turno582>"
+
+> OK
+result: "<vaga,sd,turno584>"
+
+> OK
+result: "<vaga,sd,turno586>"
+
+> OK
+result: "<vaga,sd,turno588>"
+
+> OK
+result: "<vaga,sd,turno590>"
+
+> OK
+result: "<vaga,sd,turno592>"
+
+> OK
+result: "<vaga,sd,turno594>"
+
+> OK
+result: "<vaga,sd,turno596>"
+
+> OK
+result: "<vaga,sd,turno598>"
+
+> OK
+result: "<vaga,sd,turno600>"
+
+> OK
+result: "<vaga,sd,turno602>"
+
+> OK
+result: "<vaga,sd,turno604>"
+
+> OK
+result: "<vaga,sd,turno606>"
+
+> OK
+result: "<vaga,sd,turno608>"
+
+> OK
+result: "<vaga,sd,turno610>"
+
+> OK
+result: "<vaga,sd,turno612>"
+
+> OK
+result: "<vaga,sd,turno614>"
+
+> OK
+result: "<vaga,sd,turno616>"
+
+> OK
+result: "<vaga,sd,turno618>"
+
+> OK
+result: "<vaga,sd,turno620>"
+
+> OK
+result: "<vaga,sd,turno622>"
+
+> OK
+result: "<vaga,sd,turno624>"
+
+> OK
+result: "<vaga,sd,turno626>"
+
+> OK
+result: "<vaga,sd,turno628>"
+
+> OK
+result: "<vaga,sd,turno630>"
+
+> OK
+result: "<vaga,sd,turno632>"
+
+> OK
+result: "<vaga,sd,turno634>"
+
+> OK
+result: "<vaga,sd,turno636>"
+
+> OK
+result: "<vaga,sd,turno638>"
+
+> OK
+result: "<vaga,sd,turno640>"
+
+> OK
+result: "<vaga,sd,turno642>"
+
+> OK
+result: "<vaga,sd,turno644>"
+
+> OK
+result: "<vaga,sd,turno646>"
+
+> OK
+result: "<vaga,sd,turno648>"
+
+> OK
+result: "<vaga,sd,turno650>"
+
+> OK
+result: "<vaga,sd,turno652>"
+
+> OK
+result: "<vaga,sd,turno654>"
+
+> OK
+result: "<vaga,sd,turno656>"
+
+> OK
+result: "<vaga,sd,turno658>"
+
+> OK
+result: "<vaga,sd,turno660>"
+
+> OK
+result: "<vaga,sd,turno662>"
+
+> OK
+result: "<vaga,sd,turno664>"
+
+> OK
+result: "<vaga,sd,turno666>"
+
+> OK
+result: "<vaga,sd,turno668>"
+
+> OK
+result: "<vaga,sd,turno670>"
+
+> OK
+result: "<vaga,sd,turno672>"
+
+> OK
+result: "<vaga,sd,turno674>"
+
+> OK
+result: "<vaga,sd,turno676>"
+
+> OK
+result: "<vaga,sd,turno678>"
+
+> OK
+result: "<vaga,sd,turno680>"
+
+> OK
+result: "<vaga,sd,turno682>"
+
+> OK
+result: "<vaga,sd,turno684>"
+
+> OK
+result: "<vaga,sd,turno686>"
+
+> OK
+result: "<vaga,sd,turno688>"
+
+> OK
+result: "<vaga,sd,turno690>"
+
+> OK
+result: "<vaga,sd,turno692>"
+
+> OK
+result: "<vaga,sd,turno694>"
+
+> OK
+result: "<vaga,sd,turno696>"
+
+> OK
+result: "<vaga,sd,turno698>"
+
+> OK
+result: "<vaga,sd,turno700>"
+
+> OK
+result: "<vaga,sd,turno702>"
+
+> OK
+result: "<vaga,sd,turno704>"
+
+> OK
+result: "<vaga,sd,turno706>"
+
+> OK
+result: "<vaga,sd,turno708>"
+
+> OK
+result: "<vaga,sd,turno710>"
+
+> OK
+result: "<vaga,sd,turno712>"
+
+> OK
+result: "<vaga,sd,turno714>"
+
+> OK
+result: "<vaga,sd,turno716>"
+
+> OK
+result: "<vaga,sd,turno718>"
+
+> OK
+result: "<vaga,sd,turno720>"
+
+> OK
+result: "<vaga,sd,turno722>"
+
+> OK
+result: "<vaga,sd,turno724>"
+
+> OK
+result: "<vaga,sd,turno726>"
+
+> OK
+result: "<vaga,sd,turno728>"
+
+> OK
+result: "<vaga,sd,turno730>"
+
+> OK
+result: "<vaga,sd,turno732>"
+
+> OK
+result: "<vaga,sd,turno734>"
+
+> OK
+result: "<vaga,sd,turno736>"
+
+> OK
+result: "<vaga,sd,turno738>"
+
+> OK
+result: "<vaga,sd,turno740>"
+
+> OK
+result: "<vaga,sd,turno742>"
+
+> OK
+result: "<vaga,sd,turno744>"
+
+> OK
+result: "<vaga,sd,turno746>"
+
+> OK
+result: "<vaga,sd,turno748>"
+
+> OK
+result: "<vaga,sd,turno750>"
+
+> OK
+result: "<vaga,sd,turno752>"
+
+> OK
+result: "<vaga,sd,turno754>"
+
+> OK
+result: "<vaga,sd,turno756>"
+
+> OK
+result: "<vaga,sd,turno758>"
+
+> OK
+result: "<vaga,sd,turno760>"
+
+> OK
+result: "<vaga,sd,turno762>"
+
+> OK
+result: "<vaga,sd,turno764>"
+
+> OK
+result: "<vaga,sd,turno766>"
+
+> OK
+result: "<vaga,sd,turno768>"
+
+> OK
+result: "<vaga,sd,turno770>"
+
+> OK
+result: "<vaga,sd,turno772>"
+
+> OK
+result: "<vaga,sd,turno774>"
+
+> OK
+result: "<vaga,sd,turno776>"
+
+> OK
+result: "<vaga,sd,turno778>"
+
+> OK
+result: "<vaga,sd,turno780>"
+
+> OK
+result: "<vaga,sd,turno782>"
+
+> OK
+result: "<vaga,sd,turno784>"
+
+> OK
+result: "<vaga,sd,turno786>"
+
+> OK
+result: "<vaga,sd,turno788>"
+
+> OK
+result: "<vaga,sd,turno790>"
+
+> OK
+result: "<vaga,sd,turno792>"
+
+> OK
+result: "<vaga,sd,turno794>"
+
+> OK
+result: "<vaga,sd,turno796>"
+
+> OK
+result: "<vaga,sd,turno798>"
+
+> OK
+result: "<vaga,sd,turno800>"
+
+> OK
+result: "<vaga,sd,turno802>"
+
+> OK
+result: "<vaga,sd,turno804>"
+
+> OK
+result: "<vaga,sd,turno806>"
+
+> OK
+result: "<vaga,sd,turno808>"
+
+> OK
+result: "<vaga,sd,turno810>"
+
+> OK
+result: "<vaga,sd,turno812>"
+
+> OK
+result: "<vaga,sd,turno814>"
+
+> OK
+result: "<vaga,sd,turno816>"
+
+> OK
+result: "<vaga,sd,turno818>"
+
+> OK
+result: "<vaga,sd,turno820>"
+
+> OK
+result: "<vaga,sd,turno822>"
+
+> OK
+result: "<vaga,sd,turno824>"
+
+> OK
+result: "<vaga,sd,turno826>"
+
+> OK
+result: "<vaga,sd,turno828>"
+
+> OK
+result: "<vaga,sd,turno830>"
+
+> OK
+result: "<vaga,sd,turno832>"
+
+> OK
+result: "<vaga,sd,turno834>"
+
+> OK
+result: "<vaga,sd,turno836>"
+
+> OK
+result: "<vaga,sd,turno838>"
+
+> OK
+result: "<vaga,sd,turno840>"
+
+> OK
+result: "<vaga,sd,turno842>"
+
+> OK
+result: "<vaga,sd,turno844>"
+
+> OK
+result: "<vaga,sd,turno846>"
+
+> OK
+result: "<vaga,sd,turno848>"
+
+> OK
+result: "<vaga,sd,turno850>"
+
+> OK
+result: "<vaga,sd,turno852>"
+
+> OK
+result: "<vaga,sd,turno854>"
+
+> OK
+result: "<vaga,sd,turno856>"
+
+> OK
+result: "<vaga,sd,turno858>"
+
+> OK
+result: "<vaga,sd,turno860>"
+
+> OK
+result: "<vaga,sd,turno862>"
+
+> OK
+result: "<vaga,sd,turno864>"
+
+> OK
+result: "<vaga,sd,turno866>"
+
+> OK
+result: "<vaga,sd,turno868>"
+
+> OK
+result: "<vaga,sd,turno870>"
+
+> OK
+result: "<vaga,sd,turno872>"
+
+> OK
+result: "<vaga,sd,turno874>"
+
+> OK
+result: "<vaga,sd,turno876>"
+
+> OK
+result: "<vaga,sd,turno878>"
+
+> OK
+result: "<vaga,sd,turno880>"
+
+> OK
+result: "<vaga,sd,turno882>"
+
+> OK
+result: "<vaga,sd,turno884>"
+
+> OK
+result: "<vaga,sd,turno886>"
+
+> OK
+result: "<vaga,sd,turno888>"
+
+> OK
+result: "<vaga,sd,turno890>"
+
+> OK
+result: "<vaga,sd,turno892>"
+
+> OK
+result: "<vaga,sd,turno894>"
+
+> OK
+result: "<vaga,sd,turno896>"
+
+> OK
+result: "<vaga,sd,turno898>"
+
+> OK
+result: "<vaga,sd,turno900>"
+
+> OK
+result: "<vaga,sd,turno902>"
+
+> OK
+result: "<vaga,sd,turno904>"
+
+> OK
+result: "<vaga,sd,turno906>"
+
+> OK
+result: "<vaga,sd,turno908>"
+
+> OK
+result: "<vaga,sd,turno910>"
+
+> OK
+result: "<vaga,sd,turno912>"
+
+> OK
+result: "<vaga,sd,turno914>"
+
+> OK
+result: "<vaga,sd,turno916>"
+
+> OK
+result: "<vaga,sd,turno918>"
+
+> OK
+result: "<vaga,sd,turno920>"
+
+> OK
+result: "<vaga,sd,turno922>"
+
+> OK
+result: "<vaga,sd,turno924>"
+
+> OK
+result: "<vaga,sd,turno926>"
+
+> OK
+result: "<vaga,sd,turno928>"
+
+> OK
+result: "<vaga,sd,turno930>"
+
+> OK
+result: "<vaga,sd,turno932>"
+
+> OK
+result: "<vaga,sd,turno934>"
+
+> OK
+result: "<vaga,sd,turno936>"
+
+> OK
+result: "<vaga,sd,turno938>"
+
+> OK
+result: "<vaga,sd,turno940>"
+
+> OK
+result: "<vaga,sd,turno942>"
+
+> OK
+result: "<vaga,sd,turno944>"
+
+> OK
+result: "<vaga,sd,turno946>"
+
+> OK
+result: "<vaga,sd,turno948>"
+
+> OK
+result: "<vaga,sd,turno950>"
+
+> OK
+result: "<vaga,sd,turno952>"
+
+> OK
+result: "<vaga,sd,turno954>"
+
+> OK
+result: "<vaga,sd,turno956>"
+
+> OK
+result: "<vaga,sd,turno958>"
+
+> OK
+result: "<vaga,sd,turno960>"
+
+> OK
+result: "<vaga,sd,turno962>"
+
+> OK
+result: "<vaga,sd,turno964>"
+
+> OK
+result: "<vaga,sd,turno966>"
+
+> OK
+result: "<vaga,sd,turno968>"
+
+> OK
+result: "<vaga,sd,turno970>"
+
+> OK
+result: "<vaga,sd,turno972>"
+
+> OK
+result: "<vaga,sd,turno974>"
+
+> OK
+result: "<vaga,sd,turno976>"
+
+> OK
+result: "<vaga,sd,turno978>"
+
+> OK
+result: "<vaga,sd,turno980>"
+
+> OK
+result: "<vaga,sd,turno982>"
+
+> OK
+result: "<vaga,sd,turno984>"
+
+> OK
+result: "<vaga,sd,turno986>"
+
+> OK
+result: "<vaga,sd,turno988>"
+
+> OK
+result: "<vaga,sd,turno990>"
+
+> OK
+result: "<vaga,sd,turno992>"
+
+> OK
+result: "<vaga,sd,turno994>"
+
+> OK
+result: "<vaga,sd,turno996>"
+
+> OK
+result: "<vaga,sd,turno998>"
+
+> OK
+
+> 
