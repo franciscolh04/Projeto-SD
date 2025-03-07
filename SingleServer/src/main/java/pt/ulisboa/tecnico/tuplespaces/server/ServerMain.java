@@ -15,29 +15,29 @@ public class ServerMain {
 
         System.out.println(ServerMain.class.getSimpleName());
 
-        // Receber e imprimir argumentos
+        // Receive and print arguments
         /*
         System.out.printf("Received %d arguments%n", args.length);
         for (int i = 0; i < args.length; i++) {
             System.out.printf("arg[%d] = %s%n", i, args[i]);
         }*/
 
-        // Verifica se algum dos argumentos é "debug"
+        // Verifies if any of the arguments is "debug"
         for (String arg : args) {
             if (arg.equals("-debug")) {
                 System.setProperty("debug", "true");
-                break;  // Não precisamos de continuar a verificar os outros argumentos
+                break;  // Do not need to check the rest of the arguments
             }
         }
 
-        // Verificar argumentos
+        // Verify arguments
         if (args.length < 1) {
             System.err.println("Argument missing!");
             System.err.println("Usage: mvn exec:java -Dexec.args=<port>");
             return;
         }
 
-        // Obter e validar a porta
+        // Obtain and Validate port
         int port;
         try {
             port = Integer.parseInt(args[0]);
@@ -48,7 +48,7 @@ public class ServerMain {
 
         final BindableService impl = new TupleSpacesServerImpl();
 
-        // Criar e iniciar o servidor
+        // Create and start the server
         Server server = ServerBuilder.forPort(port).addService(impl).build();
 
         try {server.start();

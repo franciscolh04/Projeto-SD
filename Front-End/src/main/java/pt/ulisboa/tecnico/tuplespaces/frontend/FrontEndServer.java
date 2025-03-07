@@ -9,22 +9,22 @@ public class FrontEndServer {
     public static void main(String[] args) throws IOException, InterruptedException {
         System.out.println(FrontEndServer.class.getSimpleName());
 
-        // Verifica se algum dos argumentos é "debug"
+        // Verifies if any of the arguments is "debug"
         for (String arg : args) {
             if (arg.equals("-debug")) {
                 System.setProperty("debug", "true");
-                break;  // Não precisamos de continuar a verificar os outros argumentos
+                break;  // Do not need to check the remaining arguments
             }
         }
 
-        // Validar argumentos
+        // Validate the number of arguments
         if (args.length < 2) {
             System.err.println("Argument(s) missing!");
             System.err.println("Usage: mvn exec:java -Dexec.args=\"<frontend_port> <server_host:server_port>\"");
             return;
         }
 
-        // Porta do front-end
+        // Front-end port
         int frontendPort;
         try {
             frontendPort = Integer.parseInt(args[0]);
@@ -33,13 +33,13 @@ public class FrontEndServer {
             return;
         }
 
-        // Endereço do servidor TupleSpaces (no futuro pode aceitar múltiplos)
+        // TupleSpaces Server Address (in the future, it should be a list of servers)
         String serverAddress = args[1];
 
-        // Criar instância do serviço gRPC do Front-end
+        // Create an instance of the Front-end gRPC service
         final BindableService frontendService = new FrontEndServiceImpl(serverAddress);
 
-        // Criar e iniciar o servidor gRPC do Front-end
+        // Create and start the Front-end gRPC server
         Server server = ServerBuilder.forPort(frontendPort).addService(frontendService).build();
 
         try {

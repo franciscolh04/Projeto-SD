@@ -67,9 +67,9 @@ public class ServerState {
           try {
             lock.wait();
           } catch (InterruptedException e) {
-            Thread.currentThread().interrupt(); // Restaura o estado de interrupção
+            Thread.currentThread().interrupt(); // Restores the interrupted status
             System.err.println("Thread stopped while waiting for a matching tuple.");
-            return null; // Opcional: pode retornar null ou lançar uma exceção
+            return null;
           }
         }
 
@@ -79,7 +79,7 @@ public class ServerState {
       } catch (IllegalArgumentException e) {
         System.err.println("Error reading a tuple: " + e.getMessage());
         return null;
-      } catch (Exception e) { // Captura erros inesperados
+      } catch (Exception e) { // Get any other unexpected error
         System.err.println("Unexpected error reading a tuple: " + e.getMessage());
         return null;
       }
@@ -88,13 +88,13 @@ public class ServerState {
 
 
   public String take(String pattern, int client_id) {
-    synchronized (lock) { // Adquirir o bloqueio antes de qualquer operação crítica
+    synchronized (lock) { // Get the lock before any critical section
       try {
         if (pattern == null || pattern.isEmpty()) {
           throw new IllegalArgumentException("Search Pattern cannot be Null or Empty.");
         }
 
-        // Procura um tuplo correspondente e remove
+        // Search for a tuple that matches the pattern
         for (String tuple : this.tuples) {
           if (tuple.matches(pattern)) {
             this.tuples.remove(tuple);
@@ -103,11 +103,11 @@ public class ServerState {
           }
         }
 
-        // Se não encontrou, espera até que um tuplo correspondente seja adicionado
+        // If no matching tuple was found, wait until a matching tuple is added
         String matchingTuple;
         while ((matchingTuple = getMatchingTuple(pattern)) == null) {
           try {
-            lock.wait(); // Aguarda até `put()` chamar `notifyAll()`
+            lock.wait(); // Waits until `put()` calls `notifyAll()`
           } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             System.err.println("Thread stopped while waiting for a matching tuple.");
@@ -115,7 +115,7 @@ public class ServerState {
           }
         }
 
-        // Remove o tuplo encontrado após o wait
+        // Remove the found tuple after the wait
         tuples.remove(matchingTuple);
         debug("Removed tuple after wait: " + matchingTuple, client_id);
         return matchingTuple;
@@ -133,12 +133,12 @@ public class ServerState {
 
   public List<String> getTupleSpacesState(int client_id) {
     try {
-      // Retorna uma cópia da lista para evitar modificações externas
+      // Returns a copy of the list to avoid external modifications
       debug("TupleSpaces Current State: " + this.tuples, client_id);
       return List.copyOf(this.tuples);
-    } catch (Exception e) { // Captura qualquer erro inesperado
+    } catch (Exception e) { // Get any other unexpected error
       System.err.println("Unexpected error when getting state of TupleSpaces: " + e.getMessage());
-      return Collections.emptyList(); // Retorna uma lista vazia em caso de erro
+      return Collections.emptyList(); // Return an empty list if an error occurs
     }
   }
 
