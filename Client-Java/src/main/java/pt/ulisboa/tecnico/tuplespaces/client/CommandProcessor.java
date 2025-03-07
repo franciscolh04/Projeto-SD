@@ -82,9 +82,9 @@ public class CommandProcessor {
         // put the tuple and get the response
         PutResponse response = clientService.put(tuple);
         if (response != null) {
-            System.out.println("OK\n");
+            System.out.println("OK");
         }
-        System.out.println("\n");
+        System.out.println();
     }
 
     private void read(String[] split) {
@@ -109,7 +109,7 @@ public class CommandProcessor {
             }
             System.out.println(responseString);
         }
-        System.out.println("\n");
+        System.out.println();
     }
 
     private void take(String[] split) {
@@ -133,7 +133,7 @@ public class CommandProcessor {
             }
             System.out.println(responseString);
         }
-        System.out.println("\n");
+        System.out.println();
     }
 
     private void getTupleSpacesState() {
@@ -147,7 +147,7 @@ public class CommandProcessor {
 
             System.out.println(formattedOutput);
         }
-        System.out.println("\n");
+        System.out.println();
     }
 
     private void sleep(String[] split) {
