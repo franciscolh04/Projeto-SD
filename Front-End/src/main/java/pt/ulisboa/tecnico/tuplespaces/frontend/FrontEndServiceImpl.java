@@ -25,7 +25,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
         ManagedChannel channel = ManagedChannelBuilder.forTarget(serverAddress).usePlaintext().build();
 
         backendStub = TupleSpacesGrpc.newBlockingStub(channel);
-        System.out.println("Frontend conectado ao servidor TupleSpaces: " + serverAddress);
+        System.out.println("Frontend connecting to server TupleSpaces: " + serverAddress);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             debug("Received put response from Server. Forwarding to Client. Feedback Status: Success");
 
         } catch (io.grpc.StatusRuntimeException e) { // Captura falhas na comunicação gRPC
-            System.err.println("[gRPC] Error connecting with server: " + e.getStatus());
+            System.err.println("[gRPC] Error connecting with server during the put request: " + e.getStatus().getDescription());
             responseObserver.onError(e); // Envia o erro ao cliente para que ele saiba que a operação falhou
         } catch (Exception e) { // Captura qualquer outra exceção inesperada
             System.err.println("Unexpected Error during the put request: " + e.getMessage());
@@ -68,10 +68,10 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             debug("Received read response from Server. Forwarding to Client. Response: " + response.getResult());
 
         } catch (io.grpc.StatusRuntimeException e) { // Captura falhas na comunicação gRPC
-            System.err.println("Erro ao conectar com o servidor gRPC durante a leitura: " + e.getStatus());
+            System.err.println("[gRPC] Error connecting with server during the reading request: " + e.getStatus().getDescription());
             responseObserver.onError(e); // Notifica o cliente sobre o erro
         } catch (Exception e) { // Captura qualquer outra exceção inesperada
-            System.err.println("Erro inesperado ao processar a requisição READ: " + e.getMessage());
+            System.err.println("Unexpected Error during the reading request: " + e.getMessage());
             responseObserver.onError(e); // Notifica o cliente sobre o erro
         }
     }
@@ -91,10 +91,10 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             debug("Received take response from Server. Forwarding to Client. Response: " + response.getResult());
 
         } catch (io.grpc.StatusRuntimeException e) { // Captura falhas na comunicação gRPC
-            System.err.println("Erro ao conectar com o servidor gRPC durante a operação TAKE: " + e.getStatus());
+            System.err.println("[gRPC] Error connecting with server during the take request: " + e.getStatus().getDescription());
             responseObserver.onError(e); // Notifica o cliente sobre o erro
         } catch (Exception e) { // Captura qualquer outra exceção inesperada
-            System.err.println("Erro inesperado ao processar a requisição TAKE: " + e.getMessage());
+            System.err.println("Unexpected Error during the take request: " + e.getMessage());
             responseObserver.onError(e); // Notifica o cliente sobre o erro
         }
     }
@@ -114,10 +114,10 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             debug("Received getTupleSpacesState response from Server. Forwarding to Client. Response: " + response.getTupleList());
 
         } catch (io.grpc.StatusRuntimeException e) { // Captura falhas na comunicação gRPC
-            System.err.println("Erro ao conectar com o servidor gRPC durante a operação getTupleSpacesState: " + e.getStatus());
+            System.err.println("[gRPC] Error connecting with server during the getTupleSpacesState request: " + e.getStatus().getDescription());
             responseObserver.onError(e); // Notifica o cliente sobre o erro
         } catch (Exception e) { // Captura qualquer outra exceção inesperada
-            System.err.println("Erro inesperado ao processar a requisição getTupleSpacesState: " + e.getMessage());
+            System.err.println("Unexpected Error during the getTupleSpacesState request: " + e.getMessage());
             responseObserver.onError(e); // Notifica o cliente sobre o erro
         }
     }
