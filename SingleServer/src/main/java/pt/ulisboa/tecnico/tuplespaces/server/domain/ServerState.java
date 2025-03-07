@@ -32,16 +32,16 @@ public class ServerState {
     synchronized (lock) {
       try {
         if (tuple == null || tuple.isEmpty()) {
-          throw new IllegalArgumentException("O tuplo não pode ser nulo ou vazio.");
+          throw new IllegalArgumentException("Tuple cannot be Null or Empty.");
         }
 
         tuples.add(tuple);
         debug("Added tuple: " + tuple, client_id);
         lock.notifyAll();
       } catch (IllegalArgumentException e) {
-        System.err.println("Erro ao adicionar tuplo: " + e.getMessage());
+        System.err.println("Error adding tuple: " + e.getMessage());
       } catch (Exception e) {
-        System.err.println("Erro inesperado ao adicionar tuplo: " + e.getMessage());
+        System.err.println("Unexpected error adding tuple: " + e.getMessage());
       }
     }
   }
@@ -59,7 +59,7 @@ public class ServerState {
     synchronized (lock) {
       try {
         if (pattern == null || pattern.isEmpty()) {
-          throw new IllegalArgumentException("O padrão de busca não pode ser nulo ou vazio.");
+          throw new IllegalArgumentException("Search Pattern cannot be Null or Empty.");
         }
 
         String tuple;
@@ -68,7 +68,7 @@ public class ServerState {
             lock.wait();
           } catch (InterruptedException e) {
             Thread.currentThread().interrupt(); // Restaura o estado de interrupção
-            System.err.println("Thread interrompida enquanto aguardava um tuplo correspondente.");
+            System.err.println("Thread stopped while waiting for a matching tuple.");
             return null; // Opcional: pode retornar null ou lançar uma exceção
           }
         }
@@ -77,10 +77,10 @@ public class ServerState {
         return tuple;
 
       } catch (IllegalArgumentException e) {
-        System.err.println("Erro ao tentar ler um tuplo: " + e.getMessage());
+        System.err.println("Error reading a tuple: " + e.getMessage());
         return null;
       } catch (Exception e) { // Captura erros inesperados
-        System.err.println("Erro inesperado ao ler um tuplo: " + e.getMessage());
+        System.err.println("Unexpected error reading a tuple: " + e.getMessage());
         return null;
       }
     }
@@ -91,7 +91,7 @@ public class ServerState {
     synchronized (lock) { // Adquirir o bloqueio antes de qualquer operação crítica
       try {
         if (pattern == null || pattern.isEmpty()) {
-          throw new IllegalArgumentException("O padrão de busca não pode ser nulo ou vazio.");
+          throw new IllegalArgumentException("Search Pattern cannot be Null or Empty.");
         }
 
         // Procura um tuplo correspondente e remove
@@ -110,7 +110,7 @@ public class ServerState {
             lock.wait(); // Aguarda até `put()` chamar `notifyAll()`
           } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
-            System.err.println("Thread interrompida enquanto aguardava um tuplo correspondente.");
+            System.err.println("Thread stopped while waiting for a matching tuple.");
             return null;
           }
         }
@@ -121,10 +121,10 @@ public class ServerState {
         return matchingTuple;
 
       } catch (IllegalArgumentException e) {
-        System.err.println("Erro ao tentar remover um tuplo: " + e.getMessage());
+        System.err.println("Error removing a tuple: " + e.getMessage());
         return null;
       } catch (Exception e) {
-        System.err.println("Erro inesperado ao remover um tuplo: " + e.getMessage());
+        System.err.println("Unexpected error removing a tuple: " + e.getMessage());
         return null;
       }
     }
@@ -137,7 +137,7 @@ public class ServerState {
       debug("TupleSpaces Current State: " + this.tuples, client_id);
       return List.copyOf(this.tuples);
     } catch (Exception e) { // Captura qualquer erro inesperado
-      System.err.println("Erro inesperado ao obter o estado do TupleSpaces: " + e.getMessage());
+      System.err.println("Unexpected error when getting state of TupleSpaces: " + e.getMessage());
       return Collections.emptyList(); // Retorna uma lista vazia em caso de erro
     }
   }

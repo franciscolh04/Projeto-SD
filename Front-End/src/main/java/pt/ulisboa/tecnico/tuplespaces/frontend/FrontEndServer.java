@@ -45,16 +45,16 @@ public class FrontEndServer {
         try {
             server.start();
         } catch (IOException e) {
-            System.err.println("Erro ao iniciar o servidor Front-end!");
+            System.err.println("Error when initializing Front-end server!");
             return;
         }
 
-        System.out.printf("Frontend gRPC Server iniciado na porta: %d%n", frontendPort);
+        System.out.printf("Frontend gRPC Server initialized in port: %d%n", frontendPort);
 
         try {
             server.awaitTermination();
         } catch (InterruptedException e) {
-            System.err.println("Servidor Front-end interrompido.");
+            System.err.println("Front-end Server Stopped.");
         }
     }
 }
