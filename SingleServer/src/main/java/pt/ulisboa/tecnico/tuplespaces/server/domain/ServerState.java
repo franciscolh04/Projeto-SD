@@ -2,18 +2,24 @@ package pt.ulisboa.tecnico.tuplespaces.server.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
+
 
 public class ServerState {
 
-  /** Set flag to true to print debug messages.
-     * The flag can be set using the -debug command line option. */
-    private static final boolean DEBUG_FLAG = (System.getProperty("debug") != null);
+  /**
+   * Set flag to true to print debug messages.
+   * The flag can be set using the -debug command line option.
+   */
+  private static final boolean DEBUG_FLAG = (System.getProperty("debug") != null);
 
-    /** Helper method to print debug messages. */
-    private static void debug(String debugMessage, int client_id) {
-        if (DEBUG_FLAG)
-            System.err.println("[DEBUG][" + client_id + "] " + debugMessage);
-    }
+  /**
+   * Helper method to print debug messages.
+   */
+  private static void debug(String debugMessage, int client_id) {
+    if (DEBUG_FLAG)
+      System.err.println("[DEBUG][" + client_id + "] " + debugMessage);
+  }
 
   private List<String> tuples;
   private final Object lock = new Object();
@@ -24,9 +30,19 @@ public class ServerState {
 
   public void put(String tuple, int client_id) {
     synchronized (lock) {
-      tuples.add(tuple);
-      debug("Added tuple: " + tuple, client_id);
-      lock.notifyAll();
+      try {
+        if (tuple == null || tuple.isEmpty()) {
+          throw new IllegalArgumentException("O tuplo não pode ser nulo ou vazio.");
+        }
+
+        tuples.add(tuple);
+        debug("Added tuple: " + tuple, client_id);
+        lock.notifyAll();
+      } catch (IllegalArgumentException e) {
+        System.err.println("Erro ao adicionar tuplo: " + e.getMessage());
+      } catch (Exception e) {
+        System.err.println("Erro inesperado ao adicionar tuplo: " + e.getMessage());
+      }
     }
   }
 
@@ -41,48 +57,89 @@ public class ServerState {
 
   public String read(String pattern, int client_id) {
     synchronized (lock) {
-      String tuple;
-        while ((tuple = getMatchingTuple(pattern)) == null) {
-            try {
-            lock.wait();
-            } catch (InterruptedException e) {
-              Thread.currentThread().interrupt();
-            }
+      try {
+        if (pattern == null || pattern.isEmpty()) {
+          throw new IllegalArgumentException("O padrão de busca não pode ser nulo ou vazio.");
         }
-      debug("Read tuple: " + pattern, client_id);
-      return getMatchingTuple(pattern);
+
+        String tuple;
+        while ((tuple = getMatchingTuple(pattern)) == null) {
+          try {
+            lock.wait();
+          } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // Restaura o estado de interrupção
+            System.err.println("Thread interrompida enquanto aguardava um tuplo correspondente.");
+            return null; // Opcional: pode retornar null ou lançar uma exceção
+          }
+        }
+
+        debug("Read tuple: " + tuple, client_id);
+        return tuple;
+
+      } catch (IllegalArgumentException e) {
+        System.err.println("Erro ao tentar ler um tuplo: " + e.getMessage());
+        return null;
+      } catch (Exception e) { // Captura erros inesperados
+        System.err.println("Erro inesperado ao ler um tuplo: " + e.getMessage());
+        return null;
+      }
     }
   }
+
 
   public String take(String pattern, int client_id) {
-    // Procura o primeiro tuplo que corresponde ao padrão
-    synchronized (lock) {
-      for (String tuple : this.tuples) {
-        if (tuple.matches(pattern)) {
-          this.tuples.remove(tuple);
-          debug("Removed tuple: " + tuple, client_id);
+    synchronized (lock) { // Adquirir o bloqueio antes de qualquer operação crítica
+      try {
+        if (pattern == null || pattern.isEmpty()) {
+          throw new IllegalArgumentException("O padrão de busca não pode ser nulo ou vazio.");
+        }
 
-          return tuple;
+        // Procura um tuplo correspondente e remove
+        for (String tuple : this.tuples) {
+          if (tuple.matches(pattern)) {
+            this.tuples.remove(tuple);
+            debug("Removed tuple: " + tuple, client_id);
+            return tuple;
+          }
         }
-      }
-      String matchingTuple;
-      while ((matchingTuple = getMatchingTuple(pattern)) == null) {
-        try {
-          lock.wait(); // Aguarda até `put()` chamar `notifyAll()`
-        } catch (InterruptedException e) {
-          Thread.currentThread().interrupt();
-          return null; // Retorna null se a thread for interrompida
+
+        // Se não encontrou, espera até que um tuplo correspondente seja adicionado
+        String matchingTuple;
+        while ((matchingTuple = getMatchingTuple(pattern)) == null) {
+          try {
+            lock.wait(); // Aguarda até `put()` chamar `notifyAll()`
+          } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.err.println("Thread interrompida enquanto aguardava um tuplo correspondente.");
+            return null;
+          }
         }
+
+        // Remove o tuplo encontrado após o wait
+        tuples.remove(matchingTuple);
+        debug("Removed tuple after wait: " + matchingTuple, client_id);
+        return matchingTuple;
+
+      } catch (IllegalArgumentException e) {
+        System.err.println("Erro ao tentar remover um tuplo: " + e.getMessage());
+        return null;
+      } catch (Exception e) {
+        System.err.println("Erro inesperado ao remover um tuplo: " + e.getMessage());
+        return null;
       }
-      tuples.remove(matchingTuple);
-      debug("Removed tuple after wait: " + matchingTuple, client_id);
-      return matchingTuple;
     }
   }
 
+
   public List<String> getTupleSpacesState(int client_id) {
-    // Retorna uma cópia da lista para evitar modificações externas
-    debug("TupleSpaces Current State: " + this.tuples, client_id);
-    return List.copyOf(this.tuples);
+    try {
+      // Retorna uma cópia da lista para evitar modificações externas
+      debug("TupleSpaces Current State: " + this.tuples, client_id);
+      return List.copyOf(this.tuples);
+    } catch (Exception e) { // Captura qualquer erro inesperado
+      System.err.println("Erro inesperado ao obter o estado do TupleSpaces: " + e.getMessage());
+      return Collections.emptyList(); // Retorna uma lista vazia em caso de erro
+    }
   }
+
 }
