@@ -49,9 +49,9 @@ if [ "$RUN_JAVA" = true ]; then
             DIFF=$(diff ${TESTS_OUTPUT}/java_out$TEST.txt ${TESTS_OUT_EXPECTED}/out$TEST.txt) 
             if [ "$DIFF" != "" ] 
             then
-                echo "${RED}[Java][$TEST] TEST FAILED${NC}"
+                echo -e "${RED}[Java][$TEST] TEST FAILED${NC}"
             else
-                echo "${GREEN}[Java][$TEST] TEST PASSED${NC}"
+                echo -e "${GREEN}[Java][$TEST] TEST PASSED${NC}"
             fi
             i=$((i+1))
         else
@@ -74,9 +74,9 @@ if [ "$RUN_PYTHON" = true ]; then
             DIFF=$(diff ${TESTS_OUTPUT}/python_out$TEST.txt ${TESTS_OUT_EXPECTED}/out$TEST.txt) 
             if [ "$DIFF" != "" ] 
             then
-                echo "${RED}[Python][$TEST] TEST FAILED${NC}"
+                echo -e "${RED}[Python][$TEST] TEST FAILED${NC}"
             else
-                echo "${GREEN}[Python][$TEST] TEST PASSED${NC}"
+                echo -e "${GREEN}[Python][$TEST] TEST PASSED${NC}"
             fi
             i=$((i+1))
         else
