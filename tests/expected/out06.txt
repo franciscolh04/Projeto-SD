@@ -1,0 +1,34 @@
+ClientMain
+> OK
+
+> OK
+
+> OK
+
+> OK
+[<vaga,sd,turno1>, <vaga,sd,turno2>, <vaga,sd,turno3>]
+
+> OK
+<vaga,sd,turno2>
+
+> OK
+[<vaga,sd,turno1>, <vaga,sd,turno3>]
+
+> OK
+
+> OK
+[<vaga,sd,turno1>, <vaga,sd,turno3>, <vaga,sd,turno2>]
+
+> OK
+<vaga,sd,turno1>
+
+> OK
+<vaga,sd,turno2>
+
+> OK
+<vaga,sd,turno3>
+
+> OK
+[]
+
+> 

@@ -1,0 +1,41 @@
+put <anatoliy,trubin>
+put <alvaro,carreras>
+put <antonio,silva>
+put <alexander,bah>
+put <nicolas,otamendi>
+put <fredrik,aursnes>
+put <orkun,kokcu>
+put <florentino,luis>
+put <renato,sanches>
+put <zeki,amdouni>
+put <arthur,cabral>
+put <angel,di,maria>
+put <vangelis,pavlidis>
+put <kerem,akturkoglu>
+put <andreas,schjelderup>
+put <gianluca,prestianni>
+put <tiago,gouveia>
+put <bruma>
+put <joao,rego>
+getTupleSpacesState
+take <anatoliy,trubin>
+take <alvaro,carreras>
+take <antonio,silva>
+take <alexander,bah>
+take <nicolas,otamendi>
+take <fredrik,aursnes>
+take <orkun,kokcu>
+take <florentino,luis>
+take <renato,sanches>
+take <zeki,amdouni>
+take <arthur,cabral>
+take <angel,di,maria>
+take <vangelis,pavlidis>
+take <kerem,akturkoglu>
+take <andreas,schjelderup>
+take <gianluca,prestianni>
+take <tiago,gouveia>
+take <bruma>
+take <joao,rego>
+getTupleSpacesState
+exit
