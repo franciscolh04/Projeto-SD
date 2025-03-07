@@ -81,7 +81,9 @@ public class ClientService {
 
         try {
             TakeResponse response = stub.take(request);
-            debug("Removed tuple: " + response.getResult());
+            if (!response.getResult().isEmpty()) {
+                debug("Removed tuple: " + response.getResult());
+            }
             return response;
         } catch (StatusRuntimeException e) {
             System.err.println("Error during the take request: " + e.getStatus() + " - " + e.getMessage());

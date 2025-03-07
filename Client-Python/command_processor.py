@@ -35,6 +35,7 @@ class CommandProcessor:
                     self.sleep(split)
                 elif command == self.EXIT:
                     exit_flag = True
+                    self.shutdown()
                 else:
                     self.print_usage()
             except EOFError:
