@@ -5,6 +5,8 @@ import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesGrpc;
 import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesOuterClass.*;
 
 import java.util.Scanner;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CommandProcessor {
 
@@ -78,8 +80,7 @@ public class CommandProcessor {
 
         // put the tuple and get the response
         PutResponse response = clientService.put(tuple);
-        System.out.println("OK");
-        System.out.println(response.toString());
+        System.out.println("OK\n");
     }
 
     private void read(String[] split) {
@@ -95,7 +96,12 @@ public class CommandProcessor {
         // read the tuple and get the response
         ReadResponse response = clientService.read(tuple);
         System.out.println("OK");
-        System.out.println(response.toString());
+
+        String responseString = response.toString().replace("result: ", "").strip();
+        if (responseString.startsWith("\"") && responseString.endsWith("\"")) {
+            responseString = responseString.substring(1, responseString.length() - 1);
+        }
+        System.out.println(responseString + "\n");
     }
 
     private void take(String[] split) {
@@ -111,14 +117,24 @@ public class CommandProcessor {
         // take the tuple and get the response
         TakeResponse response = clientService.take(tuple);
         System.out.println("OK");
-        System.out.println(response.toString());
+
+        String responseString = response.toString().replace("result: ", "").strip();
+        if (responseString.startsWith("\"") && responseString.endsWith("\"")) {
+            responseString = responseString.substring(1, responseString.length() - 1);
+        }
+        System.out.println(responseString + "\n");
     }
 
     private void getTupleSpacesState() {
         // get the tuple spaces state
         getTupleSpacesStateResponse response = clientService.getTupleSpacesState();
         System.out.println("OK");
-        System.out.println(response.toString());
+        // Transformar a lista de tuplas no formato desejado
+        List<String> tuples = response.getTupleList(); // Supondo que seja uma lista de Strings
+        String formattedOutput = tuples.stream()
+                .collect(Collectors.joining(", ", "[", "]")); // Junta os elementos com ", " e coloca "[" e "]"
+
+        System.out.println(formattedOutput + "\n");
     }
 
     private void sleep(String[] split) {

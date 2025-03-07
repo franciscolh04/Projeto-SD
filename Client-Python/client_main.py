@@ -6,12 +6,19 @@ from command_processor import CommandProcessor
 class ClientMain:
     @staticmethod
     def main(args: List[str]):
-        print("Python Client")
+        print("ClientMain")
+
+        # Verifica se algum dos argumentos é "-debug" e define a variável de ambiente
+        if "-debug" in args:
+            import os
+            os.environ["debug"] = "true"  # Similar ao System.setProperty no Java
 
         # receive and print arguments
+        '''
         print(f"Received {len(args)} arguments")
         for i, arg in enumerate(args):
-            print(f"arg[{i}] = {arg}")
+            print(f"arg[{i}] = {arg}")'
+        '''
 
         # check arguments
         if len(args) < 2:

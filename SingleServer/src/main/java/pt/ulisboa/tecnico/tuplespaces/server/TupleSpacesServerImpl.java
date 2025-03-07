@@ -35,9 +35,9 @@ public class TupleSpacesServerImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
 
         String tuple = state.read(pattern);
 
-        if (tuple == null) {
-            responseObserver.onError(INVALID_ARGUMENT.withDescription("Invalid Input").asRuntimeException());
-        }
+        //if (tuple == null) {
+        //    responseObserver.onError(INVALID_ARGUMENT.withDescription("Invalid Input").asRuntimeException());
+        //}
 
         TupleSpacesOuterClass.ReadResponse response = TupleSpacesOuterClass.ReadResponse.newBuilder().setResult(tuple).build();
 

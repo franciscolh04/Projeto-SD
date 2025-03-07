@@ -12,15 +12,15 @@ import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesOuterClass
 public class ClientService {
 
     /** Set flag to true to print debug messages.
-     * The flag can be set using the -Ddebug command line option. */
+     * The flag can be set using the -debug command line option. */
     private static final boolean DEBUG_FLAG = (System.getProperty("debug") != null);
 
     /** Helper method to print debug messages. */
     private static void debug(String debugMessage) {
         if (DEBUG_FLAG)
-            System.err.println(debugMessage);
+            System.err.println("[DEBUG] " + debugMessage);
     }
-
+    
     private final ManagedChannel channel;
     private final TupleSpacesGrpc.TupleSpacesBlockingStub stub;
 

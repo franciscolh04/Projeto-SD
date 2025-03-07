@@ -46,17 +46,23 @@ class CommandProcessor:
             return
         tuple_data = split[1]
         response = self.client_service.put(tuple_data)
-        print("OK")
-        print(response)
+        print("OK\n")
 
     def read(self, split: List[str]):
         if not self.input_is_valid(split):
             self.print_usage()
             return
+
         tuple_data = split[1]
         response = self.client_service.read(tuple_data)
         print("OK")
-        print(response)
+
+        response_str = str(response).replace("result: ", "").strip()
+        if response_str.startswith("\"") and response_str.endswith("\""):
+            response_str = response_str[1:-1]
+
+        print(response_str + "\n")
+
 
     def take(self, split: List[str]):
         if not self.input_is_valid(split):
@@ -65,12 +71,24 @@ class CommandProcessor:
         tuple_data = split[1]
         response = self.client_service.take(tuple_data)
         print("OK")
-        print(response)
+
+        response_str = str(response).replace("result: ", "").strip()
+        if response_str.startswith("\"") and response_str.endswith("\""):
+            response_str = response_str[1:-1]
+
+        print(response_str + "\n")
 
     def get_tuple_spaces_state(self):
         response = self.client_service.get_tuple_spaces_state()
         print("OK")
-        print(response)
+
+        cleaned_tuples = [
+            line.replace("tuple: ", "").strip().strip("'\"")  
+            for line in str(response).split("\n") if line.strip()
+        ]
+
+        print(f"[{', '.join(cleaned_tuples)}]\n")  
+
 
     def sleep(self, split: List[str]):
         if len(split) != 2:

@@ -16,13 +16,22 @@ public class ServerMain {
         System.out.println(ServerMain.class.getSimpleName());
 
         // Receber e imprimir argumentos
+        /*
         System.out.printf("Received %d arguments%n", args.length);
         for (int i = 0; i < args.length; i++) {
             System.out.printf("arg[%d] = %s%n", i, args[i]);
+        }*/
+
+        // Verifica se algum dos argumentos é "debug"
+        for (String arg : args) {
+            if (arg.equals("-debug")) {
+                System.setProperty("debug", "true");
+                break;  // Não precisamos de continuar a verificar os outros argumentos
+            }
         }
 
         // Verificar argumentos
-        if (args.length != 1) {
+        if (args.length < 1) {
             System.err.println("Argument missing!");
             System.err.println("Usage: mvn exec:java -Dexec.args=<port>");
             return;

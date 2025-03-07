@@ -9,6 +9,14 @@ public class FrontEndServer {
     public static void main(String[] args) throws IOException, InterruptedException {
         System.out.println(FrontEndServer.class.getSimpleName());
 
+        // Verifica se algum dos argumentos é "debug"
+        for (String arg : args) {
+            if (arg.equals("-debug")) {
+                System.setProperty("debug", "true");
+                break;  // Não precisamos de continuar a verificar os outros argumentos
+            }
+        }
+
         // Validar argumentos
         if (args.length < 2) {
             System.err.println("Argument(s) missing!");
