@@ -21,7 +21,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
     private final TupleSpacesGrpc.TupleSpacesBlockingStub backendStub;
 
     public FrontEndServiceImpl(String serverAddress) {
-        // Criar um canal gRPC para o servidor TupleSpaces recebido nos argumentos
+        // Create a gRPC channel for the TupleSpaces server received in the arguments
         ManagedChannel channel = ManagedChannelBuilder.forTarget(serverAddress).usePlaintext().build();
 
         backendStub = TupleSpacesGrpc.newBlockingStub(channel);
@@ -31,25 +31,25 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
     @Override
     public void put(TupleSpacesOuterClass.PutRequest request, StreamObserver<TupleSpacesOuterClass.PutResponse> responseObserver) {
         try {
-            // Imprime os detalhes da requisição recebida
+            // Print the details of the received request
             debug("Received put request from Client. Forwarding to Server. Tuple to add: " + request.getNewTuple());
 
-            // Realiza a operação de put no backend
+            // Perform the put operation in the backend
             TupleSpacesOuterClass.PutResponse response = backendStub.put(request);
 
-            // Envia a resposta ao cliente
+            // Send the response to the client
             responseObserver.onNext(response); // Nota: Aqui a resposta é vazia
             responseObserver.onCompleted();
 
-            // Imprime os detalhes da resposta enviada
+            // Print the details of the response
             debug("Received put response from Server. Forwarding to Client. Feedback Status: Success");
 
-        } catch (io.grpc.StatusRuntimeException e) { // Captura falhas na comunicação gRPC
+        } catch (io.grpc.StatusRuntimeException e) { // Capture gRPC communication failures
             System.err.println("[gRPC] Error connecting with server during the put request: " + e.getStatus().getDescription());
-            responseObserver.onError(e); // Envia o erro ao cliente para que ele saiba que a operação falhou
-        } catch (Exception e) { // Captura qualquer outra exceção inesperada
+            responseObserver.onError(e); // Send the error to the client so they know the operation failed
+        } catch (Exception e) { // Catches any other unexpected exception
             System.err.println("Unexpected Error during the put request: " + e.getMessage());
-            responseObserver.onError(e); // Envia o erro ao cliente
+            responseObserver.onError(e); // Sends the error to the client
         }
     }
 
@@ -58,21 +58,21 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
         try {
             debug("Received read request from Client. Forwarding to Server. Tuple to read: " + request.getSearchPattern());
 
-            // Tenta enviar a requisição ao backend
+            // Perform the read operation in the backend
             TupleSpacesOuterClass.ReadResponse response = backendStub.read(request);
 
-            // Envia a resposta ao cliente
+            // Send the response to the client
             responseObserver.onNext(response);
             responseObserver.onCompleted();
 
             debug("Received read response from Server. Forwarding to Client. Response: " + response.getResult());
 
-        } catch (io.grpc.StatusRuntimeException e) { // Captura falhas na comunicação gRPC
+        } catch (io.grpc.StatusRuntimeException e) { // Catches gRPC communication failures
             System.err.println("[gRPC] Error connecting with server during the reading request: " + e.getStatus().getDescription());
-            responseObserver.onError(e); // Notifica o cliente sobre o erro
-        } catch (Exception e) { // Captura qualquer outra exceção inesperada
+            responseObserver.onError(e); // Send the error to the client so they know the operation failed
+        } catch (Exception e) { // Catches any other unexpected exception
             System.err.println("Unexpected Error during the reading request: " + e.getMessage());
-            responseObserver.onError(e); // Notifica o cliente sobre o erro
+            responseObserver.onError(e); // Sends the error to the client
         }
     }
 
@@ -81,21 +81,21 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
         try {
             debug("Received take request from Client. Forwarding to Server. Tuple to take: " + request.getSearchPattern());
 
-            // Tenta enviar a requisição ao backend
+            // Perform the take operation in the backend
             TupleSpacesOuterClass.TakeResponse response = backendStub.take(request);
 
-            // Envia a resposta ao cliente
+            // Send the response to the client
             responseObserver.onNext(response);
             responseObserver.onCompleted();
 
             debug("Received take response from Server. Forwarding to Client. Response: " + response.getResult());
 
-        } catch (io.grpc.StatusRuntimeException e) { // Captura falhas na comunicação gRPC
+        } catch (io.grpc.StatusRuntimeException e) { // Catches gRPC communication failures
             System.err.println("[gRPC] Error connecting with server during the take request: " + e.getStatus().getDescription());
-            responseObserver.onError(e); // Notifica o cliente sobre o erro
-        } catch (Exception e) { // Captura qualquer outra exceção inesperada
+            responseObserver.onError(e); // Send the error to the client so they know the operation failed
+        } catch (Exception e) { // Catches any other unexpected exception
             System.err.println("Unexpected Error during the take request: " + e.getMessage());
-            responseObserver.onError(e); // Notifica o cliente sobre o erro
+            responseObserver.onError(e); // Sends the error to the client
         }
     }
 
@@ -104,21 +104,21 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
         try {
             debug("Received getTupleSpacesState request from Client. Forwarding to Server.");
 
-            // Tenta enviar a requisição ao backend
+            // Perform the getTupleSpacesState operation in the backend
             TupleSpacesOuterClass.getTupleSpacesStateResponse response = backendStub.getTupleSpacesState(request);
 
-            // Envia a resposta ao cliente
+            // Send the response to the client
             responseObserver.onNext(response);
             responseObserver.onCompleted();
 
             debug("Received getTupleSpacesState response from Server. Forwarding to Client. Response: " + response.getTupleList());
 
-        } catch (io.grpc.StatusRuntimeException e) { // Captura falhas na comunicação gRPC
+        } catch (io.grpc.StatusRuntimeException e) { // Catches gRPC communication failures
             System.err.println("[gRPC] Error connecting with server during the getTupleSpacesState request: " + e.getStatus().getDescription());
-            responseObserver.onError(e); // Notifica o cliente sobre o erro
-        } catch (Exception e) { // Captura qualquer outra exceção inesperada
+            responseObserver.onError(e); // Send the error to the client so they know the operation failed
+        } catch (Exception e) { // Catches any other unexpected exception
             System.err.println("Unexpected Error during the getTupleSpacesState request: " + e.getMessage());
-            responseObserver.onError(e); // Notifica o cliente sobre o erro
+            responseObserver.onError(e); // Sends the error to the client
         }
     }
 }

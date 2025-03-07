@@ -67,7 +67,7 @@ class ClientService:
             print(f"Unexpected Error during the take request: {str(e)}")
             return None
 
-    # Método para obter o estado atual do espaço de tuplos
+    # Method to get the current state of the tuple space
     def get_tuple_spaces_state(self):
         request = TupleSpaces_pb2.getTupleSpacesStateRequest()
         try:
@@ -82,7 +82,7 @@ class ClientService:
             print(f"Unexpected Error during the getTupleSpacesState request: {str(e)}")
             return None
 
-    # Fechar o canal gRPC corretamente
+    # Properly close the gRPC channel
     def shutdown(self):
         self.channel.close()
         print("Closed gRPC channel.")
