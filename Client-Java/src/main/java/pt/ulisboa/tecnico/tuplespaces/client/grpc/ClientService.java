@@ -42,9 +42,18 @@ public class ClientService {
     // Método para adicionar um tuplo ao espaço partilhado
     public PutResponse put(String tuple) {
         PutRequest request = PutRequest.newBuilder().setNewTuple(tuple).setClientId(client_id).build();
-        PutResponse response = stub.put(request);
-        debug("Added tuple: " + tuple);
-        return response;
+
+        try {
+            PutResponse response = stub.put(request);
+            debug("Added tuple: " + tuple);
+            return response;
+        } catch (StatusRuntimeException e) {
+            System.err.println("Error during the put request: " + e.getStatus() + " - " + e.getMessage());
+            return null;
+        } catch (Exception e) {
+            System.err.println("Unexpected Error during the put request: " + e.getMessage());
+            return null;
+        }
     }
 
     // Método para ler um tuplo sem o remover (bloqueia até encontrar um matching)
@@ -53,10 +62,15 @@ public class ClientService {
 
         try {
             ReadResponse response = stub.read(request);
-            debug("Read tuple: " + response.getResult());
+            if (!response.getResult().isEmpty()) {
+                debug("Read tuple: " + response.getResult());
+            }
             return response;
         } catch (StatusRuntimeException e) {
-            System.out.println("Caught exception with description: " + e.getStatus().getDescription());
+            System.err.println("Error during the read request: " + e.getStatus() + " - " + e.getMessage());
+            return null;
+        } catch (Exception e) {
+            System.err.println("Unexpected Error during the read request: " + e.getMessage());
             return null;
         }
     }
@@ -70,18 +84,34 @@ public class ClientService {
             debug("Removed tuple: " + response.getResult());
             return response;
         } catch (StatusRuntimeException e) {
-            System.out.println("Caught exception with description: " + e.getStatus().getDescription());
+            System.err.println("Error during the take request: " + e.getStatus() + " - " + e.getMessage());
+            return null; // Ou pode lançar uma exceção personalizada
+        } catch (Exception e) {
+            System.err.println("Unexpected error during the take request: " + e.getMessage());
             return null;
         }
     }
 
+
     // Método para obter o estado atual do espaço de tuplos
     public getTupleSpacesStateResponse getTupleSpacesState() {
         getTupleSpacesStateRequest request = getTupleSpacesStateRequest.newBuilder().setClientId(client_id).build();
-        getTupleSpacesStateResponse response = stub.getTupleSpacesState(request);
-        debug("TupleSpaces Current State: " + response.getTupleList());
-        return response;
+
+        try {
+            getTupleSpacesStateResponse response = stub.getTupleSpacesState(request);
+            if (response != null) {
+                debug("TupleSpaces Current State: " + response.getTupleList());
+            }
+            return response;
+        } catch (StatusRuntimeException e) {
+            System.err.println("Error during the getTupleSpacesState request: " + e.getStatus() + " - " + e.getMessage());
+            return null; // Ou pode lançar uma exceção personalizada
+        } catch (Exception e) {
+            System.err.println("Unexpected Error during the getTupleSpacesState request: " + e.getMessage());
+            return null;
+        }
     }
+
 
     // Fechar o canal gRPC corretamente
     public void shutdown() {
