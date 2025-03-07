@@ -21,8 +21,9 @@ public class TupleSpacesServerImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
     @Override
     public void put(TupleSpacesOuterClass.PutRequest request, StreamObserver<TupleSpacesOuterClass.PutResponse> responseObserver) {
         String tuple = request.getNewTuple();
+        final int client_id = request.getClientId();
 
-        state.put(tuple);
+        state.put(tuple, client_id);
         TupleSpacesOuterClass.PutResponse response = TupleSpacesOuterClass.PutResponse.newBuilder().build();
 
         responseObserver.onNext(response);
@@ -32,8 +33,9 @@ public class TupleSpacesServerImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
     @Override
     public void read(TupleSpacesOuterClass.ReadRequest request, StreamObserver<TupleSpacesOuterClass.ReadResponse> responseObserver) {
         String pattern = request.getSearchPattern();
+        final int client_id = request.getClientId();
 
-        String tuple = state.read(pattern);
+        String tuple = state.read(pattern, client_id);
 
         //if (tuple == null) {
         //    responseObserver.onError(INVALID_ARGUMENT.withDescription("Invalid Input").asRuntimeException());
@@ -48,8 +50,9 @@ public class TupleSpacesServerImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
     @Override
     public void take(TupleSpacesOuterClass.TakeRequest request, StreamObserver<TupleSpacesOuterClass.TakeResponse> responseObserver) {
         String pattern = request.getSearchPattern();
+        final int client_id = request.getClientId();
 
-        String tuple = state.take(pattern);
+        String tuple = state.take(pattern, client_id);
 
         //if (tuple == null) {
             //responseObserver.onError(INVALID_ARGUMENT.withDescription("Invalid Input").asRuntimeException());
@@ -63,8 +66,9 @@ public class TupleSpacesServerImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
 
     @Override
     public void getTupleSpacesState(TupleSpacesOuterClass.getTupleSpacesStateRequest request, StreamObserver<TupleSpacesOuterClass.getTupleSpacesStateResponse> responseObserver) {
+        final int client_id = request.getClientId();
 
-        TupleSpacesOuterClass.getTupleSpacesStateResponse response = TupleSpacesOuterClass.getTupleSpacesStateResponse.newBuilder().addAllTuple(state.getTupleSpacesState()).build();
+        TupleSpacesOuterClass.getTupleSpacesStateResponse response = TupleSpacesOuterClass.getTupleSpacesStateResponse.newBuilder().addAllTuple(state.getTupleSpacesState(client_id)).build();
 
         responseObserver.onNext(response);
         responseObserver.onCompleted();

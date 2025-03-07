@@ -10,9 +10,9 @@ public class ServerState {
     private static final boolean DEBUG_FLAG = (System.getProperty("debug") != null);
 
     /** Helper method to print debug messages. */
-    private static void debug(String debugMessage) {
+    private static void debug(String debugMessage, int client_id) {
         if (DEBUG_FLAG)
-            System.err.println("[DEBUG] " + debugMessage);
+            System.err.println("[DEBUG][" + client_id + "] " + debugMessage);
     }
 
   private List<String> tuples;
@@ -22,10 +22,10 @@ public class ServerState {
     this.tuples = new ArrayList<String>();
   }
 
-  public void put(String tuple) {
+  public void put(String tuple, int client_id) {
     synchronized (lock) {
       tuples.add(tuple);
-      debug("Added tuple: " + tuple);
+      debug("Added tuple: " + tuple, client_id);
       lock.notifyAll();
     }
   }
@@ -39,7 +39,7 @@ public class ServerState {
     return null;
   }
 
-  public String read(String pattern) {
+  public String read(String pattern, int client_id) {
     synchronized (lock) {
       String tuple;
         while ((tuple = getMatchingTuple(pattern)) == null) {
@@ -49,18 +49,18 @@ public class ServerState {
               Thread.currentThread().interrupt();
             }
         }
-      debug("Read tuple: " + pattern);
+      debug("Read tuple: " + pattern, client_id);
       return getMatchingTuple(pattern);
     }
   }
 
-  public String take(String pattern) {
+  public String take(String pattern, int client_id) {
     // Procura o primeiro tuplo que corresponde ao padrão
     synchronized (lock) {
       for (String tuple : this.tuples) {
         if (tuple.matches(pattern)) {
           this.tuples.remove(tuple);
-          debug("Removed tuple: " + tuple);
+          debug("Removed tuple: " + tuple, client_id);
 
           return tuple;
         }
@@ -75,14 +75,14 @@ public class ServerState {
         }
       }
       tuples.remove(matchingTuple);
-      debug("Removed tuple after wait: " + matchingTuple);
+      debug("Removed tuple after wait: " + matchingTuple, client_id);
       return matchingTuple;
     }
   }
 
-  public List<String> getTupleSpacesState() {
+  public List<String> getTupleSpacesState(int client_id) {
     // Retorna uma cópia da lista para evitar modificações externas
-    debug("TupleSpaces Current State: " + this.tuples);
+    debug("TupleSpaces Current State: " + this.tuples, client_id);
     return List.copyOf(this.tuples);
   }
 }
