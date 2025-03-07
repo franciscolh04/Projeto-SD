@@ -48,7 +48,7 @@ public class ClientService {
             debug("Added tuple: " + tuple);
             return response;
         } catch (StatusRuntimeException e) {
-            System.err.println("Error during the put request: " + e.getStatus() + " - " + e.getMessage());
+            System.err.println("Error during the put request: " + e.getStatus().getDescription() + " - " + e.getMessage());
             return null;
         } catch (Exception e) {
             System.err.println("Unexpected Error during the put request: " + e.getMessage());
@@ -67,7 +67,7 @@ public class ClientService {
             }
             return response;
         } catch (StatusRuntimeException e) {
-            System.err.println("Error during the read request: " + e.getStatus() + " - " + e.getMessage());
+            System.err.println("Error during the read request: " + e.getStatus().getDescription() + " - " + e.getMessage());
             return null;
         } catch (Exception e) {
             System.err.println("Unexpected Error during the read request: " + e.getMessage());
@@ -86,7 +86,7 @@ public class ClientService {
             }
             return response;
         } catch (StatusRuntimeException e) {
-            System.err.println("Error during the take request: " + e.getStatus() + " - " + e.getMessage());
+            System.err.println("Error during the take request: " + e.getStatus().getDescription() + " - " + e.getMessage());
             return null; // Ou pode lançar uma exceção personalizada
         } catch (Exception e) {
             System.err.println("Unexpected error during the take request: " + e.getMessage());
@@ -106,7 +106,7 @@ public class ClientService {
             }
             return response;
         } catch (StatusRuntimeException e) {
-            System.err.println("Error during the getTupleSpacesState request: " + e.getStatus() + " - " + e.getMessage());
+            System.err.println("Error during the getTupleSpacesState request: " + e.getStatus().getDescription() + " - " + e.getMessage());
             return null; // Ou pode lançar uma exceção personalizada
         } catch (Exception e) {
             System.err.println("Unexpected Error during the getTupleSpacesState request: " + e.getMessage());
