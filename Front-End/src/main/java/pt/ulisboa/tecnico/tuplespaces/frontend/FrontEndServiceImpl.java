@@ -37,11 +37,11 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
         TupleSpacesOuterClass.PutResponse response = backendStub.put(request);
         
         // Envia a resposta ao cliente
-        responseObserver.onNext(response);
+        responseObserver.onNext(response); //Nota: Aqui a resposta é vazio
         responseObserver.onCompleted();
         
         // Imprime os detalhes da resposta enviada
-        debug("Received put response from Server. Forwarding to Client. Response: " + response);
+        debug("Received put response from Server. Forwarding to Client. Feedback Status: Success");
     }
 
     @Override

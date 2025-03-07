@@ -16,14 +16,18 @@ public class ServerState {
     }
 
   private List<String> tuples;
+  private final Object lock = new Object();
 
   public ServerState() {
     this.tuples = new ArrayList<String>();
   }
 
   public void put(String tuple) {
-    tuples.add(tuple);
-    debug("Added tuple: " + tuple);
+    synchronized (lock) {
+      tuples.add(tuple);
+      debug("Added tuple: " + tuple);
+      lock.notifyAll();
+    }
   }
 
   private String getMatchingTuple(String pattern) {
@@ -36,20 +40,44 @@ public class ServerState {
   }
 
   public String read(String pattern) {
-    debug("Read tuple: " + pattern);
-    return getMatchingTuple(pattern);
+    synchronized (lock) {
+      String tuple;
+        while ((tuple = getMatchingTuple(pattern)) == null) {
+            try {
+            lock.wait();
+            } catch (InterruptedException e) {
+              Thread.currentThread().interrupt();
+            }
+        }
+      debug("Read tuple: " + pattern);
+      return getMatchingTuple(pattern);
+    }
   }
 
   public String take(String pattern) {
     // Procura o primeiro tuplo que corresponde ao padrão
-    for (String tuple : this.tuples) {
-      if (tuple.matches(pattern)) {
-        this.tuples.remove(tuple);
-        debug("Removed tuple: " + tuple);
-        return tuple;
+    synchronized (lock) {
+      for (String tuple : this.tuples) {
+        if (tuple.matches(pattern)) {
+          this.tuples.remove(tuple);
+          debug("Removed tuple: " + tuple);
+
+          return tuple;
+        }
       }
+      String matchingTuple;
+      while ((matchingTuple = getMatchingTuple(pattern)) == null) {
+        try {
+          lock.wait(); // Aguarda até `put()` chamar `notifyAll()`
+        } catch (InterruptedException e) {
+          Thread.currentThread().interrupt();
+          return null; // Retorna null se a thread for interrompida
+        }
+      }
+      tuples.remove(matchingTuple);
+      debug("Removed tuple after wait: " + matchingTuple);
+      return matchingTuple;
     }
-    return null; // Se nenhum tuplo corresponder
   }
 
   public List<String> getTupleSpacesState() {
