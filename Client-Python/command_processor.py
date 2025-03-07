@@ -47,7 +47,9 @@ class CommandProcessor:
             return
         tuple_data = split[1]
         response = self.client_service.put(tuple_data)
-        print("OK\n")
+        if response is not None:
+            print("OK")
+        print("\n")
 
     def read(self, split: List[str]):
         if not self.input_is_valid(split):
@@ -56,13 +58,16 @@ class CommandProcessor:
 
         tuple_data = split[1]
         response = self.client_service.read(tuple_data)
-        print("OK")
+        if response is not None :
+            print("OK")
 
-        response_str = str(response).replace("result: ", "").strip()
-        if response_str.startswith("\"") and response_str.endswith("\""):
-            response_str = response_str[1:-1]
+            response_str = str(response).replace("result: ", "").strip()
+            if response_str.startswith("\"") and response_str.endswith("\""):
+                response_str = response_str[1:-1]
 
-        print(response_str + "\n")
+            print(response_str)
+        print("\n")
+
 
 
     def take(self, split: List[str]):
@@ -71,24 +76,28 @@ class CommandProcessor:
             return
         tuple_data = split[1]
         response = self.client_service.take(tuple_data)
-        print("OK")
+        if response is not None:
+            print("OK")
 
-        response_str = str(response).replace("result: ", "").strip()
-        if response_str.startswith("\"") and response_str.endswith("\""):
-            response_str = response_str[1:-1]
+            response_str = str(response).replace("result: ", "").strip()
+            if response_str.startswith("\"") and response_str.endswith("\""):
+                response_str = response_str[1:-1]
 
-        print(response_str + "\n")
+            print(response_str)
+        print("\n")
 
     def get_tuple_spaces_state(self):
         response = self.client_service.get_tuple_spaces_state()
-        print("OK")
+        if response is not None:
+            print("OK")
 
-        cleaned_tuples = [
-            line.replace("tuple: ", "").strip().strip("'\"")  
-            for line in str(response).split("\n") if line.strip()
-        ]
+            cleaned_tuples = [
+                line.replace("tuple: ", "").strip().strip("'\"")
+                for line in str(response).split("\n") if line.strip()
+            ]
 
-        print(f"[{', '.join(cleaned_tuples)}]\n")  
+            print(f"[{', '.join(cleaned_tuples)}]")
+        print("\n")
 
 
     def sleep(self, split: List[str]):

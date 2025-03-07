@@ -141,10 +141,9 @@ public class CommandProcessor {
         getTupleSpacesStateResponse response = clientService.getTupleSpacesState();
         if (response != null) {
             System.out.println("OK");
-            // Transformar a lista de tuplas no formato desejado
-            List<String> tuples = response.getTupleList(); // Supondo que seja uma lista de Strings
+            List<String> tuples = response.getTupleList();
             String formattedOutput = tuples.stream()
-                    .collect(Collectors.joining(", ", "[", "]")); // Junta os elementos com ", " e coloca "[" e "]"
+                    .collect(Collectors.joining(", ", "[", "]")); // Join the elements with ", " and enclose them in "[" and "]"
 
             System.out.println(formattedOutput);
         }

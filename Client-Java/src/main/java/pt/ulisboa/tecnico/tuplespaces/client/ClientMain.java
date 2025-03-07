@@ -17,7 +17,7 @@ public class ClientMain {
             System.out.printf("arg[%d] = %s%n", i, args[i]);
         }*/
 
-        // Verifica se algum dos argumentos é "debug"
+        // Check if any of the arguments is "debug"
         for (String arg : args) {
             if (arg.equals("-debug")) {
                 System.setProperty("debug", "true");

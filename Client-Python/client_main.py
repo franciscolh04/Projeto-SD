@@ -8,12 +8,11 @@ class ClientMain:
     def main(args: List[str]):
         print("ClientMain")
 
-        # Verifica se algum dos argumentos é "-debug" e define a variável de ambiente
+        # Check if any of the arguments is "-debug" and set the environment variable
         if "-debug" in args:
             import os
-            os.environ["debug"] = "true"  # Similar ao System.setProperty no Java
+            os.environ["debug"] = "true"
 
-        # receive and print arguments
         '''
         print(f"Received {len(args)} arguments")
         for i, arg in enumerate(args):
