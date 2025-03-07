@@ -1,4 +1,5 @@
 import time
+import signal
 from typing import List
 
 class CommandProcessor:
@@ -14,10 +15,18 @@ class CommandProcessor:
 
     def __init__(self, client_service):
         self.client_service = client_service
+        self.exit = False
+
+        # Definir o signal handler para Ctrl+C
+        signal.signal(signal.SIGINT, self.signal_handler)
+    
+    def signal_handler(self, signum, frame):
+        print()
+        self.exit = True
+        self.client_service.shutdown()
 
     def parse_input(self):
-        exit_flag = False
-        while not exit_flag:
+        while not self.exit:
             try:
                 line = input("> ").strip()
                 split = line.split(self.SPACE)
@@ -34,12 +43,15 @@ class CommandProcessor:
                 elif command == self.SLEEP:
                     self.sleep(split)
                 elif command == self.EXIT:
-                    exit_flag = True
-                    self.shutdown()
+                    self.exit = True
+                    self.client_service.shutdown()
                 else:
-                    self.print_usage()
+                    if not self.exit:
+                        self.print_usage()
+
             except EOFError:
                 break
+        
 
     def put(self, split: List[str]):
         if not self.input_is_valid(split):
@@ -49,7 +61,7 @@ class CommandProcessor:
         response = self.client_service.put(tuple_data)
         if response is not None:
             print("OK")
-        print("\n")
+        print()
 
     def read(self, split: List[str]):
         if not self.input_is_valid(split):
@@ -66,7 +78,7 @@ class CommandProcessor:
                 response_str = response_str[1:-1]
 
             print(response_str)
-        print("\n")
+        print()
 
 
 
@@ -84,7 +96,7 @@ class CommandProcessor:
                 response_str = response_str[1:-1]
 
             print(response_str)
-        print("\n")
+        print()
 
     def get_tuple_spaces_state(self):
         response = self.client_service.get_tuple_spaces_state()
@@ -97,7 +109,7 @@ class CommandProcessor:
             ]
 
             print(f"[{', '.join(cleaned_tuples)}]")
-        print("\n")
+        print()
 
 
     def sleep(self, split: List[str]):

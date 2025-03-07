@@ -24,6 +24,12 @@ public class CommandProcessor {
 
     public CommandProcessor(ClientService clientService) {
         this.clientService = clientService;
+
+        // Adicionar shutdown hook para capturar a interrupção (Ctrl+C)
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            System.out.println();
+            clientService.shutdown();
+        }));
     }
 
     void parseInput() {

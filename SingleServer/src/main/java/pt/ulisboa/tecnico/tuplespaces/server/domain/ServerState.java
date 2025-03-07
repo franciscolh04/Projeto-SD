@@ -63,8 +63,10 @@ public class ServerState {
         }
 
         String tuple;
+        boolean waitFlag = false;
         while ((tuple = getMatchingTuple(pattern)) == null) {
           try {
+            waitFlag = true;
             lock.wait();
           } catch (InterruptedException e) {
             Thread.currentThread().interrupt(); // Restores the interrupted status
@@ -73,7 +75,11 @@ public class ServerState {
           }
         }
 
-        debug("Read tuple: " + tuple, client_id);
+        if (!waitFlag) {
+          debug("Read tuple: " + tuple, client_id);
+        } else {
+          debug("Read tuple after wait: " + tuple, client_id);
+        }
         return tuple;
 
       } catch (IllegalArgumentException e) {
