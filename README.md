@@ -42,11 +42,37 @@ mvn -version
 
 ### Installation
 
-To compile and install all modules:
+To compile and install all modules, run the following commands in the root directory:
 
 ```s
 mvn clean install
+cd Contract
+mvn install
+mvn exec:exec
+cd ..
 ```
+
+### Testing
+
+All test commands must be executed from the `tests` directory.
+
+To run all tests using both the Java and Python clients, execute:
+
+```s
+./run_tests.sh
+````
+
+To run tests only with the Java client:
+
+```s
+./run_tests.sh -j
+````
+
+To run tests only with the Python client:
+
+```s
+./run_tests.sh -p
+````
 
 ## Built With
 
