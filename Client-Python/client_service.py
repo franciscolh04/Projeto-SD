@@ -23,6 +23,7 @@ class ClientService:
         self.debug(f"Client created with ID: {client_id}")
     
 
+    # Method to print debug messages
     def debug(self, message: str):
         if self.debug_flag:
             print(f"[DEBUG] " + message)

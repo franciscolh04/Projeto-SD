@@ -5,12 +5,17 @@ import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
 import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesGrpc;
 import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesOuterClass;
+import pt.ulisboa.tecnico.tuplespaces.frontend.observers.PutObserver;
+import pt.ulisboa.tecnico.tuplespaces.frontend.observers.ReadObserver;
+import java.util.List;
+import java.util.ArrayList;
 
 public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
 
     /** Set flag to true to print debug messages.
      * The flag can be set using the -debug command line option. */
     private static final boolean DEBUG_FLAG = (System.getProperty("debug") != null);
+    private int num_servers;
 
     /** Helper method to print debug messages. */
     private static void debug(String debugMessage) {
@@ -18,28 +23,42 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             System.err.println("[DEBUG] " + debugMessage);
     }
 
-    private final TupleSpacesGrpc.TupleSpacesBlockingStub backendStub;
+    private TupleSpacesGrpc.TupleSpacesStub[] backendStubs;
+    private ManagedChannel[] channels;
 
-    public FrontEndServiceImpl(String serverAddress) {
-        // Create a gRPC channel for the TupleSpaces server received in the arguments
-        ManagedChannel channel = ManagedChannelBuilder.forTarget(serverAddress).usePlaintext().build();
+    public FrontEndServiceImpl(List<String> serverAddresses) {
+        num_servers = serverAddresses.size();
 
-        backendStub = TupleSpacesGrpc.newBlockingStub(channel);
-        System.out.println("Frontend connecting to server TupleSpaces: " + serverAddress);
+        ManagedChannel[] channels = new ManagedChannel[num_servers];
+        backendStubs = new TupleSpacesGrpc.TupleSpacesStub[num_servers];
+
+        for (int i = 0; i < num_servers; i++) {
+            // Create a gRPC channel for the TupleSpaces server received in the arguments
+            channels[i] = ManagedChannelBuilder.forTarget(serverAddresses.get(i)).usePlaintext().build();
+            backendStubs[i] = TupleSpacesGrpc.newStub(channels[i]);
+            System.out.println("Frontend connecting to server TupleSpaces: " + serverAddresses.get(i));
+        }
     }
+
 
     @Override
     public void put(TupleSpacesOuterClass.PutRequest request, StreamObserver<TupleSpacesOuterClass.PutResponse> responseObserver) {
         try {
+
             // Print the details of the received request
             debug("Received put request from Client. Forwarding to Server. Tuple to add: " + request.getNewTuple());
-
-            // Perform the put operation in the backend
-            TupleSpacesOuterClass.PutResponse response = backendStub.put(request);
+            ResponseCollector<TupleSpacesOuterClass.PutResponse> c = new ResponseCollector<TupleSpacesOuterClass.PutResponse>();
+            for(int i = 0; i < num_servers; i++) {
+                backendStubs[i].put(request, new PutObserver(c));
+            }
+            c.waitUntilAllReceived(num_servers);
+            // Perform the read operation in the backend
+            //TupleSpacesOuterClass.ReadResponse response = backendStub.read(request);
+            responseObserver.onNext(TupleSpacesOuterClass.PutResponse.newBuilder().build());
 
             // Send the response to the client
-            responseObserver.onNext(response); // Nota: Aqui a resposta é vazia
             responseObserver.onCompleted();
+            // Perform the put operation in the backend
 
             // Print the details of the response
             debug("Received put response from Server. Forwarding to Client. Feedback Status: Success");
@@ -53,19 +72,27 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
         }
     }
 
+
     @Override
     public void read(TupleSpacesOuterClass.ReadRequest request, StreamObserver<TupleSpacesOuterClass.ReadResponse> responseObserver) {
         try {
             debug("Received read request from Client. Forwarding to Server. Tuple to read: " + request.getSearchPattern());
+            ResponseCollector<TupleSpacesOuterClass.ReadResponse> c = new ResponseCollector();
+            for(int i = 0; i < num_servers; i++) {
+                backendStubs[i].read(request, new ReadObserver(c));
+            }
+            c.waitUntilAllReceived(1);
 
             // Perform the read operation in the backend
-            TupleSpacesOuterClass.ReadResponse response = backendStub.read(request);
+            //TupleSpacesOuterClass.ReadResponse response = backendStub.read(request);
+
+            responseObserver.onNext(TupleSpacesOuterClass.ReadResponse.newBuilder().setResult(c.collectedResponses.get(0)).build());
 
             // Send the response to the client
-            responseObserver.onNext(response);
             responseObserver.onCompleted();
+            // Perform the put operation in the backend
 
-            debug("Received read response from Server. Forwarding to Client. Response: " + response.getResult());
+            //debug("Received read response from Server. Forwarding to Client. Response: " + response.getResult());
 
         } catch (io.grpc.StatusRuntimeException e) { // Catches gRPC communication failures
             System.err.println("[gRPC] Error connecting with server during the reading request: " + e.getStatus().getDescription());
@@ -76,6 +103,8 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
         }
     }
 
+
+    /*
     @Override
     public void take(TupleSpacesOuterClass.TakeRequest request, StreamObserver<TupleSpacesOuterClass.TakeResponse> responseObserver) {
         try {
@@ -121,4 +150,5 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             responseObserver.onError(e); // Sends the error to the client
         }
     }
+     */
 }

@@ -4,23 +4,27 @@ import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.BindableService;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FrontEndServer {
     public static void main(String[] args) throws IOException, InterruptedException {
         System.out.println(FrontEndServer.class.getSimpleName());
 
         // Verifies if any of the arguments is "debug"
+        int flag_debug_true = 0;
         for (String arg : args) {
             if (arg.equals("-debug")) {
                 System.setProperty("debug", "true");
+                flag_debug_true = 1;
                 break;  // Do not need to check the remaining arguments
             }
         }
 
         // Validate the number of arguments
-        if (args.length < 2) {
+        if (args.length < 4 + flag_debug_true) {
             System.err.println("Argument(s) missing!");
-            System.err.println("Usage: mvn exec:java -Dexec.args=\"<frontend_port> <server_host:server_port>\"");
+            System.err.println("Usage: mvn exec:java -Dexec.args=\"<frontend_port> <server_host:server_port>(s)\"");
             return;
         }
 
@@ -33,11 +37,22 @@ public class FrontEndServer {
             return;
         }
 
-        // TupleSpaces Server Address (in the future, it should be a list of servers)
-        String serverAddress = args[1];
+        // List of TupleSpaces Server Address
+        List<String> serverAddresses = new ArrayList<>(args.length - 1 - flag_debug_true);
+        for (int i = 1; i < args.length - 1 ; i++) {
+            if (args[i].equals("-debug")) {
+                break;  // Do not need to check the remaining arguments
+            }
+            serverAddresses.add(args[i]);
+        }
+
+        System.out.println("Front-end will connect to the following servers:");
+        for (String addr : serverAddresses) {
+            System.out.println(" - " + addr);
+        }
 
         // Create an instance of the Front-end gRPC service
-        final BindableService frontendService = new FrontEndServiceImpl(serverAddress);
+        final BindableService frontendService = new FrontEndServiceImpl(serverAddresses);
 
         // Create and start the Front-end gRPC server
         Server server = ServerBuilder.forPort(frontendPort).addService(frontendService).build();
