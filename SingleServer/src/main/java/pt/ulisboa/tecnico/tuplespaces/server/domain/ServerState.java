@@ -138,14 +138,15 @@ public class ServerState {
 
 
   public List<String> getTupleSpacesState(int client_id) {
-    try {
-      // Returns a copy of the list to avoid external modifications
-      debug("TupleSpaces Current State: " + this.tuples, client_id);
-      return List.copyOf(this.tuples);
-    } catch (Exception e) { // Get any other unexpected error
-      System.err.println("Unexpected error when getting state of TupleSpaces: " + e.getMessage());
-      return Collections.emptyList(); // Return an empty list if an error occurs
+    synchronized (lock) {
+      try {
+        // Returns a copy of the list to avoid external modifications
+        debug("TupleSpaces Current State: " + this.tuples, client_id);
+        return List.copyOf(this.tuples);
+      } catch (Exception e) { // Get any other unexpected error
+        System.err.println("Unexpected error when getting state of TupleSpaces: " + e.getMessage());
+        return Collections.emptyList(); // Return an empty list if an error occurs
+      }
     }
   }
-
 }

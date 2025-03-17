@@ -52,6 +52,13 @@ public class FrontEndServer {
         System.out.printf("Frontend gRPC Server initialized in port: %d%n", frontendPort);
 
         try {
+            // Shutdown for cleanup
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                server.shutdown();
+                System.out.println("\nFront-end server shut down.");
+            }));
+
+            // Block the main thread to wait until the server is terminated
             server.awaitTermination();
         } catch (InterruptedException e) {
             System.err.println("Front-end Server Stopped.");
