@@ -115,8 +115,19 @@ public class CommandProcessor {
         // get the tuple
         String tuple = split[1];
 
+        // parse delays if provided
+        List<Integer> delays = new ArrayList<>();
+        for (int i = 2; i < split.length; i++) {
+            try {
+                delays.add(Integer.parseInt(split[i]));
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid delay format. Use integer values.");
+                return;
+            }
+        }
+
         // read the tuple and get the response
-        ReadResponse response = clientService.read(tuple);
+        ReadResponse response = clientService.read(tuple, delays);
 
         if (response != null) {
             System.out.println("OK");

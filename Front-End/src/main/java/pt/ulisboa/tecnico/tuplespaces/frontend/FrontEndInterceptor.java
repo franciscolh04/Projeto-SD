@@ -26,17 +26,6 @@ public class FrontEndInterceptor implements ServerInterceptor {
             return Contexts.interceptCall(context, call, requestHeaders, next);
 
             /*
-            // Add a listener to clear the context after the request is completed
-            context.addListener(new Context.CancellationListener() {
-                @Override
-                public void cancelled(Context context) {
-                    // Clear the context
-                    context = Context.ROOT;
-                }
-            }, Context.current().executor());
-            */
-
-            /*
             try {
                 Thread.sleep(Integer.parseInt(delayValue));
             } catch (InterruptedException e) {

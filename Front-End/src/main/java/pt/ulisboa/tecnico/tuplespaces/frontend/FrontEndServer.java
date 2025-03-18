@@ -48,7 +48,7 @@ public class FrontEndServer {
             serverAddresses.add(args[i]);
         }
 
-        System.out.println("Front-end will connect to the following servers:");
+        System.out.println("Frontend will connect to the following servers:");
         for (String addr : serverAddresses) {
             System.out.println(" - " + addr);
         }
@@ -64,7 +64,7 @@ public class FrontEndServer {
         try {
             server.start();
         } catch (IOException e) {
-            System.err.println("Error when initializing Front-end server!");
+            System.err.println("Error when initializing Frontend server!");
             return;
         }
 
@@ -74,13 +74,13 @@ public class FrontEndServer {
             // Shutdown for cleanup
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 server.shutdown();
-                System.out.println("\nFront-end server shut down.");
+                System.out.println("\nFrontend server shut down.");
             }));
 
             // Block the main thread to wait until the server is terminated
             server.awaitTermination();
         } catch (InterruptedException e) {
-            System.err.println("Front-end Server Stopped.");
+            System.err.println("Frontend Server Stopped.");
         }
     }
 }

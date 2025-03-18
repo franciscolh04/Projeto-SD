@@ -69,13 +69,20 @@ public class ClientService {
     }
 
     // Method to read a tuple (blocks until a match is found)
-    public ReadResponse read(String pattern) {
-        ReadRequest request = ReadRequest.newBuilder().setSearchPattern(pattern).setClientId(client_id).build();
+    public ReadResponse read(String pattern, List<Integer> delays) {
+        // Serialize the list of delays into a single string
+        String delaysString = delays.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(","));
+        metadata.put(DELAY_KEY, delaysString);
 
+        // Create a new stub with the metadata
+        TupleSpacesGrpc.TupleSpacesBlockingStub serverStub = stub.withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata));
+        ReadRequest request = ReadRequest.newBuilder().setSearchPattern(pattern).setClientId(client_id).build();
         try {
-            ReadResponse response = stub.read(request);
+            ReadResponse response = serverStub.read(request);
             if (!response.getResult().isEmpty()) {
-                debug("Read tuple: " + response.getResult());
+                debug("Read tuple: " + response.getResult() + " with delays: " + delaysString);
             }
             return response;
         } catch (StatusRuntimeException e) {
