@@ -7,6 +7,12 @@ import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesGrpc;
 import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesOuterClass;
 import pt.ulisboa.tecnico.tuplespaces.frontend.observers.PutObserver;
 import pt.ulisboa.tecnico.tuplespaces.frontend.observers.ReadObserver;
+
+import io.grpc.Context;
+import io.grpc.Metadata;
+import io.grpc.stub.MetadataUtils;
+
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -25,6 +31,9 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
 
     private TupleSpacesGrpc.TupleSpacesStub[] backendStubs;
     private ManagedChannel[] channels;
+    private String delayValue = "0";
+    static final Metadata.Key<String> DELAY_KEY = Metadata.Key.of("delay", Metadata.ASCII_STRING_MARSHALLER);
+    Metadata metadata = new Metadata();
 
     public FrontEndServiceImpl(List<String> serverAddresses) {
         num_servers = serverAddresses.size();
@@ -44,11 +53,15 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
     @Override
     public void put(TupleSpacesOuterClass.PutRequest request, StreamObserver<TupleSpacesOuterClass.PutResponse> responseObserver) {
         try {
+            delayValue = FrontEndInterceptor.DELAY_VALUE_CONTEXT.get();
+            System.out.println("[PUT] Delay value: " + delayValue);
 
             // Print the details of the received request
             debug("Received put request from Client. Forwarding to Server. Tuple to add: " + request.getNewTuple());
             ResponseCollector<TupleSpacesOuterClass.PutResponse> c = new ResponseCollector<TupleSpacesOuterClass.PutResponse>();
             for(int i = 0; i < num_servers; i++) {
+                metadata.put(DELAY_KEY, delayValue);
+                backendStubs[i] = backendStubs[i].withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata));
                 backendStubs[i].put(request, new PutObserver(c));
             }
             c.waitUntilAllReceived(num_servers);
@@ -76,6 +89,9 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
     @Override
     public void read(TupleSpacesOuterClass.ReadRequest request, StreamObserver<TupleSpacesOuterClass.ReadResponse> responseObserver) {
         try {
+            delayValue = FrontEndInterceptor.DELAY_VALUE_CONTEXT.get();
+            System.out.println("[READ] Delay value: " + delayValue);
+
             debug("Received read request from Client. Forwarding to Server. Tuple to read: " + request.getSearchPattern());
             ResponseCollector<TupleSpacesOuterClass.ReadResponse> c = new ResponseCollector();
             for(int i = 0; i < num_servers; i++) {

@@ -9,6 +9,9 @@ import java.util.List;
 import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesGrpc;
 import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesOuterClass.*;
 
+import io.grpc.Metadata;
+import io.grpc.stub.MetadataUtils;
+
 public class ClientService {
 
     /** Set flag to true to print debug messages.
@@ -24,14 +27,19 @@ public class ClientService {
     private final ManagedChannel channel;
     private final TupleSpacesGrpc.TupleSpacesBlockingStub stub;
     private final int client_id;
+    static final Metadata.Key<String> DELAY_KEY = Metadata.Key.of("delay", Metadata.ASCII_STRING_MARSHALLER);
+    Metadata metadata = new Metadata();
+
 
     public ClientService(String host_port, int client_id) {
+        // Initialize metadata
+        metadata.put(DELAY_KEY, "5");
 
         // Create gRPC channel to communicate with the server
         this.channel = ManagedChannelBuilder.forTarget(host_port).usePlaintext().build();
 
         // Create the stub for synchronous calls
-        this.stub = TupleSpacesGrpc.newBlockingStub(channel);
+        this.stub = TupleSpacesGrpc.newBlockingStub(channel).withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata));
 
         // Store the client ID
         this.client_id = client_id;

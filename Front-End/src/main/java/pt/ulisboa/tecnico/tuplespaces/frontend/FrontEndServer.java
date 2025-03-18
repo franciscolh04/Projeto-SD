@@ -3,6 +3,8 @@ package pt.ulisboa.tecnico.tuplespaces.frontend;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.BindableService;
+import io.grpc.ServerInterceptors;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,17 +14,17 @@ public class FrontEndServer {
         System.out.println(FrontEndServer.class.getSimpleName());
 
         // Verifies if any of the arguments is "debug"
-        int flag_debug_true = 0;
+        boolean debug = false;
         for (String arg : args) {
             if (arg.equals("-debug")) {
                 System.setProperty("debug", "true");
-                flag_debug_true = 1;
+                debug = true;
                 break;  // Do not need to check the remaining arguments
             }
         }
 
         // Validate the number of arguments
-        if (args.length < 4 + flag_debug_true) {
+        if (args.length < 4 + (debug ? 1 : 0)) {
             System.err.println("Argument(s) missing!");
             System.err.println("Usage: mvn exec:java -Dexec.args=\"<frontend_port> <server_host:server_port>(s)\"");
             return;
@@ -38,10 +40,10 @@ public class FrontEndServer {
         }
 
         // List of TupleSpaces Server Address
-        List<String> serverAddresses = new ArrayList<>(args.length - 1 - flag_debug_true);
-        for (int i = 1; i < args.length - 1 ; i++) {
+        List<String> serverAddresses = new ArrayList<>();
+        for (int i = 1; i < args.length; i++) {
             if (args[i].equals("-debug")) {
-                break;  // Do not need to check the remaining arguments
+                continue;  // Skip the debug flag
             }
             serverAddresses.add(args[i]);
         }
@@ -55,7 +57,9 @@ public class FrontEndServer {
         final BindableService frontendService = new FrontEndServiceImpl(serverAddresses);
 
         // Create and start the Front-end gRPC server
-        Server server = ServerBuilder.forPort(frontendPort).addService(frontendService).build();
+        Server server = ServerBuilder.forPort(frontendPort)
+                .addService(ServerInterceptors.intercept(frontendService, new FrontEndInterceptor()))
+                .build();
 
         try {
             server.start();
