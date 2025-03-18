@@ -19,10 +19,10 @@ public class FrontEndInterceptor implements ServerInterceptor {
         final Metadata requestHeaders,
         ServerCallHandler<ReqT, RespT> next) {
 
-        String delayValue = requestHeaders.get(DELAY_KEY);
+        String delaysString = requestHeaders.get(DELAY_KEY);
 
-        if (delayValue != null) {
-            Context context = Context.current().withValue(DELAY_VALUE_CONTEXT, delayValue);
+        if (delaysString != null) {
+            Context context = Context.current().withValue(DELAY_VALUE_CONTEXT, delaysString);
             return Contexts.interceptCall(context, call, requestHeaders, next);
 
             /*

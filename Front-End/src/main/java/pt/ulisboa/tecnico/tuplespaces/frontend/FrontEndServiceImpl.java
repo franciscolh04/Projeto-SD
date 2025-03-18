@@ -14,7 +14,9 @@ import io.grpc.stub.MetadataUtils;
 
 
 import java.util.List;
+import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
 
@@ -31,9 +33,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
 
     private TupleSpacesGrpc.TupleSpacesStub[] backendStubs;
     private ManagedChannel[] channels;
-    private String delayValue = "0";
-    static final Metadata.Key<String> DELAY_KEY = Metadata.Key.of("delay", Metadata.ASCII_STRING_MARSHALLER);
-    Metadata metadata = new Metadata();
+    public Metadata.Key<String> DELAY_KEY = Metadata.Key.of("delay", Metadata.ASCII_STRING_MARSHALLER);
 
     public FrontEndServiceImpl(List<String> serverAddresses) {
         num_servers = serverAddresses.size();
@@ -53,16 +53,34 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
     @Override
     public void put(TupleSpacesOuterClass.PutRequest request, StreamObserver<TupleSpacesOuterClass.PutResponse> responseObserver) {
         try {
-            delayValue = FrontEndInterceptor.DELAY_VALUE_CONTEXT.get();
-            System.out.println("[PUT] Delay value: " + delayValue);
+            String delaysString = FrontEndInterceptor.DELAY_VALUE_CONTEXT.get();
+
+            List<Integer> delays;
+            if (delaysString.isEmpty()) {
+                delays = Arrays.asList(0, 0, 0);
+            } else {
+                delays = Arrays.stream(delaysString.split(","))
+                        .map(Integer::parseInt)
+                        .collect(Collectors.toList());
+            }
+
+            System.out.println("[PUT] Delay values: " + delays);
 
             // Print the details of the received request
             debug("Received put request from Client. Forwarding to Server. Tuple to add: " + request.getNewTuple());
             ResponseCollector<TupleSpacesOuterClass.PutResponse> c = new ResponseCollector<TupleSpacesOuterClass.PutResponse>();
             for(int i = 0; i < num_servers; i++) {
-                metadata.put(DELAY_KEY, delayValue);
-                backendStubs[i] = backendStubs[i].withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata));
-                backendStubs[i].put(request, new PutObserver(c));
+                Metadata metadata = new Metadata();
+
+                if (i < delays.size()) {
+                    metadata.put(DELAY_KEY, String.valueOf(delays.get(i)));
+                    System.out.println("[PUT] Delay value: " + delays.get(i));
+                } else {
+                    metadata.put(DELAY_KEY, "0"); // Default delay if not provided
+                }
+
+                TupleSpacesGrpc.TupleSpacesStub stub = backendStubs[i].withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata));
+                stub.put(request, new PutObserver(c));
             }
             c.waitUntilAllReceived(num_servers);
             // Perform the read operation in the backend
@@ -72,6 +90,8 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             // Send the response to the client
             responseObserver.onCompleted();
             // Perform the put operation in the backend
+
+            //Context.current().withValue(FrontEndInterceptor.DELAY_VALUE_CONTEXT, null).attach();
 
             // Print the details of the response
             debug("Received put response from Server. Forwarding to Client. Feedback Status: Success");
@@ -86,6 +106,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
     }
 
 
+    /*
     @Override
     public void read(TupleSpacesOuterClass.ReadRequest request, StreamObserver<TupleSpacesOuterClass.ReadResponse> responseObserver) {
         try {
@@ -117,7 +138,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             System.err.println("Unexpected Error during the reading request: " + e.getMessage());
             responseObserver.onError(e); // Sends the error to the client
         }
-    }
+    }*/
 
 
     /*

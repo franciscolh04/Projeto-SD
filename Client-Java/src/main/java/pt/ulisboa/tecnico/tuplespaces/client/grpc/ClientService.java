@@ -5,6 +5,7 @@ import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesGrpc;
 import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesOuterClass.*;
@@ -30,16 +31,12 @@ public class ClientService {
     static final Metadata.Key<String> DELAY_KEY = Metadata.Key.of("delay", Metadata.ASCII_STRING_MARSHALLER);
     Metadata metadata = new Metadata();
 
-
     public ClientService(String host_port, int client_id) {
-        // Initialize metadata
-        metadata.put(DELAY_KEY, "5");
-
         // Create gRPC channel to communicate with the server
         this.channel = ManagedChannelBuilder.forTarget(host_port).usePlaintext().build();
 
         // Create the stub for synchronous calls
-        this.stub = TupleSpacesGrpc.newBlockingStub(channel).withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata));
+        this.stub = TupleSpacesGrpc.newBlockingStub(channel);
 
         // Store the client ID
         this.client_id = client_id;
@@ -48,20 +45,27 @@ public class ClientService {
     }
 
     // Method to add a tuple to the shared space
-    public PutResponse put(String tuple) {
-        PutRequest request = PutRequest.newBuilder().setNewTuple(tuple).setClientId(client_id).build();
+    public PutResponse put(String tuple, List<Integer> delays) {
+        // Serialize the list of delays into a single string
+        String delaysString = delays.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(","));
+        metadata.put(DELAY_KEY, delaysString);
 
+        // Create a new stub with the metadata
+        TupleSpacesGrpc.TupleSpacesBlockingStub serverStub = stub.withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata));
+        PutRequest request = PutRequest.newBuilder().setNewTuple(tuple).setClientId(client_id).build();
         try {
-            PutResponse response = stub.put(request);
-            debug("Added tuple: " + tuple);
+            PutResponse response = serverStub.put(request);
+            debug("Added tuple: " + tuple + " with delays: " + delaysString);
             return response;
         } catch (StatusRuntimeException e) {
             System.err.println("Error during the put request: " + e.getStatus().getDescription() + " - " + e.getMessage());
-            return null;
+            e.printStackTrace();
         } catch (Exception e) {
             System.err.println("Unexpected Error during the put request: " + e.getMessage());
-            return null;
         }
+        return null;
     }
 
     // Method to read a tuple (blocks until a match is found)

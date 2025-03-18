@@ -4,6 +4,7 @@ import pt.ulisboa.tecnico.tuplespaces.client.grpc.ClientService;
 import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesGrpc;
 import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesOuterClass.*;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -85,8 +86,19 @@ public class CommandProcessor {
         // get the tuple
         String tuple = split[1];
 
+        // parse delays if provided
+        List<Integer> delays = new ArrayList<>();
+        for (int i = 2; i < split.length; i++) {
+            try {
+                delays.add(Integer.parseInt(split[i]));
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid delay format. Use integer values.");
+                return;
+            }
+        }
+
         // put the tuple and get the response
-        PutResponse response = clientService.put(tuple);
+        PutResponse response = clientService.put(tuple, delays);
         if (response != null) {
             System.out.println("OK");
         }
@@ -185,6 +197,6 @@ public class CommandProcessor {
     }
 
     private boolean inputIsValid(String[] input) {
-        return input.length == 2 && input[1].startsWith(BGN_TUPLE) && input[1].endsWith(END_TUPLE);
+        return (input.length == 2 || input.length == 5) && input[1].startsWith(BGN_TUPLE) && input[1].endsWith(END_TUPLE);
     }
 }
