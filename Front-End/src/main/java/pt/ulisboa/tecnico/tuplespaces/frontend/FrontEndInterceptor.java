@@ -24,13 +24,6 @@ public class FrontEndInterceptor implements ServerInterceptor {
         if (delaysString != null) {
             Context context = Context.current().withValue(DELAY_VALUE_CONTEXT, delaysString);
             return Contexts.interceptCall(context, call, requestHeaders, next);
-
-            /*
-            try {
-                Thread.sleep(Integer.parseInt(delayValue));
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }*/
         }
 
         return next.startCall(call, requestHeaders);

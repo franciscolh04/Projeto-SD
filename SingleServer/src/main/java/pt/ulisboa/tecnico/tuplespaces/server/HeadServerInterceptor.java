@@ -23,14 +23,15 @@ public class HeadServerInterceptor implements ServerInterceptor {
 
         if (delayValue != null) {
             System.out.println("Arrived delay value: " + delayValue);
-            Context context = Context.current().withValue(DELAY_VALUE_CONTEXT, delayValue);
-            return Contexts.interceptCall(context, call, requestHeaders, next);
-            /*
+
             try {
-                Thread.sleep(Integer.parseInt(delayValue));
+                Thread.sleep(Integer.parseInt(delayValue) * 1000);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-            }*/
+            }
+
+            Context context = Context.current().withValue(DELAY_VALUE_CONTEXT, delayValue);
+            return Contexts.interceptCall(context, call, requestHeaders, next);
         }
 
         return next.startCall(call, requestHeaders);
