@@ -7,7 +7,7 @@ public class ResponseCollector<T> {
     ArrayList<String> collectedResponses;
 
     public ResponseCollector() {
-        collectedResponses = new ArrayList<String>();
+        collectedResponses = new ArrayList<>();
     }
 
     synchronized public void addString(String s) {
@@ -15,16 +15,18 @@ public class ResponseCollector<T> {
         notifyAll();
     }
 
+    /*
     synchronized public String getStrings() {
         String res = new String();
         for (String s : collectedResponses) {
             res = res.concat(s);
         }
         return res;
-    }
+    } */
 
     synchronized public void waitUntilAllReceived(int n) throws InterruptedException {
-        while (collectedResponses.size() < n)
+        while (collectedResponses.size() < n) {
             wait();
+        }
     }
 }

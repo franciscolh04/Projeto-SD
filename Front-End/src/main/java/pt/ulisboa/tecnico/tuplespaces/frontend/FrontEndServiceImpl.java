@@ -7,6 +7,7 @@ import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesGrpc;
 import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesOuterClass;
 import pt.ulisboa.tecnico.tuplespaces.frontend.observers.PutObserver;
 import pt.ulisboa.tecnico.tuplespaces.frontend.observers.ReadObserver;
+import pt.ulisboa.tecnico.tuplespaces.frontend.observers.GetTupleSpacesStateObserver;
 
 import io.grpc.Context;
 import io.grpc.Metadata;
@@ -159,6 +160,42 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
         }
     }
 
+
+    @Override
+    public void getTupleSpacesState(TupleSpacesOuterClass.getTupleSpacesStateRequest request, StreamObserver<TupleSpacesOuterClass.getTupleSpacesStateResponse> responseObserver) {
+        try {
+            // Print the details of the received request
+            debug("Received getTupleSpacesState request from Client. Forwarding to Server.");
+
+            ResponseCollector<TupleSpacesOuterClass.getTupleSpacesStateResponse> c = new ResponseCollector<TupleSpacesOuterClass.getTupleSpacesStateResponse>();
+
+            for(int i = 0; i < num_servers; i++) {
+                backendStubs[i].getTupleSpacesState(request, new GetTupleSpacesStateObserver(c));
+                debug("processou a informação de um servidor");
+            }
+
+            c.waitUntilAllReceived(num_servers);
+            debug("Waited until all finished.");
+            c.collectedResponses.removeIf(str -> str.trim().isEmpty());
+            responseObserver.onNext(TupleSpacesOuterClass.getTupleSpacesStateResponse.newBuilder().addAllTuple(c.collectedResponses).build());
+
+            // Send the response to the client
+            responseObserver.onCompleted();
+            // Perform the put operation in the backend
+
+            // Print the details of the response
+
+            debug("Received getTupleSpacesState response from Server. Forwarding to Client. Response: " + c.collectedResponses);
+
+        }
+        catch (io.grpc.StatusRuntimeException e) { // Catches gRPC communication failures
+            System.err.println("[gRPC] Error connecting with server during the getTupleSpacesState request: " + e.getStatus().getDescription());
+            responseObserver.onError(e); // Send the error to the client so they know the operation failed
+        } catch (Exception e) { // Catches any other unexpected exception
+            System.err.println("Unexpected Error during the getTupleSpacesState request: " + e.getMessage());
+            responseObserver.onError(e); // Sends the error to the client
+        }
+    }
 
     /*
     @Override
