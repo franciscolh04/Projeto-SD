@@ -5,8 +5,6 @@ import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesGrpc;
 import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesOuterClass;
 import pt.ulisboa.tecnico.tuplespaces.server.domain.ServerState;
 import io.grpc.stub.StreamObserver;
-import static io.grpc.Status.INVALID_ARGUMENT;
-// import static io.grpc.Status.NOT_FOUND;
 
 
 
@@ -37,10 +35,6 @@ public class TupleSpacesServerImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
 
         String tuple = state.read(pattern, client_id);
 
-        //if (tuple == null) {
-        //    responseObserver.onError(INVALID_ARGUMENT.withDescription("Invalid Input").asRuntimeException());
-        //}
-
         TupleSpacesOuterClass.ReadResponse response = TupleSpacesOuterClass.ReadResponse.newBuilder().setResult(tuple).build();
 
         responseObserver.onNext(response);
@@ -51,12 +45,9 @@ public class TupleSpacesServerImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
     public void take(TupleSpacesOuterClass.TakeRequest request, StreamObserver<TupleSpacesOuterClass.TakeResponse> responseObserver) {
         String pattern = request.getSearchPattern();
         final int client_id = request.getClientId();
+        final int index = request.getTupleIndex();
 
-        String tuple = state.take(pattern, client_id);
-
-        //if (tuple == null) {
-            //responseObserver.onError(INVALID_ARGUMENT.withDescription("Invalid Input").asRuntimeException());
-        //}
+        String tuple = state.takeWithIndex(index, client_id);
 
         TupleSpacesOuterClass.TakeResponse response = TupleSpacesOuterClass.TakeResponse.newBuilder().setResult(tuple).build();
 
@@ -69,6 +60,24 @@ public class TupleSpacesServerImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
         final int client_id = request.getClientId();
 
         TupleSpacesOuterClass.getTupleSpacesStateResponse response = TupleSpacesOuterClass.getTupleSpacesStateResponse.newBuilder().addAllTuple(state.getTupleSpacesState(client_id)).build();
+
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void requestAccess(TupleSpacesOuterClass.GrantRequest request, StreamObserver<TupleSpacesOuterClass.GrantResponse> responseObserver) {
+        final int client_id = request.getClientId();
+        final String pattern = request.getSearchPattern();
+
+        int index = state.requestAccess(pattern, client_id);
+
+        boolean granted = (index != -1);
+
+        TupleSpacesOuterClass.GrantResponse response = TupleSpacesOuterClass.GrantResponse.newBuilder()
+                .setGranted(granted)
+                .setTupleIndex(index)
+                .build();
 
         responseObserver.onNext(response);
         responseObserver.onCompleted();

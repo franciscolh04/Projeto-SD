@@ -8,8 +8,9 @@ import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesOuterClass
 import pt.ulisboa.tecnico.tuplespaces.frontend.observers.PutObserver;
 import pt.ulisboa.tecnico.tuplespaces.frontend.observers.ReadObserver;
 import pt.ulisboa.tecnico.tuplespaces.frontend.observers.GetTupleSpacesStateObserver;
+import pt.ulisboa.tecnico.tuplespaces.frontend.observers.TakeObserver;
+import pt.ulisboa.tecnico.tuplespaces.frontend.observers.GrantObserver;
 
-import io.grpc.Context;
 import io.grpc.Metadata;
 import io.grpc.stub.MetadataUtils;
 
@@ -197,51 +198,87 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
         }
     }
 
-    /*
     @Override
     public void take(TupleSpacesOuterClass.TakeRequest request, StreamObserver<TupleSpacesOuterClass.TakeResponse> responseObserver) {
         try {
-            debug("Received take request from Client. Forwarding to Server. Tuple to take: " + request.getSearchPattern());
+            final int client_id = request.getClientId();
+            final String pattern = request.getSearchPattern();
+            debug("Received take request from Client. Pattern: " + pattern);
 
-            // Perform the take operation in the backend
-            TupleSpacesOuterClass.TakeResponse response = backendStub.take(request);
+            // 1. CALCULATE VOTER SET
+            int firstReplica = client_id % 3;
+            int secondReplica = (client_id + 1) % 3;
+            List<Integer> voterSet = Arrays.asList(firstReplica, secondReplica);
+            debug("Voter set: " + voterSet);
 
-            // Send the response to the client
+            // 2. REQUEST ACCESS
+            TakeResponseCollector<TupleSpacesOuterClass.GrantResponse> grantCollector = new TakeResponseCollector<>();
+            for (int i : voterSet) {
+                TupleSpacesOuterClass.GrantRequest grantReq = TupleSpacesOuterClass.GrantRequest.newBuilder()
+                        .setClientId(client_id)
+                        .setSearchPattern(pattern)
+                        .build();
+                backendStubs[i].requestAccess(grantReq, new GrantObserver(grantCollector));
+            }
+            grantCollector.waitUntilAllReceived(2);
+
+            // 3. VERIFY GRANTS
+            List<TupleSpacesOuterClass.GrantResponse> grants = grantCollector.collectedResponses;
+            int[] tupleIndexes = new int[2];
+            boolean allGranted = true;
+            for (int j = 0; j < 2; j++) {
+                if (grants.get(j) == null || !grants.get(j).getGranted()) {
+                    allGranted = false;
+                    break;
+                }
+                tupleIndexes[j] = grants.get(j).getTupleIndex();
+            }
+            if (!allGranted) {
+                System.err.println("Failed to acquire grants from all replicas.");
+                responseObserver.onError(io.grpc.Status.UNAVAILABLE.withDescription("Could not acquire lock.").asRuntimeException());
+                return;
+            }
+            debug("Grants acquired: Indexes " + Arrays.toString(tupleIndexes));
+
+            // 4. SEND TAKE TO BOTH SERVERS
+            int tupleIndex = tupleIndexes[0];
+            TakeResponseCollector<TupleSpacesOuterClass.TakeResponse> takeCollector = new TakeResponseCollector<>();
+
+            for (int i = 0; i < num_servers; i++) { // Agora envia para TODOS
+                TupleSpacesOuterClass.TakeRequest takeReq = TupleSpacesOuterClass.TakeRequest.newBuilder()
+                        .setSearchPattern(pattern)
+                        .setClientId(client_id)
+                        .setTupleIndex(tupleIndex)
+                        .build();
+                backendStubs[i].take(takeReq, new TakeObserver(takeCollector));
+            }
+            takeCollector.waitUntilAllReceived(num_servers);
+
+            // 5. RETURN RESULT TO CLIENT
+            String finalTuple = null;
+            for (TupleSpacesOuterClass.TakeResponse resp : takeCollector.collectedResponses) {
+                if (resp != null && !resp.getResult().isEmpty()) {
+                    finalTuple = resp.getResult();
+                    break;
+                }
+            }
+            if (finalTuple == null) {
+                System.err.println("Failed to take tuple from replicas.");
+                responseObserver.onError(io.grpc.Status.UNAVAILABLE.withDescription("Take operation failed.").asRuntimeException());
+                return;
+            }
+
+            debug("Tuple taken successfully: " + finalTuple);
+            TupleSpacesOuterClass.TakeResponse response = TupleSpacesOuterClass.TakeResponse.newBuilder()
+                    .setResult(finalTuple)
+                    .build();
             responseObserver.onNext(response);
             responseObserver.onCompleted();
 
-            debug("Received take response from Server. Forwarding to Client. Response: " + response.getResult());
-
-        } catch (io.grpc.StatusRuntimeException e) { // Catches gRPC communication failures
-            System.err.println("[gRPC] Error connecting with server during the take request: " + e.getStatus().getDescription());
-            responseObserver.onError(e); // Send the error to the client so they know the operation failed
-        } catch (Exception e) { // Catches any other unexpected exception
-            System.err.println("Unexpected Error during the take request: " + e.getMessage());
-            responseObserver.onError(e); // Sends the error to the client
+        } catch (Exception e) {
+            System.err.println("Unexpected error in take: " + e.getMessage());
+            responseObserver.onError(e);
         }
     }
 
-    @Override
-    public void getTupleSpacesState(TupleSpacesOuterClass.getTupleSpacesStateRequest request, StreamObserver<TupleSpacesOuterClass.getTupleSpacesStateResponse> responseObserver) {
-        try {
-            debug("Received getTupleSpacesState request from Client. Forwarding to Server.");
-
-            // Perform the getTupleSpacesState operation in the backend
-            TupleSpacesOuterClass.getTupleSpacesStateResponse response = backendStub.getTupleSpacesState(request);
-
-            // Send the response to the client
-            responseObserver.onNext(response);
-            responseObserver.onCompleted();
-
-            debug("Received getTupleSpacesState response from Server. Forwarding to Client. Response: " + response.getTupleList());
-
-        } catch (io.grpc.StatusRuntimeException e) { // Catches gRPC communication failures
-            System.err.println("[gRPC] Error connecting with server during the getTupleSpacesState request: " + e.getStatus().getDescription());
-            responseObserver.onError(e); // Send the error to the client so they know the operation failed
-        } catch (Exception e) { // Catches any other unexpected exception
-            System.err.println("Unexpected Error during the getTupleSpacesState request: " + e.getMessage());
-            responseObserver.onError(e); // Sends the error to the client
-        }
-    }
-     */
 }
