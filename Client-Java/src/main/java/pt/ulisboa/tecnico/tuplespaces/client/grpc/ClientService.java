@@ -95,11 +95,19 @@ public class ClientService {
     }
 
     // Method to read and remove a tuple from the tuple space (blocks until a match is found)
-    public TakeResponse take(String pattern) {
-        TakeRequest request = TakeRequest.newBuilder().setSearchPattern(pattern).setClientId(client_id).build();
+    public TakeResponse take(String pattern, List<Integer> delays) {
 
+        // Serialize the list of delays into a single string
+        String delaysString = delays.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(","));
+        metadata.put(DELAY_KEY, delaysString);
+
+        // Create a new stub with the metadata
+        TupleSpacesGrpc.TupleSpacesBlockingStub serverStub = stub.withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata));
+        TakeRequest request = TakeRequest.newBuilder().setSearchPattern(pattern).setClientId(client_id).build();
         try {
-            TakeResponse response = stub.take(request);
+            TakeResponse response = serverStub.take(request);
             if (!response.getResult().isEmpty()) {
                 debug("Removed tuple: " + response.getResult());
             }

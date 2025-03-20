@@ -2,7 +2,9 @@ package pt.ulisboa.tecnico.tuplespaces.frontend.observers;
 
 import io.grpc.stub.StreamObserver;
 import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesOuterClass;
+import pt.ulisboa.tecnico.tuplespaces.frontend.ResponseCollector;
 import pt.ulisboa.tecnico.tuplespaces.frontend.TakeResponseCollector;
+
 
 public class TakeObserver implements StreamObserver<TupleSpacesOuterClass.TakeResponse> {
 

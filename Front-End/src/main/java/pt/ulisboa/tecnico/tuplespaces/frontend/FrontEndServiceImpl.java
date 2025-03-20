@@ -163,62 +163,50 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
 
 
     @Override
-    public void getTupleSpacesState(TupleSpacesOuterClass.getTupleSpacesStateRequest request, StreamObserver<TupleSpacesOuterClass.getTupleSpacesStateResponse> responseObserver) {
-        try {
-            // Print the details of the received request
-            debug("Received getTupleSpacesState request from Client. Forwarding to Server.");
-
-            ResponseCollector<TupleSpacesOuterClass.getTupleSpacesStateResponse> c = new ResponseCollector<TupleSpacesOuterClass.getTupleSpacesStateResponse>();
-
-            for(int i = 0; i < num_servers; i++) {
-                backendStubs[i].getTupleSpacesState(request, new GetTupleSpacesStateObserver(c));
-                debug("processou a informação de um servidor");
-            }
-
-            c.waitUntilAllReceived(num_servers);
-            debug("Waited until all finished.");
-            c.collectedResponses.removeIf(str -> str.trim().isEmpty());
-            responseObserver.onNext(TupleSpacesOuterClass.getTupleSpacesStateResponse.newBuilder().addAllTuple(c.collectedResponses).build());
-
-            // Send the response to the client
-            responseObserver.onCompleted();
-            // Perform the put operation in the backend
-
-            // Print the details of the response
-
-            debug("Received getTupleSpacesState response from Server. Forwarding to Client. Response: " + c.collectedResponses);
-
-        }
-        catch (io.grpc.StatusRuntimeException e) { // Catches gRPC communication failures
-            System.err.println("[gRPC] Error connecting with server during the getTupleSpacesState request: " + e.getStatus().getDescription());
-            responseObserver.onError(e); // Send the error to the client so they know the operation failed
-        } catch (Exception e) { // Catches any other unexpected exception
-            System.err.println("Unexpected Error during the getTupleSpacesState request: " + e.getMessage());
-            responseObserver.onError(e); // Sends the error to the client
-        }
-    }
-
-    @Override
     public void take(TupleSpacesOuterClass.TakeRequest request, StreamObserver<TupleSpacesOuterClass.TakeResponse> responseObserver) {
         try {
+            String delaysString = FrontEndInterceptor.DELAY_VALUE_CONTEXT.get();
+
+            List<Integer> delays;
+            if (delaysString.isEmpty()) {
+                delays = Arrays.asList(0, 0, 0);
+            } else {
+                delays = Arrays.stream(delaysString.split(","))
+                        .map(Integer::parseInt)
+                        .collect(Collectors.toList());
+            }
+
+            System.out.println("[TAKE] Delay values: " + delaysString);
+
             final int client_id = request.getClientId();
             final String pattern = request.getSearchPattern();
             debug("Received take request from Client. Pattern: " + pattern);
 
             // 1. CALCULATE VOTER SET
-            int firstReplica = client_id % 3;
-            int secondReplica = (client_id + 1) % 3;
+            int firstReplica = (client_id - 1) % 3;
+            int secondReplica = (client_id ) % 3;
             List<Integer> voterSet = Arrays.asList(firstReplica, secondReplica);
             debug("Voter set: " + voterSet);
 
             // 2. REQUEST ACCESS
             TakeResponseCollector<TupleSpacesOuterClass.GrantResponse> grantCollector = new TakeResponseCollector<>();
             for (int i : voterSet) {
+                Metadata metadata = new Metadata();
+
+                if (i < delays.size()) {
+                    metadata.put(DELAY_KEY, String.valueOf(delays.get(i)));
+                    System.out.println("[READ] Delay value: " + delays.get(i));
+                } else {
+                    metadata.put(DELAY_KEY, "0"); // Default delay if not provided
+                }
+
                 TupleSpacesOuterClass.GrantRequest grantReq = TupleSpacesOuterClass.GrantRequest.newBuilder()
                         .setClientId(client_id)
                         .setSearchPattern(pattern)
                         .build();
-                backendStubs[i].requestAccess(grantReq, new GrantObserver(grantCollector));
+
+                TupleSpacesGrpc.TupleSpacesStub stub = backendStubs[i].withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata));
+                stub.requestAccess(grantReq, new GrantObserver(grantCollector));
             }
             grantCollector.waitUntilAllReceived(2);
 
@@ -242,7 +230,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
 
             // 4. SEND TAKE TO BOTH SERVERS
             int tupleIndex = tupleIndexes[0];
-            TakeResponseCollector<TupleSpacesOuterClass.TakeResponse> takeCollector = new TakeResponseCollector<>();
+            TakeResponseCollector<TupleSpacesOuterClass.TakeResponse> takeCollector = new TakeResponseCollector<TupleSpacesOuterClass.TakeResponse>();
 
             for (int i = 0; i < num_servers; i++) { // Agora envia para TODOS
                 TupleSpacesOuterClass.TakeRequest takeReq = TupleSpacesOuterClass.TakeRequest.newBuilder()
@@ -278,6 +266,43 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
         } catch (Exception e) {
             System.err.println("Unexpected error in take: " + e.getMessage());
             responseObserver.onError(e);
+        }
+    }
+
+
+    @Override
+    public void getTupleSpacesState(TupleSpacesOuterClass.getTupleSpacesStateRequest request, StreamObserver<TupleSpacesOuterClass.getTupleSpacesStateResponse> responseObserver) {
+        try {
+            // Print the details of the received request
+            debug("Received getTupleSpacesState request from Client. Forwarding to Server.");
+
+            ResponseCollector<TupleSpacesOuterClass.getTupleSpacesStateResponse> c = new ResponseCollector<TupleSpacesOuterClass.getTupleSpacesStateResponse>();
+
+            for(int i = 0; i < num_servers; i++) {
+                backendStubs[i].getTupleSpacesState(request, new GetTupleSpacesStateObserver(c));
+                debug("processou a informação de um servidor");
+            }
+
+            c.waitUntilAllReceived(num_servers);
+            debug("Waited until all finished.");
+            c.collectedResponses.removeIf(str -> str.trim().isEmpty());
+            responseObserver.onNext(TupleSpacesOuterClass.getTupleSpacesStateResponse.newBuilder().addAllTuple(c.collectedResponses).build());
+
+            // Send the response to the client
+            responseObserver.onCompleted();
+            // Perform the put operation in the backend
+
+            // Print the details of the response
+
+            debug("Received getTupleSpacesState response from Server. Forwarding to Client. Response: " + c.collectedResponses);
+
+        }
+        catch (io.grpc.StatusRuntimeException e) { // Catches gRPC communication failures
+            System.err.println("[gRPC] Error connecting with server during the getTupleSpacesState request: " + e.getStatus().getDescription());
+            responseObserver.onError(e); // Send the error to the client so they know the operation failed
+        } catch (Exception e) { // Catches any other unexpected exception
+            System.err.println("Unexpected Error during the getTupleSpacesState request: " + e.getMessage());
+            responseObserver.onError(e); // Sends the error to the client
         }
     }
 
