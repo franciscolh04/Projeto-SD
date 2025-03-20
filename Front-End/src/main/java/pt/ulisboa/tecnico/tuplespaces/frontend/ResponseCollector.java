@@ -10,20 +10,13 @@ public class ResponseCollector<T> {
         collectedResponses = new ArrayList<>();
     }
 
+    // Add a response to the list
     synchronized public void addString(String s) {
         collectedResponses.add(s);
         notifyAll();
     }
 
-    /*
-    synchronized public String getStrings() {
-        String res = new String();
-        for (String s : collectedResponses) {
-            res = res.concat(s);
-        }
-        return res;
-    } */
-
+    // Wait until the list has n responses
     synchronized public void waitUntilAllReceived(int n) throws InterruptedException {
         while (collectedResponses.size() < n) {
             wait();

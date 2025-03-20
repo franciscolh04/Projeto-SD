@@ -18,8 +18,11 @@
 		<version.exec-maven-plugin>3.0.0</version.exec-maven-plugin>
 
 		<mainclass>pt.ulisboa.tecnico.tuplespaces.frontend.FrontEndServer</mainclass>
-		<server.hostport>localhost:3001</server.hostport>
-		<client.id>1</client.id>
+		<server.port>2001</server.port>
+		<server.hostport1>localhost:3001</server.hostport1>
+		<server.hostport2>localhost:3002</server.hostport2>
+		<server.hostport3>localhost:3003</server.hostport3>
+		<debug.flag></debug.flag>
 	</properties>
 
 	<dependencies>
@@ -83,8 +86,11 @@
 				<configuration>
 					<mainClass>${mainclass}</mainClass>
 					<arguments>
-						<argument>${server.hostport}</argument>
-						<argument>${client.id}</argument>
+						<argument>${server.port}</argument>
+						<argument>${server.hostport1}</argument>
+						<argument>${server.hostport2}</argument>
+						<argument>${server.hostport3}</argument>
+						<argument>${debug.flag}</argument>
 					</arguments>
 				</configuration>
 			</plugin>

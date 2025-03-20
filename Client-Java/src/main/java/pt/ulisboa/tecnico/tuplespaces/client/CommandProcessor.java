@@ -26,13 +26,14 @@ public class CommandProcessor {
     public CommandProcessor(ClientService clientService) {
         this.clientService = clientService;
 
-        // Adicionar shutdown hook para capturar a interrupção (Ctrl+C)
+        // Add shutdown hook to capture interruption (Ctrl+C)
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             System.out.println();
             clientService.shutdown();
         }));
     }
 
+    // Method to parse the input commands
     void parseInput() {
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
@@ -76,17 +77,18 @@ public class CommandProcessor {
         scanner.close();
     }
 
+    // Put a tuple in the tuple space
     private void put(String[] split) {
-        // check if input is valid
+        // Check if input is valid
         if (!this.inputIsValid(split)) {
             this.printUsage();
             return;
         }
 
-        // get the tuple
+        // Get the tuple
         String tuple = split[1];
 
-        // parse delays if provided
+        // Parse delays if provided
         List<Integer> delays = new ArrayList<>();
         for (int i = 2; i < split.length; i++) {
             try {
@@ -97,7 +99,7 @@ public class CommandProcessor {
             }
         }
 
-        // put the tuple and get the response
+        // Put the tuple and get the response
         PutResponse response = clientService.put(tuple, delays);
         if (response != null) {
             System.out.println("OK");
@@ -105,17 +107,18 @@ public class CommandProcessor {
         System.out.println();
     }
 
+    // Read a tuple from the tuple space
     private void read(String[] split) {
-        // check if input is valid
+        // Check if input is valid
         if (!this.inputIsValid(split)) {
             this.printUsage();
             return;
         }
 
-        // get the tuple
+        // Get the tuple
         String tuple = split[1];
 
-        // parse delays if provided
+        // Parse delays if provided
         List<Integer> delays = new ArrayList<>();
         for (int i = 2; i < split.length; i++) {
             try {
@@ -126,9 +129,8 @@ public class CommandProcessor {
             }
         }
 
-        // read the tuple and get the response
+        // Read the tuple and get the response
         ReadResponse response = clientService.read(tuple, delays);
-
         if (response != null) {
             System.out.println("OK");
 
@@ -141,17 +143,18 @@ public class CommandProcessor {
         System.out.println();
     }
 
+    // Take a tuple from the tuple space
     private void take(String[] split) {
-        // check if input is valid
+        // Check if input is valid
         if (!this.inputIsValid(split)) {
             this.printUsage();
             return;
         }
 
-        // get the tuple
+        // Get the tuple
         String tuple = split[1];
 
-        // parse delays if provided
+        // Parse delays if provided
         List<Integer> delays = new ArrayList<>();
         for (int i = 2; i < split.length; i++) {
             try {
@@ -162,7 +165,7 @@ public class CommandProcessor {
             }
         }
 
-        // take the tuple and get the response
+        // Take the tuple and get the response
         TakeResponse response = clientService.take(tuple, delays);
         if (response != null) {
             System.out.println("OK");
@@ -176,8 +179,9 @@ public class CommandProcessor {
         System.out.println();
     }
 
+    // Get the state of the tuple space
     private void getTupleSpacesState() {
-        // get the tuple spaces state
+        // Get the tuple spaces state
         getTupleSpacesStateResponse response = clientService.getTupleSpacesState();
         if (response != null) {
             System.out.println("OK");
@@ -190,13 +194,14 @@ public class CommandProcessor {
         System.out.println();
     }
 
+    // Sleep for a given time
     private void sleep(String[] split) {
         if (split.length != 2) {
             this.printUsage();
             return;
         }
 
-        // checks if input String can be parsed as an Integer
+        // Checks if input String can be parsed as an Integer
         try {
             int time = Integer.parseInt(split[1]);
             Thread.sleep(time * 1000L);
@@ -208,6 +213,7 @@ public class CommandProcessor {
         }
     }
 
+    // Print the usage of the commands
     private void printUsage() {
         System.out.println("Usage:\n" +
                 "- put <element[,more_elements]>\n" +
@@ -218,7 +224,15 @@ public class CommandProcessor {
                 "- exit\n");
     }
 
+    // Check if the input is valid
     private boolean inputIsValid(String[] input) {
-        return (input.length == 2 || input.length == 5) && input[1].startsWith(BGN_TUPLE) && input[1].endsWith(END_TUPLE);
+        return (input.length == 2 ||    // Without delays
+                (input.length == 5 &&   // With delays
+                        input[2].chars().allMatch(Character::isDigit) &&
+                        input[3].chars().allMatch(Character::isDigit) &&
+                        input[4].chars().allMatch(Character::isDigit)))
+                // Check if the tuple is well-formed
+                && input[1].startsWith(BGN_TUPLE)
+                && input[1].endsWith(END_TUPLE);
     }
 }

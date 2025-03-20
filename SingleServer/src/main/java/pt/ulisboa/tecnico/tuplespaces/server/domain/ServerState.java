@@ -13,9 +13,7 @@ public class ServerState {
    */
   private static final boolean DEBUG_FLAG = (System.getProperty("debug") != null);
 
-  /**
-   * Helper method to print debug messages.
-   */
+  // Helper method to print debug messages.
   private static void debug(String debugMessage, int client_id) {
     if (DEBUG_FLAG)
       System.err.println("[DEBUG][" + client_id + "] " + debugMessage);
@@ -30,6 +28,7 @@ public class ServerState {
     this.tupleFlags = new ArrayList<>();
   }
 
+  // Add a tuple to the tuple space
   public void put(String tuple, int client_id) {
     synchronized (lock) {
       try {
@@ -49,6 +48,7 @@ public class ServerState {
     }
   }
 
+  // Search for a tuple that matches the pattern
   private String getMatchingTuple(String pattern) {
     for (String tuple : this.tuples) {
       if (tuple.matches(pattern)) {
@@ -58,6 +58,7 @@ public class ServerState {
     return null;
   }
 
+  // Search for a tuple that matches the pattern and is free
   private int getMatchingFreeTupleIndex(String pattern) {
     for (int i = 0; i < tuples.size(); i++) {
       if (tuples.get(i).matches(pattern) && tupleFlags.get(i)) {
@@ -68,6 +69,7 @@ public class ServerState {
     return -1;
   }
 
+  // Read a tuple that matches the pattern
   public String read(String pattern, int client_id) {
     synchronized (lock) {
       try {
@@ -75,12 +77,13 @@ public class ServerState {
           throw new IllegalArgumentException("Search Pattern cannot be Null or Empty.");
         }
 
+        // Search for a tuple that matches the pattern
         String tuple;
         boolean waitFlag = false;
         while ((tuple = getMatchingTuple(pattern)) == null) {
           try {
             waitFlag = true;
-            lock.wait();
+            lock.wait(); // Waits until `put()` calls `notifyAll()`
           } catch (InterruptedException e) {
             Thread.currentThread().interrupt(); // Restores the interrupted status
             System.err.println("Thread stopped while waiting for a matching tuple.");
@@ -105,51 +108,7 @@ public class ServerState {
     }
   }
 
-
-  /*public String take(String pattern, int client_id) {
-    synchronized (lock) { // Get the lock before any critical section
-      try {
-        if (pattern == null || pattern.isEmpty()) {
-          throw new IllegalArgumentException("Search Pattern cannot be Null or Empty.");
-        }
-
-        // Search for a tuple that matches the pattern
-        for (String tuple : this.tuples) {
-          if (tuple.matches(pattern)) {
-            this.tuples.remove(tuple);
-            debug("Removed tuple: " + tuple, client_id);
-            return tuple;
-          }
-        }
-
-        // If no matching tuple was found, wait until a matching tuple is added
-        String matchingTuple;
-        while ((matchingTuple = getMatchingTuple(pattern)) == null) {
-          try {
-            lock.wait(); // Waits until `put()` calls `notifyAll()`
-          } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            System.err.println("Thread stopped while waiting for a matching tuple.");
-            return null;
-          }
-        }
-
-        // Remove the found tuple after the wait
-        tuples.remove(matchingTuple);
-        debug("Removed tuple after wait: " + matchingTuple, client_id);
-        return matchingTuple;
-
-      } catch (IllegalArgumentException e) {
-        System.err.println("Error removing a tuple: " + e.getMessage());
-        return null;
-      } catch (Exception e) {
-        System.err.println("Unexpected error removing a tuple: " + e.getMessage());
-        return null;
-      }
-    }
-  }
-  */
-
+  // Request access to a tuple that matches the pattern
   public int requestAccess(String pattern, int client_id) {
     synchronized (lock) {
       try {
@@ -188,6 +147,7 @@ public class ServerState {
     }
   }
 
+  // Take a tuple that matches the pattern
   public String takeWithIndex(int index, int client_id) {
     synchronized (lock) {
       try {
@@ -209,6 +169,20 @@ public class ServerState {
     }
   }
 
+  // Release access after taking a tuple
+  public void releaseAccess(int index, int client_id) {
+    synchronized (lock) {
+      try {
+        debug("Released access at index " + index, client_id);
+      } catch (IllegalArgumentException e) {
+        System.err.println("Error releasing tuple: " + e.getMessage());
+      } catch (Exception e) {
+        System.err.println("Unexpected error releasing tuple: " + e.getMessage());
+      }
+    }
+  }
+
+  // Get the current state of the tuple spaces
   public List<String> getTupleSpacesState(int client_id) {
     synchronized (lock) {
       try {

@@ -21,18 +21,18 @@ public class ClientMain {
         for (String arg : args) {
             if (arg.equals("-debug")) {
                 System.setProperty("debug", "true");
-                break;  // Não precisamos de continuar a verificar os outros argumentos
+                break;
             }
         }
 
-        // check arguments
+        // Check arguments
         if (args.length < 2) {
             System.err.println("Argument(s) missing!");
             System.err.println("Usage: mvn exec:java -Dexec.args=<host:port> <client_id>");
             return;
         }
 
-        // get the host and the port of the server or front-end
+        // Get the host and the port of the server or front-end
         final String host_port = args[0];
         final int client_id = Integer.parseInt(args[1]);
 

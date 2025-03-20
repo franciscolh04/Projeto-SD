@@ -51,14 +51,16 @@ public class ServerMain {
                 .addService(ServerInterceptors.intercept(impl, new HeadServerInterceptor()))
                 .build();
 
-        try {server.start();
+        try {
+            server.start();
         }
         catch (IOException e) {
         }
 
         System.out.printf("Server started on port: %d%n", port);
 
-        try {server.awaitTermination();
+        try {
+            server.awaitTermination();
         }
         catch (InterruptedException e){
         }

@@ -15,11 +15,13 @@ import io.grpc.stub.MetadataUtils;
 
 public class ClientService {
 
-    /** Set flag to true to print debug messages.
-     * The flag can be set using the -debug command line option. */
+    /**
+     * Set flag to true to print debug messages.
+     * The flag can be set using the -debug command line option.
+     */
     private static final boolean DEBUG_FLAG = (System.getProperty("debug") != null);
 
-    /** Helper method to print debug messages. */
+    // Helper method to print debug messages.
     private static void debug(String debugMessage) {
         if (DEBUG_FLAG)
             System.err.println("[DEBUG] " + debugMessage);
@@ -28,6 +30,8 @@ public class ClientService {
     private final ManagedChannel channel;
     private final TupleSpacesGrpc.TupleSpacesBlockingStub stub;
     private final int client_id;
+
+    // Key to send the delay value in the metadata in the header of the request
     static final Metadata.Key<String> DELAY_KEY = Metadata.Key.of("delay", Metadata.ASCII_STRING_MARSHALLER);
     Metadata metadata = new Metadata();
 
@@ -44,7 +48,7 @@ public class ClientService {
         debug("Client created with ID: " + client_id);
     }
 
-    // Method to add a tuple to the shared space
+    // Method to add a tuple to the tuple space
     public PutResponse put(String tuple, List<Integer> delays) {
         // Serialize the list of delays into a single string
         String delaysString = delays.stream()
@@ -56,6 +60,7 @@ public class ClientService {
         TupleSpacesGrpc.TupleSpacesBlockingStub serverStub = stub.withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata));
         PutRequest request = PutRequest.newBuilder().setNewTuple(tuple).setClientId(client_id).build();
         try {
+            // Send the request
             PutResponse response = serverStub.put(request);
             debug("Added tuple: " + tuple + " with delays: " + delaysString);
             return response;
@@ -68,7 +73,7 @@ public class ClientService {
         return null;
     }
 
-    // Method to read a tuple (blocks until a match is found)
+    // Method to read a tuple from the tuple space (blocks until a match is found)
     public ReadResponse read(String pattern, List<Integer> delays) {
         // Serialize the list of delays into a single string
         String delaysString = delays.stream()
@@ -80,6 +85,7 @@ public class ClientService {
         TupleSpacesGrpc.TupleSpacesBlockingStub serverStub = stub.withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata));
         ReadRequest request = ReadRequest.newBuilder().setSearchPattern(pattern).setClientId(client_id).build();
         try {
+            // Send the request
             ReadResponse response = serverStub.read(request);
             if (!response.getResult().isEmpty()) {
                 debug("Read tuple: " + response.getResult() + " with delays: " + delaysString);
@@ -94,9 +100,8 @@ public class ClientService {
         }
     }
 
-    // Method to read and remove a tuple from the tuple space (blocks until a match is found)
+    // Method to take a tuple from the tuple space (blocks until a match is found)
     public TakeResponse take(String pattern, List<Integer> delays) {
-
         // Serialize the list of delays into a single string
         String delaysString = delays.stream()
                 .map(String::valueOf)
@@ -107,6 +112,7 @@ public class ClientService {
         TupleSpacesGrpc.TupleSpacesBlockingStub serverStub = stub.withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata));
         TakeRequest request = TakeRequest.newBuilder().setSearchPattern(pattern).setClientId(client_id).build();
         try {
+            // Send the request
             TakeResponse response = serverStub.take(request);
             if (!response.getResult().isEmpty()) {
                 debug("Removed tuple: " + response.getResult());
@@ -127,6 +133,7 @@ public class ClientService {
         getTupleSpacesStateRequest request = getTupleSpacesStateRequest.newBuilder().setClientId(client_id).build();
 
         try {
+            // Send the request
             getTupleSpacesStateResponse response = stub.getTupleSpacesState(request);
             if (response != null) {
                 debug("TupleSpaces Current State: " + response.getTupleList());

@@ -180,6 +180,7 @@
 						<argument>--python_out=${project.build.directory}/generated-sources/protobuf/python</argument>
 						<argument>--grpc_python_out=${project.build.directory}/generated-sources/protobuf/python</argument>
 						<argument>./src/main/proto/TupleSpaces.proto</argument>
+						<!--<argument>./src/main/proto/Maekawa.proto</argument>-->
 					</arguments>
 				</configuration>
 			</plugin>

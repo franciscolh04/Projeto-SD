@@ -4,9 +4,6 @@ package pt.ulisboa.tecnico.tuplespaces.frontend.observers;
 import io.grpc.stub.StreamObserver;
 import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesOuterClass;
 import pt.ulisboa.tecnico.tuplespaces.frontend.ResponseCollector;
-import java.util.List;
-import java.util.ArrayList;
-
 
 
 public class GetTupleSpacesStateObserver implements StreamObserver<TupleSpacesOuterClass.getTupleSpacesStateResponse> {
@@ -16,18 +13,20 @@ public class GetTupleSpacesStateObserver implements StreamObserver<TupleSpacesOu
         this.collector = collector;
     }
 
+    // This method is called whenever a new response is received from the server
     @Override
     public void onNext(TupleSpacesOuterClass.getTupleSpacesStateResponse response) {
         collector.addString(String.join(", ", response.getTupleList()));
-        //collector.addString(String.join(", ", response.getTupleList()));
         System.out.println("Received response: " + response.getTupleList());
     }
 
+    // This method is called whenever an error occurs
     @Override
     public void onError(Throwable throwable) {
         System.out.println("Received error: " + throwable);
     }
 
+    // This method is called when the server finishes sending responses
     @Override
     public void onCompleted() {
         System.out.println("Request completed");
