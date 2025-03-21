@@ -2,20 +2,20 @@ package pt.ulisboa.tecnico.tuplespaces.frontend.observers;
 
 
 import io.grpc.stub.StreamObserver;
-import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesOuterClass;
+import pt.ulisboa.tecnico.tuplespaces.centralized.contract.ReplicaServerOuterClass;
 import pt.ulisboa.tecnico.tuplespaces.frontend.ResponseCollector;
 
 
-public class GetTupleSpacesStateObserver implements StreamObserver<TupleSpacesOuterClass.getTupleSpacesStateResponse> {
-    private final ResponseCollector<TupleSpacesOuterClass.getTupleSpacesStateResponse> collector;
+public class GetTupleSpacesStateObserver implements StreamObserver<ReplicaServerOuterClass.getTupleSpacesStateResponseServer> {
+    private final ResponseCollector<ReplicaServerOuterClass.getTupleSpacesStateResponseServer> collector;
 
-    public GetTupleSpacesStateObserver(ResponseCollector<TupleSpacesOuterClass.getTupleSpacesStateResponse> collector) {
+    public GetTupleSpacesStateObserver(ResponseCollector<ReplicaServerOuterClass.getTupleSpacesStateResponseServer> collector) {
         this.collector = collector;
     }
 
     // This method is called whenever a new response is received from the server
     @Override
-    public void onNext(TupleSpacesOuterClass.getTupleSpacesStateResponse response) {
+    public void onNext(ReplicaServerOuterClass.getTupleSpacesStateResponseServer response) {
         collector.addString(String.join(", ", response.getTupleList()));
     }
 

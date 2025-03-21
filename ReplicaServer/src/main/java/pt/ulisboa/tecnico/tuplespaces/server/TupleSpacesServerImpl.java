@@ -1,14 +1,14 @@
 package pt.ulisboa.tecnico.tuplespaces.server;
 
 
-import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesGrpc;
-import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesOuterClass;
+import pt.ulisboa.tecnico.tuplespaces.centralized.contract.ReplicaServerGrpc;
+import pt.ulisboa.tecnico.tuplespaces.centralized.contract.ReplicaServerOuterClass;
 import pt.ulisboa.tecnico.tuplespaces.server.domain.ServerState;
 import io.grpc.stub.StreamObserver;
 
 
 
-public class TupleSpacesServerImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
+public class TupleSpacesServerImpl extends ReplicaServerGrpc.ReplicaServerImplBase {
 
     private ServerState state;
 
@@ -18,35 +18,35 @@ public class TupleSpacesServerImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
 
     // Put a tuple in the tuple space
     @Override
-    public void put(TupleSpacesOuterClass.PutRequest request, StreamObserver<TupleSpacesOuterClass.PutResponse> responseObserver) {
+    public void putServer(ReplicaServerOuterClass.PutRequestServer request, StreamObserver<ReplicaServerOuterClass.PutResponseServer> responseObserver) {
         String tuple = request.getNewTuple();
         final int client_id = request.getClientId();
 
         state.put(tuple, client_id);
 
         // Send an empty response
-        TupleSpacesOuterClass.PutResponse response = TupleSpacesOuterClass.PutResponse.newBuilder().build();
+        ReplicaServerOuterClass.PutResponseServer response = ReplicaServerOuterClass.PutResponseServer.newBuilder().build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
 
     // Read a tuple from the tuple space
     @Override
-    public void read(TupleSpacesOuterClass.ReadRequest request, StreamObserver<TupleSpacesOuterClass.ReadResponse> responseObserver) {
+    public void readServer(ReplicaServerOuterClass.ReadRequestServer request, StreamObserver<ReplicaServerOuterClass.ReadResponseServer> responseObserver) {
         String pattern = request.getSearchPattern();
         final int client_id = request.getClientId();
 
         String tuple = state.read(pattern, client_id);
 
         // Send the response with the read tuple
-        TupleSpacesOuterClass.ReadResponse response = TupleSpacesOuterClass.ReadResponse.newBuilder().setResult(tuple).build();
+        ReplicaServerOuterClass.ReadResponseServer response = ReplicaServerOuterClass.ReadResponseServer.newBuilder().setResult(tuple).build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
 
     // Take a tuple from the tuple space
     @Override
-    public void take(TupleSpacesOuterClass.TakeRequest request, StreamObserver<TupleSpacesOuterClass.TakeResponse> responseObserver) {
+    public void takeServer(ReplicaServerOuterClass.TakeRequestServer request, StreamObserver<ReplicaServerOuterClass.TakeResponseServer> responseObserver) {
         String pattern = request.getSearchPattern();
         final int client_id = request.getClientId();
         final int index = request.getTupleIndex();
@@ -54,25 +54,25 @@ public class TupleSpacesServerImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
         String tuple = state.takeWithIndex(index, client_id);
 
         // Send the response with the taken tuple
-        TupleSpacesOuterClass.TakeResponse response = TupleSpacesOuterClass.TakeResponse.newBuilder().setResult(tuple).build();
+        ReplicaServerOuterClass.TakeResponseServer response = ReplicaServerOuterClass.TakeResponseServer.newBuilder().setResult(tuple).build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
 
     // Get the state of the tuple spaces
     @Override
-    public void getTupleSpacesState(TupleSpacesOuterClass.getTupleSpacesStateRequest request, StreamObserver<TupleSpacesOuterClass.getTupleSpacesStateResponse> responseObserver) {
+    public void getTupleSpacesStateServer(ReplicaServerOuterClass.getTupleSpacesStateRequestServer request, StreamObserver<ReplicaServerOuterClass.getTupleSpacesStateResponseServer> responseObserver) {
         final int client_id = request.getClientId();
 
         // Send the response with the state of the tuple spaces
-        TupleSpacesOuterClass.getTupleSpacesStateResponse response = TupleSpacesOuterClass.getTupleSpacesStateResponse.newBuilder().addAllTuple(state.getTupleSpacesState(client_id)).build();
+        ReplicaServerOuterClass.getTupleSpacesStateResponseServer response = ReplicaServerOuterClass.getTupleSpacesStateResponseServer.newBuilder().addAllTuple(state.getTupleSpacesState(client_id)).build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
 
     // Request access to take a tuple
     @Override
-    public void requestAccess(TupleSpacesOuterClass.GrantRequest request, StreamObserver<TupleSpacesOuterClass.GrantResponse> responseObserver) {
+    public void requestAccess(ReplicaServerOuterClass.GrantRequest request, StreamObserver<ReplicaServerOuterClass.GrantResponse> responseObserver) {
         final int client_id = request.getClientId();
         final String pattern = request.getSearchPattern();
 
@@ -82,24 +82,10 @@ public class TupleSpacesServerImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
         boolean granted = (index != -1);
 
         // Send the response with the result of the request
-        TupleSpacesOuterClass.GrantResponse response = TupleSpacesOuterClass.GrantResponse.newBuilder()
+        ReplicaServerOuterClass.GrantResponse response = ReplicaServerOuterClass.GrantResponse.newBuilder()
                 .setGranted(granted)
                 .setTupleIndex(index)
                 .build();
-        responseObserver.onNext(response);
-        responseObserver.onCompleted();
-    }
-
-    // Release access after taking a tuple
-    @Override
-    public void releaseAccess(TupleSpacesOuterClass.ReleaseRequest request, StreamObserver<TupleSpacesOuterClass.ReleaseResponse> responseObserver) {
-        final int client_id = request.getClientId();
-        final int index = request.getTupleIndex();
-
-        state.releaseAccess(index, client_id);
-
-        // Send an empty response
-        TupleSpacesOuterClass.ReleaseResponse response = TupleSpacesOuterClass.ReleaseResponse.newBuilder().build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }

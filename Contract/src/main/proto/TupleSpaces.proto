@@ -33,31 +33,9 @@ message getTupleSpacesStateResponse {
   repeated string tuple = 1;
 }
 
-message GrantRequest {
-  int32 client_id = 1;
-  string searchPattern = 2;
-}
-
-message GrantResponse {
-  bool granted = 1;
-  int32 tuple_index = 2;
-}
-
-message ReleaseRequest {
-  int32 client_id = 1;
-  int32 tuple_index = 2;
-}
-
-message ReleaseResponse {
-}
-
 service TupleSpaces {
   rpc put(PutRequest) returns (PutResponse);
   rpc read(ReadRequest) returns (ReadResponse);
   rpc take(TakeRequest) returns (TakeResponse);
   rpc getTupleSpacesState(getTupleSpacesStateRequest) returns (getTupleSpacesStateResponse);
-
-  // Maekawa algorithm
-  rpc requestAccess(GrantRequest) returns (GrantResponse);
-  rpc releaseAccess(ReleaseRequest) returns (ReleaseResponse);
 }

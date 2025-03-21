@@ -6,7 +6,6 @@ import io.grpc.BindableService;
 import io.grpc.ServerInterceptors;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class ServerMain {
     public static void main(String[] args) throws IOException, InterruptedException {

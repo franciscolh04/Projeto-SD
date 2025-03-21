@@ -15,13 +15,6 @@ public class ServerMain {
 
         System.out.println(ServerMain.class.getSimpleName());
 
-        // Receive and print arguments
-        /*
-        System.out.printf("Received %d arguments%n", args.length);
-        for (int i = 0; i < args.length; i++) {
-            System.out.printf("arg[%d] = %s%n", i, args[i]);
-        }*/
-
         // Verifies if any of the arguments is "debug"
         for (String arg : args) {
             if (arg.equals("-debug")) {
@@ -51,14 +44,16 @@ public class ServerMain {
         // Create and start the server
         Server server = ServerBuilder.forPort(port).addService(impl).build();
 
-        try {server.start();
+        try {
+            server.start();
         }
         catch (IOException e) {
         }
 
         System.out.printf("Server started on port: %d%n", port);
 
-        try {server.awaitTermination();
+        try {
+            server.awaitTermination();
         }
         catch (InterruptedException e){
         }

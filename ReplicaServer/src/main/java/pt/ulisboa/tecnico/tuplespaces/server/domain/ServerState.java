@@ -147,7 +147,7 @@ public class ServerState {
     }
   }
 
-  // Take a tuple that matches the pattern
+  // Take a tuple that matches the pattern with the given index
   public String takeWithIndex(int index, int client_id) {
     synchronized (lock) {
       try {
@@ -165,19 +165,6 @@ public class ServerState {
       } catch (Exception e) {
         System.err.println("Unexpected error taking tuple: " + e.getMessage());
         return null;
-      }
-    }
-  }
-
-  // Release access after taking a tuple
-  public void releaseAccess(int index, int client_id) {
-    synchronized (lock) {
-      try {
-        debug("Released access at index " + index, client_id);
-      } catch (IllegalArgumentException e) {
-        System.err.println("Error releasing tuple: " + e.getMessage());
-      } catch (Exception e) {
-        System.err.println("Unexpected error releasing tuple: " + e.getMessage());
       }
     }
   }

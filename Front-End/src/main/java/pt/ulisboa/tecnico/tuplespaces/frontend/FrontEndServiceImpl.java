@@ -3,14 +3,15 @@ package pt.ulisboa.tecnico.tuplespaces.frontend;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
-import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesGrpc;
+import pt.ulisboa.tecnico.tuplespaces.centralized.contract.ReplicaServerGrpc;
+import pt.ulisboa.tecnico.tuplespaces.centralized.contract.ReplicaServerOuterClass;
 import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesOuterClass;
+import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesGrpc;
 import pt.ulisboa.tecnico.tuplespaces.frontend.observers.PutObserver;
 import pt.ulisboa.tecnico.tuplespaces.frontend.observers.ReadObserver;
 import pt.ulisboa.tecnico.tuplespaces.frontend.observers.GetTupleSpacesStateObserver;
 import pt.ulisboa.tecnico.tuplespaces.frontend.observers.TakeObserver;
 import pt.ulisboa.tecnico.tuplespaces.frontend.observers.GrantObserver;
-import pt.ulisboa.tecnico.tuplespaces.frontend.observers.ReleaseObserver;
 
 import io.grpc.Metadata;
 import io.grpc.stub.MetadataUtils;
@@ -35,7 +36,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             System.err.println("[DEBUG] " + debugMessage);
     }
 
-    private TupleSpacesGrpc.TupleSpacesStub[] backendStubs;
+    private ReplicaServerGrpc.ReplicaServerStub[] backendStubs;
     private ManagedChannel[] channels;
 
     // Key to send the delay value in the metadata in the header of the request
@@ -45,12 +46,12 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
         num_servers = serverAddresses.size();
 
         ManagedChannel[] channels = new ManagedChannel[num_servers];
-        backendStubs = new TupleSpacesGrpc.TupleSpacesStub[num_servers];
+        backendStubs = new ReplicaServerGrpc.ReplicaServerStub[num_servers];
 
         for (int i = 0; i < num_servers; i++) {
             // Create a gRPC channel for the TupleSpaces server received in the arguments
             channels[i] = ManagedChannelBuilder.forTarget(serverAddresses.get(i)).usePlaintext().build();
-            backendStubs[i] = TupleSpacesGrpc.newStub(channels[i]);
+            backendStubs[i] = ReplicaServerGrpc.newStub(channels[i]);
             System.out.println("Frontend connecting to server TupleSpaces: " + serverAddresses.get(i));
         }
     }
@@ -75,7 +76,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
 
             debug("Received put request from Client. Forwarding to Server. Tuple to add: " + request.getNewTuple());
 
-            ResponseCollector<TupleSpacesOuterClass.PutResponse> c = new ResponseCollector<TupleSpacesOuterClass.PutResponse>();
+            ResponseCollector<ReplicaServerOuterClass.PutResponseServer> c = new ResponseCollector<ReplicaServerOuterClass.PutResponseServer>();
             for(int i = 0; i < num_servers; i++) {
                 Metadata metadata = new Metadata();
 
@@ -87,8 +88,11 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                 }
 
                 // Create a stub with the metadata and send the put request to the server
-                TupleSpacesGrpc.TupleSpacesStub stub = backendStubs[i].withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata));
-                stub.put(request, new PutObserver(c));
+                ReplicaServerGrpc.ReplicaServerStub stub = backendStubs[i].withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata));
+                stub.putServer(ReplicaServerOuterClass.PutRequestServer.newBuilder()
+                        .setNewTuple(request.getNewTuple())
+                        .setClientId(request.getClientId())
+                        .build(), new PutObserver(c));
                 debug("[PUT] Sent request to Server [" + (i + 1) + "] with delay: " + delays.get(i));
             }
 
@@ -130,7 +134,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
 
             debug("[READ] Received request from Client. Forwarding to Server. Tuple to read: " + request.getSearchPattern());
 
-            ResponseCollector<TupleSpacesOuterClass.ReadResponse> c = new ResponseCollector();
+            ResponseCollector<ReplicaServerOuterClass.ReadResponseServer> c = new ResponseCollector();
             for(int i = 0; i < num_servers; i++) {
                 Metadata metadata = new Metadata();
 
@@ -142,8 +146,11 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                 }
 
                 // Create a stub with the metadata and send the read request to the server
-                TupleSpacesGrpc.TupleSpacesStub stub = backendStubs[i].withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata));
-                stub.read(request, new ReadObserver(c));
+                ReplicaServerGrpc.ReplicaServerStub stub = backendStubs[i].withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata));
+                stub.readServer(ReplicaServerOuterClass.ReadRequestServer.newBuilder()
+                        .setSearchPattern(request.getSearchPattern())
+                        .setClientId(request.getClientId())
+                        .build(), new ReadObserver(c));
                 debug("[READ] Sent request to Server [" + (i + 1) + "] with delay: " + delays.get(i));
             }
 
@@ -195,7 +202,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             debug("[TAKE] Voter set: " + (voterSet.get(0) + 1) + ", " + (voterSet.get(1) + 1));
 
             // 2. Request access to the tuple to all servers in the voter set
-            TakeResponseCollector<TupleSpacesOuterClass.GrantResponse> grantCollector = new TakeResponseCollector<>();
+            TakeResponseCollector<ReplicaServerOuterClass.GrantResponse> grantCollector = new TakeResponseCollector<>();
             for (int i : voterSet) {
                 Metadata metadata = new Metadata();
 
@@ -207,13 +214,13 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                 }
 
                 // Create the grant request to send to the server
-                TupleSpacesOuterClass.GrantRequest grantReq = TupleSpacesOuterClass.GrantRequest.newBuilder()
+                ReplicaServerOuterClass.GrantRequest grantReq = ReplicaServerOuterClass.GrantRequest.newBuilder()
                         .setClientId(client_id)
                         .setSearchPattern(pattern)
                         .build();
 
                 // Create a stub with the metadata and send the requestAccess to the server
-                TupleSpacesGrpc.TupleSpacesStub stub = backendStubs[i].withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata));
+                ReplicaServerGrpc.ReplicaServerStub stub = backendStubs[i].withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata));
                 stub.requestAccess(grantReq, new GrantObserver(grantCollector));
                 debug("[TAKE] Sent grant request to Server [" + (i + 1) + "] with delay: " + delays.get(i));
             }
@@ -222,7 +229,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             grantCollector.waitUntilAllReceived(2);
 
             // 3. Verify if all grants were acquired
-            List<TupleSpacesOuterClass.GrantResponse> grants = grantCollector.collectedResponses;
+            List<ReplicaServerOuterClass.GrantResponse> grants = grantCollector.collectedResponses;
             int[] tupleIndexes = new int[2];
             boolean allGranted = true;
             for (int j = 0; j < 2; j++) {
@@ -243,40 +250,24 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
 
             // 4. Take the tuple from all servers in the voter set
             int tupleIndex = tupleIndexes[0];
-            TakeResponseCollector<TupleSpacesOuterClass.TakeResponse> takeCollector = new TakeResponseCollector<TupleSpacesOuterClass.TakeResponse>();
+            TakeResponseCollector<ReplicaServerOuterClass.TakeResponseServer> takeCollector = new TakeResponseCollector<>();
             for (int i = 0; i < num_servers; i++) {
-                TupleSpacesOuterClass.TakeRequest takeReq = TupleSpacesOuterClass.TakeRequest.newBuilder()
+                ReplicaServerOuterClass.TakeRequestServer takeReq = ReplicaServerOuterClass.TakeRequestServer.newBuilder()
                         .setSearchPattern(pattern)
                         .setClientId(client_id)
                         .setTupleIndex(tupleIndex)
                         .build();
                 // Send the take request to the server
-                backendStubs[i].take(takeReq, new TakeObserver(takeCollector));
+                backendStubs[i].takeServer(takeReq, new TakeObserver(takeCollector));
                 debug("[TAKE] Sent request to Server [" + (i + 1) + "]");
             }
 
             // Wait until all responses are received
             takeCollector.waitUntilAllReceived(num_servers);
 
-            // 5. Release access to the tuple from all servers in the voter set
-            ResponseCollector<TupleSpacesOuterClass.ReleaseResponse> releaseCollector = new ResponseCollector<>();
-            for (int i : voterSet) {
-                TupleSpacesOuterClass.ReleaseRequest releaseReq = TupleSpacesOuterClass.ReleaseRequest.newBuilder()
-                        .setClientId(client_id)
-                        .setTupleIndex(tupleIndex)
-                        .build();
-                // Send the release request to the server
-                backendStubs[i].releaseAccess(releaseReq, new ReleaseObserver(releaseCollector));
-                debug("[TAKE] Sent release request to Server [" + i + "]");
-            }
-
-            // Wait until all responses from the voter set are received
-            releaseCollector.waitUntilAllReceived(2);
-            debug("Released access from Voter Set servers.");
-
-            // 6. Return the taken tuple to the client
+            // 5. Return the taken tuple to the client
             String finalTuple = null;
-            for (TupleSpacesOuterClass.TakeResponse resp : takeCollector.collectedResponses) {
+            for (ReplicaServerOuterClass.TakeResponseServer resp : takeCollector.collectedResponses) {
                 if (resp != null && !resp.getResult().isEmpty()) {
                     finalTuple = resp.getResult();
                     break;
@@ -313,11 +304,11 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
         try {
             debug("Received getTupleSpacesState request from Client. Forwarding to Server.");
 
-            ResponseCollector<TupleSpacesOuterClass.getTupleSpacesStateResponse> c = new ResponseCollector<TupleSpacesOuterClass.getTupleSpacesStateResponse>();
+            ResponseCollector< ReplicaServerOuterClass.getTupleSpacesStateResponseServer> c = new ResponseCollector<ReplicaServerOuterClass.getTupleSpacesStateResponseServer>();
 
             // Send the getTupleSpacesState request to all servers
             for(int i = 0; i < num_servers; i++) {
-                backendStubs[i].getTupleSpacesState(request, new GetTupleSpacesStateObserver(c));
+                backendStubs[i].getTupleSpacesStateServer(ReplicaServerOuterClass.getTupleSpacesStateRequestServer.newBuilder().setClientId(request.getClientId()).build(), new GetTupleSpacesStateObserver(c));
             }
 
             // Wait until all responses are received

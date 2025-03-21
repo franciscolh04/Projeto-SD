@@ -18,18 +18,21 @@ public class TupleSpacesServerImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
         state = new ServerState();
     }
 
+    // Put a tuple in the tuple space
     @Override
     public void put(TupleSpacesOuterClass.PutRequest request, StreamObserver<TupleSpacesOuterClass.PutResponse> responseObserver) {
         String tuple = request.getNewTuple();
         final int client_id = request.getClientId();
 
         state.put(tuple, client_id);
-        TupleSpacesOuterClass.PutResponse response = TupleSpacesOuterClass.PutResponse.newBuilder().build();
 
+        // Send an empty response
+        TupleSpacesOuterClass.PutResponse response = TupleSpacesOuterClass.PutResponse.newBuilder().build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
 
+    // Read a tuple from the tuple space
     @Override
     public void read(TupleSpacesOuterClass.ReadRequest request, StreamObserver<TupleSpacesOuterClass.ReadResponse> responseObserver) {
         String pattern = request.getSearchPattern();
@@ -37,12 +40,8 @@ public class TupleSpacesServerImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
 
         String tuple = state.read(pattern, client_id);
 
-        //if (tuple == null) {
-        //    responseObserver.onError(INVALID_ARGUMENT.withDescription("Invalid Input").asRuntimeException());
-        //}
-
+        // Send the response with the read tuple
         TupleSpacesOuterClass.ReadResponse response = TupleSpacesOuterClass.ReadResponse.newBuilder().setResult(tuple).build();
-
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
@@ -54,12 +53,8 @@ public class TupleSpacesServerImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
 
         String tuple = state.take(pattern, client_id);
 
-        //if (tuple == null) {
-            //responseObserver.onError(INVALID_ARGUMENT.withDescription("Invalid Input").asRuntimeException());
-        //}
-
+        // Send the response with the taken tuple
         TupleSpacesOuterClass.TakeResponse response = TupleSpacesOuterClass.TakeResponse.newBuilder().setResult(tuple).build();
-
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
@@ -68,8 +63,8 @@ public class TupleSpacesServerImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
     public void getTupleSpacesState(TupleSpacesOuterClass.getTupleSpacesStateRequest request, StreamObserver<TupleSpacesOuterClass.getTupleSpacesStateResponse> responseObserver) {
         final int client_id = request.getClientId();
 
+        // Send the response with the state of the tuple spaces
         TupleSpacesOuterClass.getTupleSpacesStateResponse response = TupleSpacesOuterClass.getTupleSpacesStateResponse.newBuilder().addAllTuple(state.getTupleSpacesState(client_id)).build();
-
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }

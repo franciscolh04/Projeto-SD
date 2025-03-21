@@ -13,9 +13,7 @@ public class ServerState {
    */
   private static final boolean DEBUG_FLAG = (System.getProperty("debug") != null);
 
-  /**
-   * Helper method to print debug messages.
-   */
+  // Helper method to print debug messages.
   private static void debug(String debugMessage, int client_id) {
     if (DEBUG_FLAG)
       System.err.println("[DEBUG][" + client_id + "] " + debugMessage);
@@ -28,6 +26,7 @@ public class ServerState {
     this.tuples = new ArrayList<String>();
   }
 
+  // Add a tuple to the tuple space
   public void put(String tuple, int client_id) {
     synchronized (lock) {
       try {
@@ -46,6 +45,7 @@ public class ServerState {
     }
   }
 
+  // Search for a tuple that matches the pattern
   private String getMatchingTuple(String pattern) {
     for (String tuple : this.tuples) {
       if (tuple.matches(pattern)) {
@@ -55,6 +55,7 @@ public class ServerState {
     return null;
   }
 
+  // Read a tuple that matches the pattern
   public String read(String pattern, int client_id) {
     synchronized (lock) {
       try {
@@ -62,12 +63,13 @@ public class ServerState {
           throw new IllegalArgumentException("Search Pattern cannot be Null or Empty.");
         }
 
+        // Search for a tuple that matches the pattern
         String tuple;
         boolean waitFlag = false;
         while ((tuple = getMatchingTuple(pattern)) == null) {
           try {
             waitFlag = true;
-            lock.wait();
+            lock.wait(); // Waits until `put()` calls `notifyAll()`
           } catch (InterruptedException e) {
             Thread.currentThread().interrupt(); // Restores the interrupted status
             System.err.println("Thread stopped while waiting for a matching tuple.");
@@ -92,9 +94,9 @@ public class ServerState {
     }
   }
 
-
+  // Take a tuple that matches the pattern
   public String take(String pattern, int client_id) {
-    synchronized (lock) { // Get the lock before any critical section
+    synchronized (lock) {
       try {
         if (pattern == null || pattern.isEmpty()) {
           throw new IllegalArgumentException("Search Pattern cannot be Null or Empty.");
@@ -137,6 +139,7 @@ public class ServerState {
   }
 
 
+  // Get the state of the tuple spaces
   public List<String> getTupleSpacesState(int client_id) {
     try {
       // Returns a copy of the list to avoid external modifications

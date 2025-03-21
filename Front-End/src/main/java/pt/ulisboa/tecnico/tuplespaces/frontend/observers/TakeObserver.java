@@ -1,22 +1,21 @@
 package pt.ulisboa.tecnico.tuplespaces.frontend.observers;
 
 import io.grpc.stub.StreamObserver;
-import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesOuterClass;
-import pt.ulisboa.tecnico.tuplespaces.frontend.ResponseCollector;
+import pt.ulisboa.tecnico.tuplespaces.centralized.contract.ReplicaServerOuterClass;
 import pt.ulisboa.tecnico.tuplespaces.frontend.TakeResponseCollector;
 
 
-public class TakeObserver implements StreamObserver<TupleSpacesOuterClass.TakeResponse> {
+public class TakeObserver implements StreamObserver<ReplicaServerOuterClass.TakeResponseServer> {
 
-    private final TakeResponseCollector<TupleSpacesOuterClass.TakeResponse> collector;
+    private final TakeResponseCollector<ReplicaServerOuterClass.TakeResponseServer> collector;
 
-    public TakeObserver(TakeResponseCollector<TupleSpacesOuterClass.TakeResponse> collector) {
+    public TakeObserver(TakeResponseCollector<ReplicaServerOuterClass.TakeResponseServer> collector) {
         this.collector = collector;
     }
 
     // This method is called whenever a new response is received from the server
     @Override
-    public void onNext(TupleSpacesOuterClass.TakeResponse response) {
+    public void onNext(ReplicaServerOuterClass.TakeResponseServer response) {
         collector.addResponse(response);
     }
 

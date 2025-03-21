@@ -1,10 +1,10 @@
 package pt.ulisboa.tecnico.tuplespaces.frontend.observers;
 
 import io.grpc.stub.StreamObserver;
-import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesOuterClass;
+import pt.ulisboa.tecnico.tuplespaces.centralized.contract.ReplicaServerOuterClass;
 import pt.ulisboa.tecnico.tuplespaces.frontend.ResponseCollector;
 
-public class PutObserver implements StreamObserver<TupleSpacesOuterClass.PutResponse> {
+public class PutObserver implements StreamObserver<ReplicaServerOuterClass.PutResponseServer> {
     private final ResponseCollector collector;
 
     public PutObserver(ResponseCollector collector) {
@@ -13,7 +13,7 @@ public class PutObserver implements StreamObserver<TupleSpacesOuterClass.PutResp
 
     // This method is called whenever a new response is received from the server
     @Override
-    public void onNext(TupleSpacesOuterClass.PutResponse response) {
+    public void onNext(ReplicaServerOuterClass.PutResponseServer response) {
         collector.addString(response.toString());
     }
 
