@@ -89,6 +89,13 @@ public class FrontEndServer {
 
             // Block the main thread to wait until the server is terminated
             server.awaitTermination();
+            // Shutdown
+            Arrays.stream(((FrontEndServiceImpl)frontendService).getBackendStubs())
+                    .map(stub -> (ManagedChannel) stub.getChannel())
+                    .forEach(channel -> channel.shutdown());
+            server.shutdown();
+            System.out.println("\nFrontend server shut down.");
+
         } catch (InterruptedException e) {
             System.err.println("Frontend Server Stopped.");
         }
