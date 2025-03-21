@@ -27,5 +27,6 @@ public class ReleaseObserver implements StreamObserver<TupleSpacesOuterClass.Rel
     // This method is called when the server finishes sending responses
     @Override
     public void onCompleted() {
+        // Nothing to do here.
     }
 }

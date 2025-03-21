@@ -72,7 +72,6 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                         .map(Integer::parseInt)
                         .collect(Collectors.toList());
             }
-            System.out.println("[PUT] Delay values: " + delays);
 
             debug("Received put request from Client. Forwarding to Server. Tuple to add: " + request.getNewTuple());
 
@@ -83,7 +82,6 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                 // Add the respective delay value to the metadata
                 if (i < delays.size()) {
                     metadata.put(DELAY_KEY, String.valueOf(delays.get(i)));
-                    System.out.println("[PUT] Delay value: " + delays.get(i));
                 } else {
                     metadata.put(DELAY_KEY, "0"); // Default delay if not provided
                 }
@@ -91,6 +89,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                 // Create a stub with the metadata and send the put request to the server
                 TupleSpacesGrpc.TupleSpacesStub stub = backendStubs[i].withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata));
                 stub.put(request, new PutObserver(c));
+                debug("[PUT] Sent request to Server [" + (i + 1) + "] with delay: " + delays.get(i));
             }
 
             // Wait until all responses are received
@@ -100,7 +99,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             responseObserver.onNext(TupleSpacesOuterClass.PutResponse.newBuilder().build());
             responseObserver.onCompleted();
 
-            debug("Received put response from Server. Forwarding to Client. Feedback Status: Success");
+            debug("[PUT] Received response from Server. Forwarding to Client. Feedback Status: Success");
 
         } catch (io.grpc.StatusRuntimeException e) { // Capture gRPC communication failures
             System.err.println("[gRPC] Error connecting with server during the put request: " + e.getStatus().getDescription());
@@ -128,9 +127,8 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                         .map(Integer::parseInt)
                         .collect(Collectors.toList());
             }
-            System.out.println("[READ] Delay values: " + delaysString);
 
-            debug("Received read request from Client. Forwarding to Server. Tuple to read: " + request.getSearchPattern());
+            debug("[READ] Received request from Client. Forwarding to Server. Tuple to read: " + request.getSearchPattern());
 
             ResponseCollector<TupleSpacesOuterClass.ReadResponse> c = new ResponseCollector();
             for(int i = 0; i < num_servers; i++) {
@@ -139,7 +137,6 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                 // Add the respective delay value to the metadata
                 if (i < delays.size()) {
                     metadata.put(DELAY_KEY, String.valueOf(delays.get(i)));
-                    System.out.println("[READ] Delay value: " + delays.get(i));
                 } else {
                     metadata.put(DELAY_KEY, "0"); // Default delay if not provided
                 }
@@ -147,6 +144,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                 // Create a stub with the metadata and send the read request to the server
                 TupleSpacesGrpc.TupleSpacesStub stub = backendStubs[i].withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata));
                 stub.read(request, new ReadObserver(c));
+                debug("[READ] Sent request to Server [" + (i + 1) + "] with delay: " + delays.get(i));
             }
 
             // Wait until the first response is received
@@ -156,7 +154,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             responseObserver.onNext(TupleSpacesOuterClass.ReadResponse.newBuilder().setResult(c.collectedResponses.get(0)).build());
             responseObserver.onCompleted();
 
-            debug("Received read response from Server. Forwarding to Client. Response: " + c.collectedResponses.get(0));
+            debug("[READ] Received response from Server. Forwarding to Client. Response: " + c.collectedResponses.get(0));
 
         } catch (io.grpc.StatusRuntimeException e) { // Catches gRPC communication failures
             System.err.println("[gRPC] Error connecting with server during the reading request: " + e.getStatus().getDescription());
@@ -184,17 +182,17 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                         .map(Integer::parseInt)
                         .collect(Collectors.toList());
             }
-            System.out.println("[TAKE] Delay values: " + delaysString);
+            debug("[TAKE] Delay values: " + delays.stream().map(String::valueOf).collect(Collectors.joining(", ")));
 
             final int client_id = request.getClientId();
             final String pattern = request.getSearchPattern();
-            debug("Received take request from Client. Pattern: " + pattern);
+            debug("[TAKE] Received request from Client. Pattern: " + pattern);
 
             // 1. Calculate the voter set based on the client id
             int firstReplica = (client_id - 1) % 3;
             int secondReplica = (client_id ) % 3;
             List<Integer> voterSet = Arrays.asList(firstReplica, secondReplica);
-            debug("Voter set: " + voterSet);
+            debug("[TAKE] Voter set: " + (voterSet.get(0) + 1) + ", " + (voterSet.get(1) + 1));
 
             // 2. Request access to the tuple to all servers in the voter set
             TakeResponseCollector<TupleSpacesOuterClass.GrantResponse> grantCollector = new TakeResponseCollector<>();
@@ -204,7 +202,6 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                 // Add the respective delay value to the metadata
                 if (i < delays.size()) {
                     metadata.put(DELAY_KEY, String.valueOf(delays.get(i)));
-                    System.out.println("[READ] Delay value: " + delays.get(i));
                 } else {
                     metadata.put(DELAY_KEY, "0"); // Default delay if not provided
                 }
@@ -218,6 +215,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                 // Create a stub with the metadata and send the requestAccess to the server
                 TupleSpacesGrpc.TupleSpacesStub stub = backendStubs[i].withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata));
                 stub.requestAccess(grantReq, new GrantObserver(grantCollector));
+                debug("[TAKE] Sent grant request to Server [" + (i + 1) + "] with delay: " + delays.get(i));
             }
 
             // Wait until all responses from the voter set are received
@@ -241,7 +239,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                 return;
             }
             // If all grants were acquired, proceed with the take operation
-            debug("Grants acquired: Indexes " + Arrays.toString(tupleIndexes));
+            debug("[TAKE] Grants acquired: Indexes " + Arrays.toString(tupleIndexes));
 
             // 4. Take the tuple from all servers in the voter set
             int tupleIndex = tupleIndexes[0];
@@ -254,6 +252,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                         .build();
                 // Send the take request to the server
                 backendStubs[i].take(takeReq, new TakeObserver(takeCollector));
+                debug("[TAKE] Sent request to Server [" + (i + 1) + "]");
             }
 
             // Wait until all responses are received
@@ -268,6 +267,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                         .build();
                 // Send the release request to the server
                 backendStubs[i].releaseAccess(releaseReq, new ReleaseObserver(releaseCollector));
+                debug("[TAKE] Sent release request to Server [" + i + "]");
             }
 
             // Wait until all responses from the voter set are received

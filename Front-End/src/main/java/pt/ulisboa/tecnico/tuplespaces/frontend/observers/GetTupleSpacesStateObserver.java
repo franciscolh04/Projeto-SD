@@ -17,19 +17,18 @@ public class GetTupleSpacesStateObserver implements StreamObserver<TupleSpacesOu
     @Override
     public void onNext(TupleSpacesOuterClass.getTupleSpacesStateResponse response) {
         collector.addString(String.join(", ", response.getTupleList()));
-        System.out.println("Received response: " + response.getTupleList());
     }
 
     // This method is called whenever an error occurs
     @Override
     public void onError(Throwable throwable) {
-        System.out.println("Received error: " + throwable);
+        System.err.println("[gRPC] Error during requestAccess: " + throwable.getMessage());
     }
 
     // This method is called when the server finishes sending responses
     @Override
     public void onCompleted() {
-        System.out.println("Request completed");
+        // Nothing to do here.
     }
 }
 

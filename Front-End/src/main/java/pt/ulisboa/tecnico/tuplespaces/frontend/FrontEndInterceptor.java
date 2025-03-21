@@ -26,8 +26,6 @@ public class FrontEndInterceptor implements ServerInterceptor {
         String delaysString = requestHeaders.get(DELAY_KEY);
 
         if (delaysString != null) {
-            System.out.println("Arrived delay value: " + delaysString);
-
             // Set the delay value in the context
             Context context = Context.current().withValue(DELAY_VALUE_CONTEXT, delaysString);
             return Contexts.interceptCall(context, call, requestHeaders, next);
