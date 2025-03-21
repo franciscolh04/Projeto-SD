@@ -66,7 +66,6 @@ public class ClientService {
             return response;
         } catch (StatusRuntimeException e) {
             System.err.println("Error during the put request: " + e.getStatus().getDescription() + " - " + e.getMessage());
-            e.printStackTrace();
         } catch (Exception e) {
             System.err.println("Unexpected Error during the put request: " + e.getMessage());
         }

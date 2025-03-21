@@ -80,7 +80,7 @@ public class FrontEndServer {
         try {
             // Shutdown for cleanup
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-                Arrays.stream(((FrontEndServiceImpl)frontendService).getBackendStubs()) 
+                Arrays.stream(((FrontEndServiceImpl)frontendService).getBackendStubs())
                         .map(stub -> (ManagedChannel) stub.getChannel())
                         .forEach(channel -> channel.shutdown());
                 server.shutdown();

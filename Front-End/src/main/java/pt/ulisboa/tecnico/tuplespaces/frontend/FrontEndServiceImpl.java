@@ -208,24 +208,14 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             // 2. Request access to the tuple to all servers in the voter set
             TakeResponseCollector<ReplicaServerOuterClass.GrantResponse> grantCollector = new TakeResponseCollector<>();
             for (int i : voterSet) {
-                Metadata metadata = new Metadata();
-
-                // Add the respective delay value to the metadata
-                if (i < delays.size()) {
-                    metadata.put(DELAY_KEY, String.valueOf(delays.get(i)));
-                } else {
-                    metadata.put(DELAY_KEY, "0"); // Default delay if not provided
-                }
-
                 // Create the grant request to send to the server
                 ReplicaServerOuterClass.GrantRequest grantReq = ReplicaServerOuterClass.GrantRequest.newBuilder()
                         .setClientId(client_id)
                         .setSearchPattern(pattern)
                         .build();
 
-                // Create a stub with the metadata and send the requestAccess to the server
-                ReplicaServerGrpc.ReplicaServerStub stub = backendStubs[i].withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata));
-                stub.requestAccess(grantReq, new GrantObserver(grantCollector));
+                // Send the requestAccess to the server
+                backendStubs[i].requestAccess(grantReq, new GrantObserver(grantCollector));
                 debug("[TAKE] Sent grant request to Server [" + (i + 1) + "] with delay: " + delays.get(i));
             }
 
@@ -256,13 +246,24 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             int tupleIndex = tupleIndexes[0];
             TakeResponseCollector<ReplicaServerOuterClass.TakeResponseServer> takeCollector = new TakeResponseCollector<>();
             for (int i = 0; i < num_servers; i++) {
+                Metadata metadata = new Metadata();
+
+                // Add the respective delay value to the metadata
+                if (i < delays.size()) {
+                    metadata.put(DELAY_KEY, String.valueOf(delays.get(i)));
+                } else {
+                    metadata.put(DELAY_KEY, "0"); // Default delay if not provided
+                }
+
                 ReplicaServerOuterClass.TakeRequestServer takeReq = ReplicaServerOuterClass.TakeRequestServer.newBuilder()
                         .setSearchPattern(pattern)
                         .setClientId(client_id)
                         .setTupleIndex(tupleIndex)
                         .build();
-                // Send the take request to the server
-                backendStubs[i].takeServer(takeReq, new TakeObserver(takeCollector));
+
+                // Create a stub with the metadata and send the take request to the server
+                ReplicaServerGrpc.ReplicaServerStub stub = backendStubs[i].withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata));
+                stub.takeServer(takeReq, new TakeObserver(takeCollector));
                 debug("[TAKE] Sent request to Server [" + (i + 1) + "]");
             }
 
