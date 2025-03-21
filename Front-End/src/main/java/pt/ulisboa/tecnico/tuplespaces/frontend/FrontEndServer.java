@@ -7,7 +7,10 @@ import io.grpc.ServerInterceptors;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import io.grpc.ManagedChannel;
+
 
 public class FrontEndServer {
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -16,10 +19,12 @@ public class FrontEndServer {
         // Verifies if any of the arguments is "debug"
         boolean debug = false;
         for (String arg : args) {
-            if (arg.equals("-debug")) {
-                System.setProperty("debug", "true");
-                debug = true;
-                break;  // Do not need to check the remaining arguments
+            if (arg != null) {
+                if (arg.equals("-debug")) {
+                    System.setProperty("debug", "true");
+                    debug = true;
+                    break;  // Do not need to check the remaining arguments
+                }
             }
         }
 
@@ -42,10 +47,12 @@ public class FrontEndServer {
         // List of TupleSpaces Server Address
         List<String> serverAddresses = new ArrayList<>();
         for (int i = 1; i < args.length; i++) {
-            if (args[i].equals("-debug")) {
-                continue;  // Skip the debug flag
+            if (args[i] != null) {
+                if (args[i].equals("-debug")) {
+                    continue;  // Skip the debug flag
+                }
+                serverAddresses.add(args[i]);
             }
-            serverAddresses.add(args[i]);
         }
 
         System.out.println("Frontend will connect to the following servers:");
@@ -73,6 +80,9 @@ public class FrontEndServer {
         try {
             // Shutdown for cleanup
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                Arrays.stream(((FrontEndServiceImpl)frontendService).getBackendStubs()) 
+                        .map(stub -> (ManagedChannel) stub.getChannel())
+                        .forEach(channel -> channel.shutdown());
                 server.shutdown();
                 System.out.println("\nFrontend server shut down.");
             }));

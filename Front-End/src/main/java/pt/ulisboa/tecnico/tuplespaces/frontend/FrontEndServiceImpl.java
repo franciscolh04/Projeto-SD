@@ -56,6 +56,10 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
         }
     }
 
+    public ReplicaServerGrpc.ReplicaServerStub[] getBackendStubs() {
+        return backendStubs;
+    }
+
 
     // Forward the put request to the server
     @Override
