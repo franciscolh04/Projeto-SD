@@ -132,7 +132,7 @@ public class CommandProcessor {
         // Read the tuple and get the response
         ReadResponse response = clientService.read(tuple, delays);
         if (response != null) {
-            System.out.println("OK");
+            if (!response.getResult().contains("exception")) System.out.println("OK");
 
             String responseString = response.toString().replace("result: ", "").strip();
             if (responseString.startsWith("\"") && responseString.endsWith("\"")) {

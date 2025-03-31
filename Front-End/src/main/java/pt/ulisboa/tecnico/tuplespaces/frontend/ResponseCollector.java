@@ -16,6 +16,12 @@ public class ResponseCollector<T> {
         notifyAll();
     }
 
+    // Add an error to the list
+    synchronized public void addError(Throwable t) {
+        collectedResponses.add(t.getMessage());
+        notifyAll();
+    }
+
     // Wait until the list has n responses
     synchronized public void waitUntilAllReceived(int n) throws InterruptedException {
         while (collectedResponses.size() < n) {

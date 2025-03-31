@@ -21,7 +21,8 @@ public class ReadObserver implements StreamObserver<ReplicaServerOuterClass.Read
     // This method is called whenever an error occurs
     @Override
     public void onError(Throwable throwable) {
-        System.err.println("[gRPC] Error during requestAccess: " + throwable.getMessage());
+        System.err.println("[gRPC] Error during request Read Command: " + throwable.getMessage());
+        collector.addError(throwable);
     }
 
     // This method is called when the server finishes sending responses
