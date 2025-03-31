@@ -20,7 +20,7 @@ message ReadResponse {
 message TakeRequest {
   string searchPattern = 1;
   int32 client_id = 2;
-  int32 tuple_index = 3;
+  string tuple = 3;
 }
 message TakeResponse {
   string result = 1;

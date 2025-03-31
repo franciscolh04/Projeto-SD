@@ -59,14 +59,14 @@ public class ServerState {
   }
 
   // Search for a tuple that matches the pattern and is free
-  private int getMatchingFreeTupleIndex(String pattern) {
+  private String getMatchingFreeTuple(String pattern) {
     for (int i = 0; i < tuples.size(); i++) {
       if (tuples.get(i).matches(pattern) && tupleFlags.get(i)) {
         tupleFlags.set(i, false);
-        return i;
+        return tuples.get(i);
       }
     }
-    return -1;
+    return null;
   }
 
   // Read a tuple that matches the pattern
@@ -109,28 +109,28 @@ public class ServerState {
   }
 
   // Request access to a tuple that matches the pattern
-  public int requestAccess(String pattern, int client_id) {
+  public String requestAccess(String pattern, int client_id) {
     synchronized (lock) {
       try {
         if (pattern == null || pattern.isEmpty()) {
           throw new IllegalArgumentException("Search Pattern cannot be Null or Empty.");
         }
         // Search for a tuple that matches the pattern
-        int index = getMatchingFreeTupleIndex(pattern);
-        if (index != -1) {
-          debug("Granted Access: " + tuples.get(index), client_id);
-          return index;
+        String tuple = getMatchingFreeTuple(pattern);
+        if (tuple != null) {
+          debug("Granted Access: " + tuple, client_id);
+          return tuple;
         }
 
         // If no matching tuple was found, wait until a matching tuple is added
-        int matchingTuple;
-        while ((matchingTuple = getMatchingFreeTupleIndex(pattern)) == -1) {
+        String matchingTuple;
+        while ((matchingTuple = getMatchingFreeTuple(pattern)) == null) {
           try {
             lock.wait(); // Waits until `put()` calls `notifyAll()`
           } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             System.err.println("Thread stopped while waiting for a matching tuple.");
-            return -1;
+            return null;
           }
         }
 
@@ -139,25 +139,33 @@ public class ServerState {
 
       } catch (IllegalArgumentException e) {
         System.err.println("Error requesting access: " + e.getMessage());
-        return -1;
+        return null;
       } catch (Exception e) {
         System.err.println("Unexpected error requesting access: " + e.getMessage());
-        return -1;
+        return null;
       }
     }
   }
 
   // Take a tuple that matches the pattern with the given index
-  public String takeWithIndex(int index, int client_id) {
+  public String takeWithTuple(String tuple, int client_id) {
     synchronized (lock) {
       try {
-        if (index >= 0 && index < tuples.size()) {
-          String removed = tuples.remove(index);
-          tupleFlags.remove(index);
-          debug("Removed tuple at index " + index + ": " + removed, client_id);
-          return removed;
+        if (tuple != null) {
+          while (true) {
+            // percorre a lista e retira tuplo
+            for (int i = 0; i < tuples.size(); i++) {
+              if (tuples.get(i).equals(tuple)) {
+                String removed = tuples.remove(i);
+                tupleFlags.remove(i);
+                debug("Removed tuple: " + removed, client_id);
+                return removed;
+              }
+            }
+            lock.wait(); // Waits until `put()` calls `notifyAll()`
+          }
         } else {
-          throw new IllegalArgumentException("Invalid index for take: " + index);
+          throw new IllegalArgumentException("Invalid tuple for take: " + tuple);
         }
       } catch (IllegalArgumentException e) {
         System.err.println("Error taking tuple: " + e.getMessage());

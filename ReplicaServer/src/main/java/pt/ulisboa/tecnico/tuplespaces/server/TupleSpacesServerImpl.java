@@ -49,9 +49,8 @@ public class TupleSpacesServerImpl extends ReplicaServerGrpc.ReplicaServerImplBa
     public void takeServer(ReplicaServerOuterClass.TakeRequestServer request, StreamObserver<ReplicaServerOuterClass.TakeResponseServer> responseObserver) {
         String pattern = request.getSearchPattern();
         final int client_id = request.getClientId();
-        final int index = request.getTupleIndex();
 
-        String tuple = state.takeWithIndex(index, client_id);
+        String tuple = state.takeWithTuple(pattern, client_id);
 
         // Send the response with the taken tuple
         ReplicaServerOuterClass.TakeResponseServer response = ReplicaServerOuterClass.TakeResponseServer.newBuilder().setResult(tuple).build();
@@ -76,15 +75,15 @@ public class TupleSpacesServerImpl extends ReplicaServerGrpc.ReplicaServerImplBa
         final int client_id = request.getClientId();
         final String pattern = request.getSearchPattern();
 
-        int index = state.requestAccess(pattern, client_id);
+        String tuple = state.requestAccess(pattern, client_id);
 
         // If the index is -1, the access was not granted
-        boolean granted = (index != -1);
+        boolean granted = (tuple != null);
 
         // Send the response with the result of the request
         ReplicaServerOuterClass.GrantResponse response = ReplicaServerOuterClass.GrantResponse.newBuilder()
                 .setGranted(granted)
-                .setTupleIndex(index)
+                .setTuple(tuple)
                 .build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();

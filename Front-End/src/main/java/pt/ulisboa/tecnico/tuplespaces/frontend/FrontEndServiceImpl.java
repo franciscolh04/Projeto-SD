@@ -224,14 +224,14 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
 
             // 3. Verify if all grants were acquired
             List<ReplicaServerOuterClass.GrantResponse> grants = grantCollector.collectedResponses;
-            int[] tupleIndexes = new int[2];
+            String[] tuples = new String[2];
             boolean allGranted = true;
             for (int j = 0; j < 2; j++) {
                 if (grants.get(j) == null || !grants.get(j).getGranted()) {
                     allGranted = false;
                     break;
                 }
-                tupleIndexes[j] = grants.get(j).getTupleIndex();
+                tuples[j] = grants.get(j).getTuple();
             }
             // If not all grants were acquired, fail the operation and return an error to the client
             if (!allGranted) {
@@ -240,10 +240,10 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                 return;
             }
             // If all grants were acquired, proceed with the take operation
-            debug("[TAKE] Grants acquired: Indexes " + Arrays.toString(tupleIndexes));
+            debug("[TAKE] Grants acquired: Indexes " + Arrays.toString(tuples));
 
-            // 4. Take the tuple from all servers in the voter set
-            int tupleIndex = tupleIndexes[0];
+            // 4. Take the tuple from all servers
+            String tuple = tuples[0];
             TakeResponseCollector<ReplicaServerOuterClass.TakeResponseServer> takeCollector = new TakeResponseCollector<>();
             for (int i = 0; i < num_servers; i++) {
                 Metadata metadata = new Metadata();
@@ -258,7 +258,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                 ReplicaServerOuterClass.TakeRequestServer takeReq = ReplicaServerOuterClass.TakeRequestServer.newBuilder()
                         .setSearchPattern(pattern)
                         .setClientId(client_id)
-                        .setTupleIndex(tupleIndex)
+                        .setTuple(tuple) //mudar para receber o tuplo e não o index
                         .build();
 
                 // Create a stub with the metadata and send the take request to the server
