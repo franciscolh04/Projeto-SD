@@ -6,6 +6,8 @@ import pt.ulisboa.tecnico.tuplespaces.centralized.contract.ReplicaServerOuterCla
 import pt.ulisboa.tecnico.tuplespaces.server.domain.ServerState;
 import io.grpc.stub.StreamObserver;
 
+import java.util.List;
+
 
 
 public class TupleSpacesServerImpl extends ReplicaServerGrpc.ReplicaServerImplBase {
@@ -47,10 +49,22 @@ public class TupleSpacesServerImpl extends ReplicaServerGrpc.ReplicaServerImplBa
     // Take a tuple from the tuple space
     @Override
     public void takeServer(ReplicaServerOuterClass.TakeRequestServer request, StreamObserver<ReplicaServerOuterClass.TakeResponseServer> responseObserver) {
-        String pattern = request.getSearchPattern();
+        String pattern = request.getTuple();
         final int client_id = request.getClientId();
 
-        String tuple = state.takeWithTuple(pattern, client_id);
+        String tuple = state.takeServer(pattern, client_id);
+
+
+        // Faz release dos tuplos extra que este servidor bloqueou
+        List<String> releaseList = request.getReleaseTuplesList();
+        if (!releaseList.isEmpty()) {
+            for (String t : releaseList) {
+                state.release(t, client_id);
+            }
+        }
+
+        //prints de debug
+        System.out.println("Server " + (1 + request.getServerIndex()) + " released: " + releaseList);
 
         // Send the response with the taken tuple
         ReplicaServerOuterClass.TakeResponseServer response = ReplicaServerOuterClass.TakeResponseServer.newBuilder().setResult(tuple).build();
@@ -75,15 +89,15 @@ public class TupleSpacesServerImpl extends ReplicaServerGrpc.ReplicaServerImplBa
         final int client_id = request.getClientId();
         final String pattern = request.getSearchPattern();
 
-        String tuple = state.requestAccess(pattern, client_id);
+        List<String> tuples = state.requestAccess(pattern, client_id);
 
         // If the index is -1, the access was not granted
-        boolean granted = (tuple != null);
+        boolean granted = (!tuples.isEmpty());
 
         // Send the response with the result of the request
         ReplicaServerOuterClass.GrantResponse response = ReplicaServerOuterClass.GrantResponse.newBuilder()
                 .setGranted(granted)
-                .setTuple(tuple)
+                .addAllTuples(tuples)
                 .build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();

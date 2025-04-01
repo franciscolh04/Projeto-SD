@@ -7,18 +7,13 @@ import pt.ulisboa.tecnico.tuplespaces.centralized.contract.ReplicaServerGrpc;
 import pt.ulisboa.tecnico.tuplespaces.centralized.contract.ReplicaServerOuterClass;
 import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesOuterClass;
 import pt.ulisboa.tecnico.tuplespaces.centralized.contract.TupleSpacesGrpc;
-import pt.ulisboa.tecnico.tuplespaces.frontend.observers.PutObserver;
-import pt.ulisboa.tecnico.tuplespaces.frontend.observers.ReadObserver;
-import pt.ulisboa.tecnico.tuplespaces.frontend.observers.GetTupleSpacesStateObserver;
-import pt.ulisboa.tecnico.tuplespaces.frontend.observers.TakeObserver;
-import pt.ulisboa.tecnico.tuplespaces.frontend.observers.GrantObserver;
+import pt.ulisboa.tecnico.tuplespaces.frontend.observers.*;
 
 import io.grpc.Metadata;
 import io.grpc.stub.MetadataUtils;
 
 
-import java.util.List;
-import java.util.Arrays;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
@@ -224,27 +219,79 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
 
             // 3. Verify if all grants were acquired
             List<ReplicaServerOuterClass.GrantResponse> grants = grantCollector.collectedResponses;
-            String[] tuples = new String[2];
+            List<List<String>> allTuples = new ArrayList<>();
             boolean allGranted = true;
-            for (int j = 0; j < 2; j++) {
-                if (grants.get(j) == null || !grants.get(j).getGranted()) {
+
+            // Extrai as listas de tuplos de cada GrantResponse
+            for (ReplicaServerOuterClass.GrantResponse grant : grants) {
+                if (grant == null || !grant.getGranted()) {
                     allGranted = false;
                     break;
                 }
-                tuples[j] = grants.get(j).getTuple();
+
+                List<String> tuplesFromGrant = grant.getTuplesList();
+                allTuples.add(tuplesFromGrant);
             }
+
             // If not all grants were acquired, fail the operation and return an error to the client
-            if (!allGranted) {
+            if (!allGranted || allTuples.size() < 2) {
                 System.err.println("Failed to acquire grants from all replicas.");
                 responseObserver.onError(io.grpc.Status.UNAVAILABLE.withDescription("Could not acquire lock.").asRuntimeException());
                 return;
             }
             // If all grants were acquired, proceed with the take operation
-            debug("[TAKE] Grants acquired: Indexes " + Arrays.toString(tuples));
+            debug("[TAKE] Grants acquired:" + Arrays.toString(allTuples.toArray()));
+
+            // Escolher o tuplo a retirar (interseção das listas de tuplos)
+            String tuple = null;
+
+            // Caso normal (sem regex): cada grant tem apenas um tuplo
+            if (allTuples.get(0).size() == 1 && allTuples.get(1).size() == 1) {
+                String t1 = allTuples.get(0).get(0);
+                String t2 = allTuples.get(1).get(0);
+
+                if (!t1.equals(t2)) {
+                    System.err.println("Tuples granted by voter set do not match: " + t1 + " vs " + t2);
+                    responseObserver.onError(io.grpc.Status.ABORTED.withDescription("Inconsistent tuple grants.").asRuntimeException());
+                    return;
+                }
+
+                tuple = t1;
+                debug("[TAKE] Tuplo final escolhido (normal): " + tuple);
+            } else {
+                // Caso regex: calcular a interseção
+                Set<String> intersection = new HashSet<>(allTuples.get(0));
+                intersection.retainAll(allTuples.get(1));
+
+                if (intersection.isEmpty()) {
+                    System.err.println("No matching tuple found in intersection.");
+                    responseObserver.onError(io.grpc.Status.ABORTED.withDescription("No common tuple to take.").asRuntimeException());
+                    return;
+                }
+
+                tuple = intersection.iterator().next(); // Pega no primeiro
+                debug("[TAKE] Tuplo final escolhido da interseção: " + tuple);
+            }
 
             // 4. Take the tuple from all servers
-            String tuple = tuples[0];
             TakeResponseCollector<ReplicaServerOuterClass.TakeResponseServer> takeCollector = new TakeResponseCollector<>();
+            String finalTuple = tuple;
+
+            List<String> toRelease1 = new ArrayList<>();
+            List<String> toRelease2 = new ArrayList<>();
+            List<String> toRelease = new ArrayList<>();
+
+            for (String t : allTuples.get(0)) {
+                if (!t.equals(finalTuple)) {
+                    toRelease1.add(t);
+                }
+            }
+            for (String t : allTuples.get(1)) {
+                if (!t.equals(finalTuple)) {
+                    toRelease2.add(t);
+                }
+            }
+
             for (int i = 0; i < num_servers; i++) {
                 Metadata metadata = new Metadata();
 
@@ -255,10 +302,22 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                     metadata.put(DELAY_KEY, "0"); // Default delay if not provided
                 }
 
+                if (i == voterSet.get(0)) {
+                    toRelease = toRelease1;
+                } else if (i == voterSet.get(1)) {
+                    toRelease = toRelease2;
+                } else {
+                    toRelease = new ArrayList<>();
+                }
+
                 ReplicaServerOuterClass.TakeRequestServer takeReq = ReplicaServerOuterClass.TakeRequestServer.newBuilder()
                         .setSearchPattern(pattern)
                         .setClientId(client_id)
-                        .setTuple(tuple) //mudar para receber o tuplo e não o index
+                        .setTuple(tuple)
+
+                        .setServerIndex(i)
+                        .addAllReleaseTuples(toRelease)
+
                         .build();
 
                 // Create a stub with the metadata and send the take request to the server
@@ -270,14 +329,16 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             // Wait until all responses are received
             takeCollector.waitUntilAllReceived(num_servers);
 
+
             // 5. Return the taken tuple to the client
-            String finalTuple = null;
+
             for (ReplicaServerOuterClass.TakeResponseServer resp : takeCollector.collectedResponses) {
                 if (resp != null && !resp.getResult().isEmpty()) {
                     finalTuple = resp.getResult();
                     break;
                 }
             }
+
             if (finalTuple == null) {
                 System.err.println("Failed to take tuple from replicas.");
                 responseObserver.onError(io.grpc.Status.UNAVAILABLE.withDescription("Take operation failed.").asRuntimeException());

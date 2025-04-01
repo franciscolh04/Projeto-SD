@@ -19,13 +19,11 @@ public class ServerState {
       System.err.println("[DEBUG][" + client_id + "] " + debugMessage);
   }
 
-  private List<String> tuples;
-  private List<Boolean> tupleFlags;
+  private ConcurrentKeyStore<String> tuples = new ConcurrentKeyStore<>();
   private final Object lock = new Object();
 
   public ServerState() {
-    this.tuples = new ArrayList<String>();
-    this.tupleFlags = new ArrayList<>();
+    this.tuples = new ConcurrentKeyStore<>();
   }
 
   // Add a tuple to the tuple space
@@ -36,8 +34,7 @@ public class ServerState {
           throw new IllegalArgumentException("Tuple cannot be Null or Empty.");
         }
 
-        tuples.add(tuple);
-        tupleFlags.add(true);
+        tuples.putOrIncrement(tuple);
         debug("Added tuple: " + tuple, client_id);
         lock.notifyAll();
       } catch (IllegalArgumentException e) {
@@ -50,7 +47,7 @@ public class ServerState {
 
   // Search for a tuple that matches the pattern
   private String getMatchingTuple(String pattern) {
-    for (String tuple : this.tuples) {
+    for (String tuple : this.tuples.getAllKeys()) {
       if (tuple.matches(pattern)) {
         return tuple;
       }
@@ -59,13 +56,14 @@ public class ServerState {
   }
 
   // Search for a tuple that matches the pattern and is free
-  private String getMatchingFreeTuple(String pattern) {
-    for (int i = 0; i < tuples.size(); i++) {
-      if (tuples.get(i).matches(pattern) && tupleFlags.get(i)) {
-        tupleFlags.set(i, false);
-        return tuples.get(i);
+  private String getMatchingAvailableTuple(String pattern) {
+    for (String tuple : tuples.getAllKeys()) {
+      var entry = tuples.getEntry(tuple);
+      if (tuple.matches(pattern) && entry != null && entry.getCounter() > 0) {
+          if (entry.lock.tryLock())
+            return tuple;
+        }
       }
-    }
     return null;
   }
 
@@ -109,22 +107,65 @@ public class ServerState {
   }
 
   // Request access to a tuple that matches the pattern
-  public String requestAccess(String pattern, int client_id) {
+  public List<String> requestAccess(String pattern, int client_id) {
     synchronized (lock) {
       try {
         if (pattern == null || pattern.isEmpty()) {
           throw new IllegalArgumentException("Search Pattern cannot be Null or Empty.");
         }
+        List<String> reserved = new ArrayList<>();
+        boolean isRegex = pattern.contains("[^,]+");
+
+        // REGEX
+        if (isRegex) {
+
+          for (String tuple : tuples.getAllKeys()) {
+            var entry = tuples.getEntry(tuple);
+            if (tuple.matches(pattern) && entry != null && entry.getCounter() > 0) {
+              if (entry.lock.tryLock()) {
+                reserved.add(tuple);
+              }
+            }
+          }
+
+          if (reserved.isEmpty()) {
+            while (reserved.isEmpty()) {
+              try {
+                lock.wait();
+              } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                System.err.println("Thread interrupted while waiting for matching regex tuples.");
+                return null;
+              }
+
+              for (String tuple : tuples.getAllKeys()) {
+                var entry = tuples.getEntry(tuple);
+                if (tuple.matches(pattern) && entry != null && entry.getCounter() > 0) {
+                  if (entry.lock.tryLock()) {
+                    reserved.add(tuple);
+                  }
+                }
+              }
+            }
+          }
+
+          debug("Reserved tuples (regex): " + reserved, client_id);
+          return reserved;
+        }
+
+        //NOT REGEX
+
         // Search for a tuple that matches the pattern
-        String tuple = getMatchingFreeTuple(pattern);
+        String tuple = getMatchingAvailableTuple(pattern);
         if (tuple != null) {
-          debug("Granted Access: " + tuple, client_id);
-          return tuple;
+          debug("Granted Access (lock acquired): " + tuple, client_id);
+          reserved.add(tuple);
+          return reserved;
         }
 
         // If no matching tuple was found, wait until a matching tuple is added
         String matchingTuple;
-        while ((matchingTuple = getMatchingFreeTuple(pattern)) == null) {
+        while ((matchingTuple = getMatchingAvailableTuple(pattern)) == null) {
           try {
             lock.wait(); // Waits until `put()` calls `notifyAll()`
           } catch (InterruptedException e) {
@@ -134,8 +175,9 @@ public class ServerState {
           }
         }
 
-        debug("Granted Access: " + matchingTuple, client_id);
-        return matchingTuple;
+        debug("Granted Access (after wait): " + matchingTuple, client_id);
+        reserved.add(matchingTuple);
+        return reserved;
 
       } catch (IllegalArgumentException e) {
         System.err.println("Error requesting access: " + e.getMessage());
@@ -147,47 +189,78 @@ public class ServerState {
     }
   }
 
-  // Take a tuple that matches the pattern with the given index
-  public String takeWithTuple(String tuple, int client_id) {
+  public String takeServer(String tuple, int client_id) {
     synchronized (lock) {
       try {
-        if (tuple != null) {
-          while (true) {
-            // percorre a lista e retira tuplo
-            for (int i = 0; i < tuples.size(); i++) {
-              if (tuples.get(i).equals(tuple)) {
-                String removed = tuples.remove(i);
-                tupleFlags.remove(i);
-                debug("Removed tuple: " + removed, client_id);
-                return removed;
-              }
-            }
-            lock.wait(); // Waits until `put()` calls `notifyAll()`
-          }
-        } else {
-          throw new IllegalArgumentException("Invalid tuple for take: " + tuple);
+        if (tuple == null) {
+          throw new IllegalArgumentException("Tuple cannot be Null.");
         }
+
+        while (tuples.getEntry(tuple) == null) {
+          try {
+            lock.wait();
+          } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.err.println("Thread interrupted while waiting for tuple: " + tuple);
+            return null;
+          }
+        }
+
+        var entry = tuples.getEntry(tuple); // volta a obter após o wait
+        entry.decrementCounter();
+        if (entry.getCounter() == 0) {
+          tuples.remove(tuple);
+          debug("Removed tuple (counter == 0): " + tuple, client_id);
+        } else {
+          debug("Decremented tuple counter: " + tuple + " (remaining: " + entry.getCounter() + ")", client_id);
+        }
+
+        if (entry.lock.isHeldByCurrentThread()) {
+          entry.lock.unlock();
+        }
+
+        return tuple;
       } catch (IllegalArgumentException e) {
-        System.err.println("Error taking tuple: " + e.getMessage());
+        System.err.println("Error in takeServer: " + e.getMessage());
         return null;
       } catch (Exception e) {
-        System.err.println("Unexpected error taking tuple: " + e.getMessage());
+        System.err.println("Unexpected error in takeServer: " + e.getMessage());
         return null;
       }
     }
   }
 
-  // Get the current state of the tuple spaces
+  // Release a tuple (unlock it without modifying the counter)
+  public void release(String tuple, int client_id) {
+    var entry = tuples.getEntry(tuple);
+    if (entry != null && entry.lock.isHeldByCurrentThread()) {
+      entry.lock.unlock();
+      debug("Released tuple lock: " + tuple, client_id);
+    }
+  }
+
+
+
   public List<String> getTupleSpacesState(int client_id) {
     synchronized (lock) {
       try {
-        // Returns a copy of the list to avoid external modifications
-        debug("TupleSpaces Current State: " + this.tuples, client_id);
-        return List.copyOf(this.tuples);
-      } catch (Exception e) { // Get any other unexpected error
+        List<String> tuplesArray = new ArrayList<>();
+        for (String tuple : tuples.getAllKeys()) {
+          var entry = tuples.getEntry(tuple);
+          if (entry != null) {
+            for (int i = 0; i < entry.getCounter(); i++) {
+              tuplesArray.add(tuple);
+            }
+          }
+        }
+        debug("TupleSpaces Current State: " + tuplesArray, client_id);
+        return tuplesArray;
+      } catch (Exception e) {
         System.err.println("Unexpected error when getting state of TupleSpaces: " + e.getMessage());
-        return Collections.emptyList(); // Return an empty list if an error occurs
+        return Collections.emptyList();
       }
     }
   }
+
+
 }

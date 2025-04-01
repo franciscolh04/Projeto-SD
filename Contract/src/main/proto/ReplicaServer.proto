@@ -18,8 +18,12 @@ message ReadResponseServer {
 
 message TakeRequestServer {
   string searchPattern = 1;
-  int32 client_id = 2;
-  string tuple = 3;
+    int32 client_id = 2;
+    string tuple = 3;
+
+    int32 server_index = 4;
+
+    repeated string releaseTuples = 5;
 }
 message TakeResponseServer {
   string result = 1;
@@ -39,15 +43,7 @@ message GrantRequest {
 
 message GrantResponse {
   bool granted = 1;
-  string tuple = 2;
-}
-
-message ReleaseRequest {
-  int32 client_id = 1;
-  string tuple = 2;
-}
-
-message ReleaseResponse {
+  repeated string tuples = 2;
 }
 
 service ReplicaServer {
@@ -58,5 +54,4 @@ service ReplicaServer {
 
   // Maekawa algorithm
   rpc requestAccess(GrantRequest) returns (GrantResponse);
-  rpc releaseAccess(ReleaseRequest) returns (ReleaseResponse);
 }
