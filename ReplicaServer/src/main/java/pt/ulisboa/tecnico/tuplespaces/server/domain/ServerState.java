@@ -118,18 +118,41 @@ public class ServerState {
 
         // REGEX
         if (isRegex) {
+          while (true) {
+            reserved.clear();
 
-          for (String tuple : tuples.getAllKeys()) {
-            var entry = tuples.getEntry(tuple);
-            if (tuple.matches(pattern) && entry != null && entry.getCounter() > 0) {
-              if (entry.lock.tryLock()) {
-                reserved.add(tuple);
+            // 1. Encontra todos os tuplos que correspondem ao padrão
+            List<String> matchingTuples = new ArrayList<>();
+            for (String tuple : tuples.getAllKeys()) {
+              if (tuple.matches(pattern)) {
+                matchingTuples.add(tuple);
               }
             }
-          }
 
-          if (reserved.isEmpty()) {
-            while (reserved.isEmpty()) {
+            // 2. Tenta bloquear todos
+            boolean allLocked = true;
+            for (String tuple : matchingTuples) {
+              var entry = tuples.getEntry(tuple);
+              if (entry != null && entry.getCounter() > 0 && entry.lock.tryLock()) {
+                reserved.add(tuple);
+              } else {
+                allLocked = false;
+                break;
+              }
+            }
+
+            // 3. Verifica se conseguiu bloquear todos
+            if (!allLocked || reserved.size() < matchingTuples.size()) {
+              // Liberta os que conseguiu
+              for (String t : reserved) {
+                var entry = tuples.getEntry(t);
+                if (entry != null && entry.lock.isHeldByCurrentThread()) {
+                  entry.lock.unlock();
+                }
+              }
+              reserved.clear();
+
+              // Espera até que alguém faça notifyAll() (por exemplo, após release)
               try {
                 lock.wait();
               } catch (InterruptedException e) {
@@ -137,20 +160,11 @@ public class ServerState {
                 System.err.println("Thread interrupted while waiting for matching regex tuples.");
                 return null;
               }
-
-              for (String tuple : tuples.getAllKeys()) {
-                var entry = tuples.getEntry(tuple);
-                if (tuple.matches(pattern) && entry != null && entry.getCounter() > 0) {
-                  if (entry.lock.tryLock()) {
-                    reserved.add(tuple);
-                  }
-                }
-              }
+            } else {
+              debug("Reserved tuples (regex): " + reserved, client_id);
+              return reserved;
             }
           }
-
-          debug("Reserved tuples (regex): " + reserved, client_id);
-          return reserved;
         }
 
         //NOT REGEX
@@ -230,14 +244,27 @@ public class ServerState {
     }
   }
 
-  // Release a tuple (unlock it without modifying the counter)
-  public void release(String tuple, int client_id) {
-    var entry = tuples.getEntry(tuple);
-    if (entry != null && entry.lock.isHeldByCurrentThread()) {
-      entry.lock.unlock();
-      debug("Released tuple lock: " + tuple, client_id);
+  // Release multiple tuples and notify waiting threads
+  public void release(List<String> tuplesToRelease, int client_id) {
+    boolean releasedSomething = false;
+
+    synchronized (this) {
+      for (String tuple : tuplesToRelease) {
+        var entry = tuples.getEntry(tuple);
+        if (entry != null && entry.lock.isHeldByCurrentThread()) {
+          entry.lock.unlock();
+          releasedSomething = true;
+          debug("Released tuple lock: " + tuple, client_id);
+        }
+      }
+
+      if (releasedSomething) {
+        debug("Calling notifyAll() after releasing tuples.", client_id);
+        this.notifyAll();
+      }
     }
   }
+
 
 
 

@@ -41,18 +41,6 @@ public class ConcurrentKeyStore<K> {
         map.remove(key);
     }
 
-    // Decrementa o contador e remove a entrada se o contador chegar a zero
-    public void decrementOrRemove(K key) {
-        map.computeIfPresent(key, (k, entry) -> {
-            entry.decrementCounter();
-            if (entry.getCounter() <= 0) {
-                map.remove(k);
-                return null;
-            }
-            return entry;
-        });
-    }
-
     // Acede à entrada associada à chave
     public EntryData getEntry(K key) {
         return map.get(key);

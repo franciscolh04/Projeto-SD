@@ -176,183 +176,115 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
     @Override
     public void take(TupleSpacesOuterClass.TakeRequest request, StreamObserver<TupleSpacesOuterClass.TakeResponse> responseObserver) {
         try {
-            // Get the delay values from the context
+            // Parse delays
             String delaysString = FrontEndInterceptor.DELAY_VALUE_CONTEXT.get();
+            List<Integer> delays = delaysString.isEmpty() ? Arrays.asList(0, 0, 0)
+                    : Arrays.stream(delaysString.split(",")).map(Integer::parseInt).toList();
+            debug("[TAKE] Delay values: " + delays);
 
-            // Parse the delay values from the string into a list of integers
-            List<Integer> delays;
-            if (delaysString.isEmpty()) {
-                delays = Arrays.asList(0, 0, 0);
-            } else {
-                delays = Arrays.stream(delaysString.split(","))
-                        .map(Integer::parseInt)
-                        .collect(Collectors.toList());
-            }
-            debug("[TAKE] Delay values: " + delays.stream().map(String::valueOf).collect(Collectors.joining(", ")));
+            int client_id = request.getClientId();
+            String pattern = request.getSearchPattern();
+            debug("[TAKE] Received request. Pattern: " + pattern);
 
-            final int client_id = request.getClientId();
-            final String pattern = request.getSearchPattern();
-            debug("[TAKE] Received request from Client. Pattern: " + pattern);
-
-            // 1. Calculate the voter set based on the client id
+            // Define voter set
             int firstReplica = (client_id - 1) % 3;
-            int secondReplica = (client_id ) % 3;
+            int secondReplica = (client_id) % 3;
             List<Integer> voterSet = Arrays.asList(firstReplica, secondReplica);
-            debug("[TAKE] Voter set: " + (voterSet.get(0) + 1) + ", " + (voterSet.get(1) + 1));
 
-            // 2. Request access to the tuple to all servers in the voter set
-            TakeResponseCollector<ReplicaServerOuterClass.GrantResponse> grantCollector = new TakeResponseCollector<>();
+            // Request access
+            GrantResponseCollector grantCollector = new GrantResponseCollector(voterSet.size());
             for (int i : voterSet) {
-                // Create the grant request to send to the server
-                ReplicaServerOuterClass.GrantRequest grantReq = ReplicaServerOuterClass.GrantRequest.newBuilder()
+                var grantReq = ReplicaServerOuterClass.GrantRequest.newBuilder()
                         .setClientId(client_id)
-                        .setSearchPattern(pattern)
-                        .build();
-
-                // Send the requestAccess to the server
-                backendStubs[i].requestAccess(grantReq, new GrantObserver(grantCollector));
-                debug("[TAKE] Sent grant request to Server [" + (i + 1) + "] with delay: " + delays.get(i));
+                        .setSearchPattern(pattern).build();
+                backendStubs[i].requestAccess(grantReq, new GrantObserver(grantCollector, i));
+                debug("[TAKE] Sent grant to Server " + (i + 1));
             }
+            grantCollector.waitUntilAllReceived();
 
-            // Wait until all responses from the voter set are received
-            grantCollector.waitUntilAllReceived(2);
-
-            // 3. Verify if all grants were acquired
-            List<ReplicaServerOuterClass.GrantResponse> grants = grantCollector.collectedResponses;
-            List<List<String>> allTuples = new ArrayList<>();
+            Map<Integer, ReplicaServerOuterClass.GrantResponse> grants = grantCollector.getResponses();
+            Map<Integer, List<String>> grantedTuplesMap = new HashMap<>();
             boolean allGranted = true;
-
-            // Extrai as listas de tuplos de cada GrantResponse
-            for (ReplicaServerOuterClass.GrantResponse grant : grants) {
+            for (int i : voterSet) {
+                var grant = grants.get(i);
                 if (grant == null || !grant.getGranted()) {
                     allGranted = false;
                     break;
                 }
-
-                List<String> tuplesFromGrant = grant.getTuplesList();
-                allTuples.add(tuplesFromGrant);
+                grantedTuplesMap.put(i, grant.getTuplesList());
             }
 
-            // If not all grants were acquired, fail the operation and return an error to the client
-            if (!allGranted || allTuples.size() < 2) {
-                System.err.println("Failed to acquire grants from all replicas.");
+            if (!allGranted || grantedTuplesMap.size() < 2) {
                 responseObserver.onError(io.grpc.Status.UNAVAILABLE.withDescription("Could not acquire lock.").asRuntimeException());
                 return;
             }
-            // If all grants were acquired, proceed with the take operation
-            debug("[TAKE] Grants acquired:" + Arrays.toString(allTuples.toArray()));
 
-            // Escolher o tuplo a retirar (interseção das listas de tuplos)
+            debug("[TAKE] Grants: " + grantedTuplesMap);
+
+            // Escolher tuplo
+            List<String> list1 = grantedTuplesMap.get(voterSet.get(0));
+            List<String> list2 = grantedTuplesMap.get(voterSet.get(1));
             String tuple = null;
-
-            // Caso normal (sem regex): cada grant tem apenas um tuplo
-            if (allTuples.get(0).size() == 1 && allTuples.get(1).size() == 1) {
-                String t1 = allTuples.get(0).get(0);
-                String t2 = allTuples.get(1).get(0);
-
-                if (!t1.equals(t2)) {
-                    System.err.println("Tuples granted by voter set do not match: " + t1 + " vs " + t2);
-                    responseObserver.onError(io.grpc.Status.ABORTED.withDescription("Inconsistent tuple grants.").asRuntimeException());
-                    return;
-                }
-
-                tuple = t1;
-                debug("[TAKE] Tuplo final escolhido (normal): " + tuple);
+            if (list1.size() == 1 && list2.size() == 1 && list1.get(0).equals(list2.get(0))) {
+                tuple = list1.get(0);
             } else {
-                // Caso regex: calcular a interseção
-                Set<String> intersection = new HashSet<>(allTuples.get(0));
-                intersection.retainAll(allTuples.get(1));
-
-                if (intersection.isEmpty()) {
-                    System.err.println("No matching tuple found in intersection.");
-                    responseObserver.onError(io.grpc.Status.ABORTED.withDescription("No common tuple to take.").asRuntimeException());
-                    return;
+                Set<String> intersection = new HashSet<>(list1);
+                intersection.retainAll(list2);
+                if (!intersection.isEmpty()) {
+                    tuple = intersection.iterator().next();
                 }
-
-                tuple = intersection.iterator().next(); // Pega no primeiro
-                debug("[TAKE] Tuplo final escolhido da interseção: " + tuple);
             }
 
-            // 4. Take the tuple from all servers
+            // Preparar release
+            Map<Integer, List<String>> toReleaseMap = new HashMap<>();
+            for (int i : voterSet) {
+                List<String> releaseList = new ArrayList<>();
+                for (String t : grantedTuplesMap.get(i)) {
+                    if (!Objects.equals(t, tuple)) {
+                        releaseList.add(t);
+                    }
+                }
+                toReleaseMap.put(i, releaseList);
+            }
+
+            // Fazer take/release nos servidores
             TakeResponseCollector<ReplicaServerOuterClass.TakeResponseServer> takeCollector = new TakeResponseCollector<>();
-            String finalTuple = tuple;
-
-            List<String> toRelease1 = new ArrayList<>();
-            List<String> toRelease2 = new ArrayList<>();
-            List<String> toRelease = new ArrayList<>();
-
-            for (String t : allTuples.get(0)) {
-                if (!t.equals(finalTuple)) {
-                    toRelease1.add(t);
-                }
-            }
-            for (String t : allTuples.get(1)) {
-                if (!t.equals(finalTuple)) {
-                    toRelease2.add(t);
-                }
-            }
-
-            for (int i = 0; i < num_servers; i++) {
-                Metadata metadata = new Metadata();
-
-                // Add the respective delay value to the metadata
-                if (i < delays.size()) {
-                    metadata.put(DELAY_KEY, String.valueOf(delays.get(i)));
-                } else {
-                    metadata.put(DELAY_KEY, "0"); // Default delay if not provided
-                }
-
-                if (i == voterSet.get(0)) {
-                    toRelease = toRelease1;
-                } else if (i == voterSet.get(1)) {
-                    toRelease = toRelease2;
-                } else {
-                    toRelease = new ArrayList<>();
-                }
-
-                ReplicaServerOuterClass.TakeRequestServer takeReq = ReplicaServerOuterClass.TakeRequestServer.newBuilder()
-                        .setSearchPattern(pattern)
+            for (int i = 0; i < backendStubs.length; i++) {
+                List<String> toRelease = toReleaseMap.getOrDefault(i, new ArrayList<>());
+                String takeTuple = (tuple == null) ? "" : tuple;
+                var req = ReplicaServerOuterClass.TakeRequestServer.newBuilder()
                         .setClientId(client_id)
-                        .setTuple(tuple)
-
+                        .setSearchPattern(pattern)
+                        .setTuple(takeTuple)
                         .setServerIndex(i)
                         .addAllReleaseTuples(toRelease)
-
                         .build();
 
-                // Create a stub with the metadata and send the take request to the server
-                ReplicaServerGrpc.ReplicaServerStub stub = backendStubs[i].withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata));
-                stub.takeServer(takeReq, new TakeObserver(takeCollector));
-                debug("[TAKE] Sent request to Server [" + (i + 1) + "]");
+                Metadata metadata = new Metadata();
+                metadata.put(DELAY_KEY, String.valueOf(i < delays.size() ? delays.get(i) : 0));
+                backendStubs[i].withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata))
+                        .takeServer(req, new TakeObserver(takeCollector));
+            }
+            takeCollector.waitUntilAllReceived(backendStubs.length);
+
+            if (tuple == null) {
+                responseObserver.onError(io.grpc.Status.ABORTED.withDescription("No common tuple to take. Locks released.").asRuntimeException());
+                return;
             }
 
-            // Wait until all responses are received
-            takeCollector.waitUntilAllReceived(num_servers);
-
-
-            // 5. Return the taken tuple to the client
-
-            for (ReplicaServerOuterClass.TakeResponseServer resp : takeCollector.collectedResponses) {
+            // Confirmar tuplo final (redundância)
+            for (var resp : takeCollector.collectedResponses) {
                 if (resp != null && !resp.getResult().isEmpty()) {
-                    finalTuple = resp.getResult();
+                    tuple = resp.getResult();
                     break;
                 }
             }
 
-            if (finalTuple == null) {
-                System.err.println("Failed to take tuple from replicas.");
-                responseObserver.onError(io.grpc.Status.UNAVAILABLE.withDescription("Take operation failed.").asRuntimeException());
-                return;
-            }
-
-            debug("Tuple taken successfully: " + finalTuple);
             TupleSpacesOuterClass.TakeResponse response = TupleSpacesOuterClass.TakeResponse.newBuilder()
-                    .setResult(finalTuple)
-                    .build();
-
-            // Send the response to the client
+                    .setResult(tuple).build();
             responseObserver.onNext(response);
             responseObserver.onCompleted();
+            debug("[TAKE] Final tuple: " + tuple);
 
         } catch (io.grpc.StatusRuntimeException e) { // Catches gRPC communication failures
             System.err.println("[gRPC] Error connecting with server during the Take request: " + e.getStatus().getDescription());

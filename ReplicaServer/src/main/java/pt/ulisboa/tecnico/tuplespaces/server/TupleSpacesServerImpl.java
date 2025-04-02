@@ -49,22 +49,20 @@ public class TupleSpacesServerImpl extends ReplicaServerGrpc.ReplicaServerImplBa
     // Take a tuple from the tuple space
     @Override
     public void takeServer(ReplicaServerOuterClass.TakeRequestServer request, StreamObserver<ReplicaServerOuterClass.TakeResponseServer> responseObserver) {
-        String pattern = request.getTuple();
+        String tupleToTake = request.getTuple();
         final int client_id = request.getClientId();
+        String tuple = "";
 
-        String tuple = state.takeServer(pattern, client_id);
-
+        // Só tenta fazer take se o tuplo não for nulo ou vazio
+        if (!tupleToTake.isEmpty()) {
+            tuple = state.takeServer(tupleToTake, client_id);
+        }
 
         // Faz release dos tuplos extra que este servidor bloqueou
         List<String> releaseList = request.getReleaseTuplesList();
         if (!releaseList.isEmpty()) {
-            for (String t : releaseList) {
-                state.release(t, client_id);
-            }
+            state.release(releaseList, client_id);
         }
-
-        //prints de debug
-        System.out.println("Server " + (1 + request.getServerIndex()) + " released: " + releaseList);
 
         // Send the response with the taken tuple
         ReplicaServerOuterClass.TakeResponseServer response = ReplicaServerOuterClass.TakeResponseServer.newBuilder().setResult(tuple).build();
