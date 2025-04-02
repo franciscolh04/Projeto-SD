@@ -4,6 +4,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.Set;
 
+/*
+    Class representing a key map (tuples) with associated counters
+    Each key has an associated counter that is incremented and decremented
+    The counter is incremented when a tuple is inserted and decremented when it is removed
+    The key is removed from the map when the counter reaches 0
+    The class includes per-key lock implementation to ensure counter consistency
+*/
+
 public class ConcurrentKeyStore<K> {
 
     public static class EntryData {
@@ -25,7 +33,7 @@ public class ConcurrentKeyStore<K> {
 
     private final ConcurrentHashMap<K, EntryData> map = new ConcurrentHashMap<>();
 
-    // Cria a entrada se não existir; incrementa o contador caso exista
+    // Creates the key if it does not exist and increments the respective counter
     public void putOrIncrement(K key) {
         map.compute(key, (k, entry) -> {
             if (entry == null) {
@@ -36,21 +44,17 @@ public class ConcurrentKeyStore<K> {
         });
     }
 
-    // Remove diretamente uma entrada
+    // Removes the key
     public void remove(K key) {
         map.remove(key);
     }
 
-    // Acede à entrada associada à chave
+    // Access the respective key
     public EntryData getEntry(K key) {
         return map.get(key);
     }
 
-    // Verifica se a chave existe
-    public boolean containsKey(K key) {
-        return map.containsKey(key);
-    }
-
+    // Returns all keys
     public Set<K> getAllKeys() {
         return map.keySet();
     }

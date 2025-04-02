@@ -182,16 +182,17 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                     : Arrays.stream(delaysString.split(",")).map(Integer::parseInt).toList();
             debug("[TAKE] Delay values: " + delays);
 
+            // Get client id and search pattern
             int client_id = request.getClientId();
             String pattern = request.getSearchPattern();
             debug("[TAKE] Received request. Pattern: " + pattern);
 
-            // Define voter set
+            // 1. DEFINE VOTER SET
             int firstReplica = (client_id - 1) % 3;
             int secondReplica = (client_id) % 3;
             List<Integer> voterSet = Arrays.asList(firstReplica, secondReplica);
 
-            // Request access
+            // 2. REQUEST GRANTS
             GrantResponseCollector grantCollector = new GrantResponseCollector(voterSet.size());
             for (int i : voterSet) {
                 var grantReq = ReplicaServerOuterClass.GrantRequest.newBuilder()
@@ -202,6 +203,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             }
             grantCollector.waitUntilAllReceived();
 
+            // Now we have to check if all grants were successful
             Map<Integer, ReplicaServerOuterClass.GrantResponse> grants = grantCollector.getResponses();
             Map<Integer, List<String>> grantedTuplesMap = new HashMap<>();
             boolean allGranted = true;
@@ -214,6 +216,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                 grantedTuplesMap.put(i, grant.getTuplesList());
             }
 
+            // If not all grants were successful, release all locks and return error
             if (!allGranted || grantedTuplesMap.size() < 2) {
                 responseObserver.onError(io.grpc.Status.UNAVAILABLE.withDescription("Could not acquire lock.").asRuntimeException());
                 return;
@@ -221,13 +224,14 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
 
             debug("[TAKE] Grants: " + grantedTuplesMap);
 
-            // Escolher tuplo
+            // Choose tuple to take (intersection of granted tuples)
             List<String> list1 = grantedTuplesMap.get(voterSet.get(0));
             List<String> list2 = grantedTuplesMap.get(voterSet.get(1));
             String tuple = null;
+            // If both lists have only one element and they are the same, choose that element
             if (list1.size() == 1 && list2.size() == 1 && list1.get(0).equals(list2.get(0))) {
                 tuple = list1.get(0);
-            } else {
+            } else { // Otherwise, choose the first common element
                 Set<String> intersection = new HashSet<>(list1);
                 intersection.retainAll(list2);
                 if (!intersection.isEmpty()) {
@@ -235,7 +239,8 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                 }
             }
 
-            // Preparar release
+            // We have to release all locks except the one we are taking (even if it is "null", no interception)
+            // so we do a release list with all tuples except the one we are taking
             Map<Integer, List<String>> toReleaseMap = new HashMap<>();
             for (int i : voterSet) {
                 List<String> releaseList = new ArrayList<>();
@@ -247,7 +252,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                 toReleaseMap.put(i, releaseList);
             }
 
-            // Fazer take/release nos servidores
+            // 3. TAKE TUPLE (and release the remaining ones inside this step)
             TakeResponseCollector<ReplicaServerOuterClass.TakeResponseServer> takeCollector = new TakeResponseCollector<>();
             for (int i = 0; i < backendStubs.length; i++) {
                 List<String> toRelease = toReleaseMap.getOrDefault(i, new ArrayList<>());
@@ -267,12 +272,15 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             }
             takeCollector.waitUntilAllReceived(backendStubs.length);
 
+            // Only now we will tell that if the tuple/intersection is null, we could not take any tuple
+            // We have already released all locks, so we can return an error
             if (tuple == null) {
                 responseObserver.onError(io.grpc.Status.ABORTED.withDescription("No common tuple to take. Locks released.").asRuntimeException());
                 return;
             }
 
-            // Confirmar tuplo final (redundância)
+            // For debug reasons and to ensure that the right tuple was taken, we will check the final tuple
+            // that was given to the server and its response and send it to the client
             for (var resp : takeCollector.collectedResponses) {
                 if (resp != null && !resp.getResult().isEmpty()) {
                     tuple = resp.getResult();
@@ -280,6 +288,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                 }
             }
 
+            //4. SEND RESPONSE TO CLIENT
             TupleSpacesOuterClass.TakeResponse response = TupleSpacesOuterClass.TakeResponse.newBuilder()
                     .setResult(tuple).build();
             responseObserver.onNext(response);

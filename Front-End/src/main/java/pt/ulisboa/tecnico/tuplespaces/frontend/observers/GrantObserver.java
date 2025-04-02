@@ -21,7 +21,7 @@ public class GrantObserver implements StreamObserver<ReplicaServerOuterClass.Gra
     @Override
     public void onError(Throwable t) {
         System.err.println("[TAKE] Error from server " + (serverIndex + 1) + " during grant: " + t.getMessage());
-        collector.addResponse(serverIndex, null); // adiciona nulo para marcar falha
+        collector.addResponse(serverIndex, null);
     }
 
     @Override

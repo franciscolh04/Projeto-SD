@@ -53,12 +53,14 @@ public class TupleSpacesServerImpl extends ReplicaServerGrpc.ReplicaServerImplBa
         final int client_id = request.getClientId();
         String tuple = "";
 
-        // Só tenta fazer take se o tuplo não for nulo ou vazio
+        // It only takes the tuple if it is not empty (no tuple to take / no intersection)
         if (!tupleToTake.isEmpty()) {
             tuple = state.takeServer(tupleToTake, client_id);
         }
 
-        // Faz release dos tuplos extra que este servidor bloqueou
+        // Now we release the remaining tuples that were locked
+        // We have avoided extra messages by sending all the tuples to release in a single message
+        // And in the same request in which we take the tuple
         List<String> releaseList = request.getReleaseTuplesList();
         if (!releaseList.isEmpty()) {
             state.release(releaseList, client_id);
