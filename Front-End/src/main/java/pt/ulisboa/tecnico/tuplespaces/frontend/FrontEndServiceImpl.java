@@ -233,6 +233,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             grantCollector.waitUntilAllReceived();
 
             // Now we have to check if all grants were successful
+            // If everything worked as supposed, then we should always have 2 grants with at least one tuple
             Map<Integer, ReplicaServerOuterClass.GrantResponse> grants = grantCollector.getResponses();
             Map<Integer, List<String>> grantedTuplesMap = new HashMap<>();
             boolean allGranted = true;
@@ -245,7 +246,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                 grantedTuplesMap.put(i, grant.getTuplesList());
             }
 
-            // If not all grants were successful, release all locks and return error
+            // If not all grants were successful, then we have to break the opperation --> internal error
             if (!allGranted || grantedTuplesMap.size() < 2) {
                 responseObserver.onError(io.grpc.Status.UNAVAILABLE.withDescription("Could not acquire lock.").asRuntimeException());
                 return;
