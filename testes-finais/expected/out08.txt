@@ -1,0 +1,31 @@
+Cliente1:
+> put <ola>
+OK
+
+> take <ola> 0 0 60
+OK
+<ola>
+
+> put <ola>
+OK
+
+Cliente2:
+> sleep 10
+
+> getTupleSpacesState
+OK
+[<ola>]
+
+> sleep 60
+
+> getTupleSpacesState
+OK
+[<ola>, <ola>, <ola>]
+
+
+// this test demonstrates in a very good way the second optimization of C2:
+// put <ola> (#3) in Cliente1 returns immediately, but it is actually not being processed by any replica yet,
+// because the take <ola> 0 0 60 (#2) in Cliente1 is still being processed by R3 (delay = 60 seconds).
+// we can prove this by doing a couple getTupleSpacesState's commands in Cliente2:
+// the first one will return [<ola>] because the tuple <ola> is still present in R3,
+// and the second one will return [<ola>, <ola>, <ola>] because the put <ola> (#3) in Cliente1 has finally been processed.

@@ -1,0 +1,11 @@
+Cliente1:
+put <ola>
+take <ola> 0 0 60
+put <ola>
+
+Cliente2:
+sleep 10
+getTupleSpacesState
+sleep 60
+getTupleSpacesState
+
