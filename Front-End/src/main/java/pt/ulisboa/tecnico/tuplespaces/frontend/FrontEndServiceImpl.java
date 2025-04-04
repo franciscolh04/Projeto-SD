@@ -226,6 +226,9 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             int clientId = request.getClientId();
             int ticketNumber = clientTickets.getOrDefault(clientId, 0);
             ticketNumber++;
+            boolean flag = true;
+            String tuple = null;
+            int sleepingTime = 1000;
 
             // Update the ticket number in the HashMap
             clientTickets.put(clientId, ticketNumber);
@@ -253,98 +256,113 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             clientTakeLocks.putIfAbsent(clientId, new Object());
             Object clientTakeLock = clientTakeLocks.get(clientId);
 
+            TakeResponseCollector<ReplicaServerOuterClass.TakeResponseServer> takeCollector = new TakeResponseCollector<>();
 
-            // 2. REQUEST GRANTS
-            GrantResponseCollector grantCollector = new GrantResponseCollector(voterSet.size());
-            for (int i : voterSet) {
-                var grantReq = ReplicaServerOuterClass.GrantRequest.newBuilder()
-                        .setClientId(client_id)
-                        .setTicketNumber(ticketNumber)
-                        .setSearchPattern(pattern).build();
-                backendStubs[i].requestAccess(grantReq, new GrantObserver(grantCollector, i));
-                debug("[TAKE] Sent grant to Server " + (i + 1));
-            }
-            grantCollector.waitUntilAllReceived();
-
-
-            // Now we have to check if all grants were successful
-            // If everything worked as supposed, then we should always have 2 grants with at least one tuple
-            Map<Integer, ReplicaServerOuterClass.GrantResponse> grants = grantCollector.getResponses();
-            Map<Integer, List<String>> grantedTuplesMap = new HashMap<>();
-            boolean allGranted = true;
-            for (int i : voterSet) {
-                var grant = grants.get(i);
-                if (grant == null || !grant.getGranted()) {
-                    allGranted = false;
-                    break;
+            while(flag) {
+                // 2. REQUEST GRANTS
+                GrantResponseCollector grantCollector = new GrantResponseCollector(voterSet.size());
+                for (int i : voterSet) {
+                    var grantReq = ReplicaServerOuterClass.GrantRequest.newBuilder()
+                            .setClientId(client_id)
+                            .setTicketNumber(ticketNumber)
+                            .setSearchPattern(pattern).build();
+                    backendStubs[i].requestAccess(grantReq, new GrantObserver(grantCollector, i));
+                    debug("[TAKE] Sent grant to Server " + (i + 1));
                 }
-                grantedTuplesMap.put(i, grant.getTuplesList());
-            }
+                grantCollector.waitUntilAllReceived();
 
-            // If not all grants were successful, then we have to break the opperation --> internal error
-            if (!allGranted || grantedTuplesMap.size() < 2) {
-                responseObserver.onError(io.grpc.Status.UNAVAILABLE.withDescription("Could not acquire lock.").asRuntimeException());
-                return;
-            }
 
-            debug("[TAKE] Grants: " + grantedTuplesMap);
-
-            // Choose tuple to take (intersection of granted tuples)
-            List<String> list1 = grantedTuplesMap.get(voterSet.get(0));
-            List<String> list2 = grantedTuplesMap.get(voterSet.get(1));
-            String tuple = null;
-            // If both lists have only one element and they are the same, choose that element
-            if (list1.size() == 1 && list2.size() == 1 && list1.get(0).equals(list2.get(0))) {
-                tuple = list1.get(0);
-            } else { // Otherwise, choose the first common element
-                Set<String> intersection = new HashSet<>(list1);
-                intersection.retainAll(list2);
-                if (!intersection.isEmpty()) {
-                    tuple = intersection.iterator().next();
+                // Now we have to check if all grants were successful
+                // If everything worked as supposed, then we should always have 2 grants with at least one tuple
+                Map<Integer, ReplicaServerOuterClass.GrantResponse> grants = grantCollector.getResponses();
+                Map<Integer, List<String>> grantedTuplesMap = new HashMap<>();
+                boolean allGranted = true;
+                for (int i : voterSet) {
+                    var grant = grants.get(i);
+                    if (grant == null || !grant.getGranted()) {
+                        allGranted = false;
+                        break;
+                    }
+                    grantedTuplesMap.put(i, grant.getTuplesList());
                 }
-            }
 
-            if(tuple != null) {
-                //3. SEND RESPONSE TO CLIENT
-                TupleSpacesOuterClass.TakeResponse response = TupleSpacesOuterClass.TakeResponse.newBuilder()
-                        .setResult(tuple).build();
-                responseObserver.onNext(response);
-                responseObserver.onCompleted();
-            }
+                // If not all grants were successful, then we have to break the opperation --> internal error
+                if (!allGranted || grantedTuplesMap.size() < 2) {
+                    responseObserver.onError(io.grpc.Status.UNAVAILABLE.withDescription("Could not acquire lock.").asRuntimeException());
+                    return;
+                }
 
-            // We have to release all locks except the one we are taking (even if it is "null", no interception)
-            // so we do a release list with all tuples except the one we are taking
-            Map<Integer, List<String>> toReleaseMap = new HashMap<>();
-            for (int i : voterSet) {
-                List<String> releaseList = new ArrayList<>();
-                for (String t : grantedTuplesMap.get(i)) {
-                    if (!Objects.equals(t, tuple)) {
-                        releaseList.add(t);
+                debug("[TAKE] Grants: " + grantedTuplesMap);
+
+                // Choose tuple to take (intersection of granted tuples)
+                List<String> list1 = grantedTuplesMap.get(voterSet.get(0));
+                List<String> list2 = grantedTuplesMap.get(voterSet.get(1));
+                tuple = null;
+                // If both lists have only one element and they are the same, choose that element
+                if (list1.size() == 1 && list2.size() == 1 && list1.get(0).equals(list2.get(0))) {
+                    tuple = list1.get(0);
+                } else { // Otherwise, choose the first common element
+                    Set<String> intersection = new HashSet<>(list1);
+                    intersection.retainAll(list2);
+                    if (!intersection.isEmpty()) {
+                        tuple = intersection.iterator().next();
                     }
                 }
-                toReleaseMap.put(i, releaseList);
-            }
 
-            // 4. TAKE TUPLE (and release the remaining ones inside this step)
-            TakeResponseCollector<ReplicaServerOuterClass.TakeResponseServer> takeCollector = new TakeResponseCollector<>();
-            for (int i = 0; i < backendStubs.length; i++) {
-                List<String> toRelease = toReleaseMap.getOrDefault(i, new ArrayList<>());
-                String takeTuple = (tuple == null) ? "" : tuple;
-                var req = ReplicaServerOuterClass.TakeRequestServer.newBuilder()
-                        .setClientId(client_id)
-                        .setSearchPattern(pattern)
-                        .setTuple(takeTuple)
-                        .setServerIndex(i)
-                        .setTicketNumber(ticketNumber)
-                        .addAllReleaseTuples(toRelease)
-                        .build();
+                if (tuple != null) {
+                    //3. SEND RESPONSE TO CLIENT
+                    TupleSpacesOuterClass.TakeResponse response = TupleSpacesOuterClass.TakeResponse.newBuilder()
+                            .setResult(tuple).build();
+                    responseObserver.onNext(response);
+                    responseObserver.onCompleted();
+                    flag = false;
+                }
 
-                Metadata metadata = new Metadata();
-                metadata.put(DELAY_KEY, String.valueOf(i < delays.size() ? delays.get(i) : 0));
-                backendStubs[i].withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata))
-                        .takeServer(req, new TakeObserver(takeCollector));
+                // We have to release all locks except the one we are taking (even if it is "null", no interception)
+                // so we do a release list with all tuples except the one we are taking
+                Map<Integer, List<String>> toReleaseMap = new HashMap<>();
+                for (int i : voterSet) {
+                    List<String> releaseList = new ArrayList<>();
+                    for (String t : grantedTuplesMap.get(i)) {
+                        if (!Objects.equals(t, tuple)) {
+                            releaseList.add(t);
+                        }
+                    }
+                    toReleaseMap.put(i, releaseList);
+                }
+
+                // 4. TAKE TUPLE (and release the remaining ones inside this step)
+                takeCollector = new TakeResponseCollector<>();
+                for (int i = 0; i < backendStubs.length; i++) {
+                    List<String> toRelease = toReleaseMap.getOrDefault(i, new ArrayList<>());
+                    String takeTuple = (tuple == null) ? "" : tuple;
+                    var req = ReplicaServerOuterClass.TakeRequestServer.newBuilder()
+                            .setClientId(client_id)
+                            .setSearchPattern(pattern)
+                            .setTuple(takeTuple)
+                            .setServerIndex(i)
+                            .setTicketNumber(ticketNumber)
+                            .addAllReleaseTuples(toRelease)
+                            .build();
+
+                    Metadata metadata = new Metadata();
+                    metadata.put(DELAY_KEY, String.valueOf(i < delays.size() ? delays.get(i) : 0));
+                    backendStubs[i].withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata))
+                            .takeServer(req, new TakeObserver(takeCollector));
+                }
+                takeCollector.waitUntilAllReceived(backendStubs.length);
+
+                if(tuple == null) {
+                    System.out.println("[TAKE] No tuple found, chegou ao final da linha");
+                    try {
+                        Thread.sleep(sleepingTime); // Espera 2 segundos
+                        sleepingTime = sleepingTime * 2;
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
             }
-            takeCollector.waitUntilAllReceived(backendStubs.length);
 
             synchronized (clientTakeLock) {
                 clientTakeLock.notifyAll();

@@ -44,9 +44,9 @@ public class TupleSpacesServerImpl extends ReplicaServerGrpc.ReplicaServerImplBa
 
             // Put the tuple in the tuple space and increment the ticket number
             state.put(tuple, client_id);
-            clientTickets.put(client_id, requestTicketNumber + 1);
-
             // Notify all waiting threads for this client
+            // Increment the ticket number and notify all waiting threads for this client
+            clientTickets.put(client_id, requestTicketNumber + 1);
             clientLock.notifyAll();
         }
 
@@ -131,8 +131,12 @@ public class TupleSpacesServerImpl extends ReplicaServerGrpc.ReplicaServerImplBa
             }
 
             // Increment the ticket number and notify all waiting threads for this client
-            clientTickets.put(client_id, requestTicketNumber + 1);
-            clientLock.notifyAll();
+            if(tuple != null && tuple != "") {
+                clientTickets.put(client_id, requestTicketNumber + 1);
+                clientLock.notifyAll();
+            }
+
+
         }
 
         // Send the response with the taken tuple
