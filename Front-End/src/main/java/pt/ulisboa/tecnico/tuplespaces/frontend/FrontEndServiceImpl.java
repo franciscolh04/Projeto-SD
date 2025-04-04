@@ -35,6 +35,9 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
     private ReplicaServerGrpc.ReplicaServerStub[] backendStubs;
     private ManagedChannel[] channels;
     private ConcurrentHashMap<Integer, Integer> clientTickets = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Integer, Integer> clientTakeInProgress = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Integer, Object> clientTakeLocks = new ConcurrentHashMap<>();
+
 
     // Key to send the delay value in the metadata in the header of the request
     public Metadata.Key<String> DELAY_KEY = Metadata.Key.of("delay", Metadata.ASCII_STRING_MARSHALLER);
@@ -70,9 +73,18 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             // Update the ticket number in the HashMap
             clientTickets.put(clientId, ticketNumber);
 
+            int takeWaits = clientTakeInProgress.getOrDefault(clientId, 0);
+
+            debug("Received put request from Client. Forwarding to Server. Tuple to add: " + request.getNewTuple());
+
             // Send the response to the client
             responseObserver.onNext(TupleSpacesOuterClass.PutResponse.newBuilder().build());
             responseObserver.onCompleted();
+
+            // Get the client take lock for this client
+            // Get the client lock for this client
+            clientTakeLocks.putIfAbsent(clientId, new Object());
+            Object clientTakeLock = clientTakeLocks.get(clientId);
 
             // Get the delay values from the context
             String delaysString = FrontEndInterceptor.DELAY_VALUE_CONTEXT.get();
@@ -87,10 +99,23 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                         .collect(Collectors.toList());
             }
 
-            debug("Received put request from Client. Forwarding to Server. Tuple to add: " + request.getNewTuple());
+
+            synchronized (clientTakeLock) {
+
+                while(takeWaits > 0) {
+                    try {
+                        clientTakeLock.wait();
+                        takeWaits--;
+                    }
+                    catch (InterruptedException e) {
+                        Thread.currentThread().interrupt(); // Keep the interrupt status
+                        return;
+                    }
+                }
+            }
 
             ResponseCollector<ReplicaServerOuterClass.PutResponseServer> c = new ResponseCollector<ReplicaServerOuterClass.PutResponseServer>();
-            for(int i = 0; i < num_servers; i++) {
+            for (int i = 0; i < num_servers; i++) {
                 Metadata metadata = new Metadata();
 
                 // Add the respective delay value to the metadata
@@ -114,6 +139,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             c.waitUntilAllReceived(num_servers);
 
             debug("[PUT] Received response from Server. Forwarding to Client. Feedback Status: Success");
+
 
         } catch (io.grpc.StatusRuntimeException e) { // Capture gRPC communication failures
             System.err.println("[gRPC] Error connecting with server during the put request: " + e.getStatus().getDescription());
@@ -204,6 +230,10 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             // Update the ticket number in the HashMap
             clientTickets.put(clientId, ticketNumber);
 
+            // Initialize the clientTakeInProgress flag if not already set
+            int takesInProgress = clientTakeInProgress.getOrDefault(clientId, 0);
+            clientTakeInProgress.put(clientId, takesInProgress + 1);
+
             // Parse delays
             String delaysString = FrontEndInterceptor.DELAY_VALUE_CONTEXT.get();
             List<Integer> delays = delaysString.isEmpty() ? Arrays.asList(0, 0, 0)
@@ -220,6 +250,10 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             int secondReplica = (client_id) % 3;
             List<Integer> voterSet = Arrays.asList(firstReplica, secondReplica);
 
+            clientTakeLocks.putIfAbsent(clientId, new Object());
+            Object clientTakeLock = clientTakeLocks.get(clientId);
+
+
             // 2. REQUEST GRANTS
             GrantResponseCollector grantCollector = new GrantResponseCollector(voterSet.size());
             for (int i : voterSet) {
@@ -231,6 +265,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                 debug("[TAKE] Sent grant to Server " + (i + 1));
             }
             grantCollector.waitUntilAllReceived();
+
 
             // Now we have to check if all grants were successful
             // If everything worked as supposed, then we should always have 2 grants with at least one tuple
@@ -269,11 +304,13 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                 }
             }
 
-            //3. SEND RESPONSE TO CLIENT
-            TupleSpacesOuterClass.TakeResponse response = TupleSpacesOuterClass.TakeResponse.newBuilder()
-                    .setResult(tuple).build();
-            responseObserver.onNext(response);
-            responseObserver.onCompleted();
+            if(tuple != null) {
+                //3. SEND RESPONSE TO CLIENT
+                TupleSpacesOuterClass.TakeResponse response = TupleSpacesOuterClass.TakeResponse.newBuilder()
+                        .setResult(tuple).build();
+                responseObserver.onNext(response);
+                responseObserver.onCompleted();
+            }
 
             // We have to release all locks except the one we are taking (even if it is "null", no interception)
             // so we do a release list with all tuples except the one we are taking
@@ -309,12 +346,13 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             }
             takeCollector.waitUntilAllReceived(backendStubs.length);
 
-            // Only now we will tell that if the tuple/intersection is null, we could not take any tuple
-            // We have already released all locks, so we can return an error
-            if (tuple == null) {
-                responseObserver.onError(io.grpc.Status.ABORTED.withDescription("No common tuple to take. Locks released.").asRuntimeException());
-                return;
+            synchronized (clientTakeLock) {
+                clientTakeLock.notifyAll();
             }
+            // Mark that the take operation finished for the given client
+            takesInProgress = clientTakeInProgress.get(clientId);
+            clientTakeInProgress.put(clientId, takesInProgress - 1);
+
 
             // For debug reasons and to ensure that the right tuple was taken, we will check the final tuple
             // that was given to the server and its response and send it to the client
@@ -324,9 +362,14 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                     break;
                 }
             }
-
-
             debug("[TAKE] Final tuple: " + tuple);
+
+            // Only now we will tell that if the tuple/intersection is null, we could not take any tuple
+            // We have already released all locks, so we can return an error
+            if (tuple == null) {
+                responseObserver.onError(io.grpc.Status.ABORTED.withDescription("No common tuple to take. Locks released.").asRuntimeException());
+                return;
+            }
 
         } catch (io.grpc.StatusRuntimeException e) { // Catches gRPC communication failures
             System.err.println("[gRPC] Error connecting with server during the Take request: " + e.getStatus().getDescription());
