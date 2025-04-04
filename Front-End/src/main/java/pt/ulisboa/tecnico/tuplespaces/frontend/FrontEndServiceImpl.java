@@ -353,12 +353,12 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                 takeCollector.waitUntilAllReceived(backendStubs.length);
 
                 if(tuple == null) {
-                    System.out.println("[TAKE] No tuple found, chegou ao final da linha");
                     try {
-                        Thread.sleep(sleepingTime); // Espera 2 segundos
+                        Thread.sleep(sleepingTime);
                         sleepingTime = sleepingTime * 2;
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        System.err.println("Unexpected Error during the Take request: " + e.getMessage());
+                        responseObserver.onError(e); // Sends the error to the client
                     }
                 }
 

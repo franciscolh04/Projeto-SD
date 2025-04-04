@@ -1,0 +1,7 @@
+Cliente1:
+put <ola> 60 60 60
+read <ola>
+
+Cliente2:
+sleep 10
+put <ola>

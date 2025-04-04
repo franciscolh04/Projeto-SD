@@ -1,5 +1,0 @@
-put <vaga,sd,turno1>
-getTupleSpacesState
-take <vaga,sd,turno1>
-getTupleSpacesState
-exit

@@ -1,0 +1,5 @@
+Cliente1:
+put <b>
+put <a> 0 30 30
+take <a>
+take <b>

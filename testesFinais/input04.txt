@@ -1,0 +1,6 @@
+Cliente1:
+put <a> 10 10 0
+
+Cliente2:
+put <b> 0 10 10
+take <[^,]+>

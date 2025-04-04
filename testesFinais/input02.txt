@@ -1,0 +1,4 @@
+Cliente1:
+put <a>
+take <a>
+read <a>

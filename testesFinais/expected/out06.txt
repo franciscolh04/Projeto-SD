@@ -1,0 +1,18 @@
+Cliente1:
+> put <a>
+OK
+
+> take <a>
+OK
+<a>
+
+> put <b>
+OK
+
+Cliente2:
+> read <b>
+OK
+<b>
+
+> read <a>
+(waiting for someone to put <a>)

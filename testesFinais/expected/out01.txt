@@ -1,0 +1,22 @@
+Cliente1:
+
+take <[^,]+>
+(after some consecutive tries (exp time increase between tries))
+
+> OK
+<b> or <a>
+
+
+Cliente2:
+put <a> 0 30 30
+> OK
+
+(only after the Cliente1 get the first OK)
+
+take <a> or <b>
+> OK
+<b> or <a> (remaining tuple --> to ensure that everything is ok and is not locked)
+
+Cliente3:
+put <b> 30 0 30
+> OK

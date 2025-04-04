@@ -1,0 +1,15 @@
+Cliente1:
+
+> put <a> 10 10 0
+OK
+
+Cliente2:
+
+> put <b> 0 0 10
+OK
+
+> take <[^,]+>
+OK
+<b>
+
+(por exemplo)

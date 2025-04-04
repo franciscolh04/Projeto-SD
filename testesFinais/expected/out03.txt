@@ -1,0 +1,16 @@
+Cliente1:
+
+> put <b>
+OK
+
+> put <a> 0 30 30
+OK
+
+> take <a>
+(waits delay --> until he has the intersection of both servers)
+OK
+<a>
+
+> take <b> (this take will not be done first than the previous one)
+OK
+<b>

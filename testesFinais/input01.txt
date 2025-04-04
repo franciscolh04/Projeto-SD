@@ -1,0 +1,13 @@
+Cliente1:
+take <[^,]+>
+
+Cliente2:
+put <a> 0 30 30
+
+Cliente3:
+put <b> 30 0 30
+
+(only after the Cliente1 get the first OK)
+
+Cliente2:
+take <a> or <b> (remaining tuple - to ensure that everything is ok and is not locked)

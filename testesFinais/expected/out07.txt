@@ -1,0 +1,15 @@
+Cliente1:
+> put <ola> 60 60 60
+OK
+
+> read <ola>
+(wait for the previous command to finish executing in the background)
+
+Cliente2:
+> put <ola>
+OK
+
+// this test demonstrates in a very good way the first optimization of C2:
+// the read (#2) in Cliente1 will wait for the put <ola> (#1) in Cliente1 to finish,
+// even after the put <ola> in Cliente2, because it cannot be done first,
+// since we have to ensure that the linearity property is satisfied.

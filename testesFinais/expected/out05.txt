@@ -1,0 +1,5 @@
+Cliente2:
+> take <[^,]+>
+OK
+<b>
+
