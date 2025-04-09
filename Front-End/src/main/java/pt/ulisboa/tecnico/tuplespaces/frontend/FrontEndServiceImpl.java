@@ -69,9 +69,10 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
             int clientId = request.getClientId();
             int ticketNumber = clientTickets.getOrDefault(clientId, 0);
             ticketNumber++;
+            int ticketNumber2 = ticketNumber + 1;
 
             // Update the ticket number in the HashMap
-            clientTickets.put(clientId, ticketNumber);
+            clientTickets.put(clientId, ticketNumber2);
 
             int takeWaits = clientTakeInProgress.getOrDefault(clientId, 0);
 
@@ -135,8 +136,36 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                 debug("[PUT] Sent request to Server [" + (i + 1) + "] with delay: " + delays.get(i));
             }
 
+
             // Wait until all responses are received
             c.waitUntilAllReceived(num_servers);
+
+            ResponseCollector<ReplicaServerOuterClass.PutResponseServer> c1 = new ResponseCollector<ReplicaServerOuterClass.PutResponseServer>();
+            for (int i = 0; i < num_servers; i++) {
+                Metadata metadata = new Metadata();
+
+                // Add the respective delay value to the metadata
+                if (i < delays.size()) {
+                    metadata.put(DELAY_KEY, String.valueOf(delays.get(i)));
+                } else {
+                    metadata.put(DELAY_KEY, "0"); // Default delay if not provided
+                }
+
+                // Create a stub with the metadata and send the put request to the server
+                ReplicaServerGrpc.ReplicaServerStub stub = backendStubs[i].withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata));
+                stub.putServer(ReplicaServerOuterClass.PutRequestServer.newBuilder()
+                        .setNewTuple((request.getNewTuple() + "_extra"))
+                        .setClientId(request.getClientId())
+                        .setTicketNumber(ticketNumber2)
+                        .build(), new PutObserver(c1));
+                debug("[PUT] Sent request to Server [" + (i + 1) + "] with delay: " + delays.get(i));
+            }
+
+
+            // Wait until all responses are received
+            c1.waitUntilAllReceived(num_servers);
+
+
 
             debug("[PUT] Received response from Server. Forwarding to Client. Feedback Status: Success");
 
