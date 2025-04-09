@@ -114,6 +114,9 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                 }
             }
 
+            //tuplo 2 que é o pedido + "_extra"
+            String newtuple = request.getNewTuple() + "_extra";
+
             ResponseCollector<ReplicaServerOuterClass.PutResponseServer> c = new ResponseCollector<ReplicaServerOuterClass.PutResponseServer>();
             for (int i = 0; i < num_servers; i++) {
                 Metadata metadata = new Metadata();
@@ -129,6 +132,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                 ReplicaServerGrpc.ReplicaServerStub stub = backendStubs[i].withInterceptors(MetadataUtils.newAttachHeadersInterceptor(metadata));
                 stub.putServer(ReplicaServerOuterClass.PutRequestServer.newBuilder()
                         .setNewTuple(request.getNewTuple())
+                        .setNewTuple2(newtuple)
                         .setClientId(request.getClientId())
                         .setTicketNumber(ticketNumber)
                         .build(), new PutObserver(c));

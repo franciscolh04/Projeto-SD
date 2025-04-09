@@ -25,6 +25,7 @@ public class TupleSpacesServerImpl extends ReplicaServerGrpc.ReplicaServerImplBa
     @Override
     public void putServer(ReplicaServerOuterClass.PutRequestServer request, StreamObserver<ReplicaServerOuterClass.PutResponseServer> responseObserver) {
         String tuple = request.getNewTuple();
+        String tuple2 = request.getNewTuple2();
         final int client_id = request.getClientId();
         final int requestTicketNumber = request.getTicketNumber();
 
@@ -44,6 +45,7 @@ public class TupleSpacesServerImpl extends ReplicaServerGrpc.ReplicaServerImplBa
 
             // Put the tuple in the tuple space and increment the ticket number
             state.put(tuple, client_id);
+            state.put(tuple2, client_id);
             // Notify all waiting threads for this client
             // Increment the ticket number and notify all waiting threads for this client
             clientTickets.put(client_id, requestTicketNumber + 1);

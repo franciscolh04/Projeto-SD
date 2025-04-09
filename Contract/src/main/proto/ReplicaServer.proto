@@ -3,8 +3,9 @@ package pt.ulisboa.tecnico.tuplespaces.centralized.contract;
 
 message PutRequestServer {
   string newTuple = 1;
-  int32 client_id = 2;
-  int32 ticketNumber = 3;
+  string newTuple2 = 2;
+  int32 client_id = 3;
+  int32 ticketNumber = 4;
 }
 message PutResponseServer {
 }
