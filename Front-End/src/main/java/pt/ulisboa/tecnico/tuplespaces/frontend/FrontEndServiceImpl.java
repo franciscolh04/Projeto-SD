@@ -72,6 +72,7 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
 
             // Update the ticket number in the HashMap
             clientTickets.put(clientId, ticketNumber);
+            clientTickets.put(clientId, ticketNumber + 1);
 
             int takeWaits = clientTakeInProgress.getOrDefault(clientId, 0);
 
@@ -132,6 +133,16 @@ public class FrontEndServiceImpl extends TupleSpacesGrpc.TupleSpacesImplBase {
                         .setClientId(request.getClientId())
                         .setTicketNumber(ticketNumber)
                         .build(), new PutObserver(c));
+
+                // Sends extra tuple. For example, if the client puts <a>, we also put <a_extra>
+                String extra_tuple = request.getNewTuple() + "_extra";
+
+                stub.putServer(ReplicaServerOuterClass.PutRequestServer.newBuilder()
+                        .setNewTuple(extra_tuple)
+                        .setClientId(request.getClientId())
+                        .setTicketNumber(ticketNumber + 1)
+                        .build(), new PutObserver(c));
+
                 debug("[PUT] Sent request to Server [" + (i + 1) + "] with delay: " + delays.get(i));
             }
 
