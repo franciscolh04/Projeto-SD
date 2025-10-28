@@ -6,6 +6,31 @@ Distributed Systems Project 2025
 
 **Difficulty level: I am Death incarnate!**
 
+#
+
+## A.1:
+4.67/5
+
+## A.2:
+1.73/2
+
+## B.1:
+2.80/3
+
+## B.2:
+3.33/4
+
+## C.1:
+3/3
+
+## C.2:
+3/3
+
+## Final Grade:
+18.53/20
+
+#
+
 
 ### Code Identification
 
